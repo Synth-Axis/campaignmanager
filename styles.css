@@ -1,0 +1,208 @@
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+/*
+  2. Remove default margin
+*/
+* {
+  margin: 0;
+}
+/*
+  Typographic tweaks!
+  3. Add accessible line-height
+  4. Improve text rendering
+*/
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+/*
+  5. Improve media defaults
+*/
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+/*
+  6. Remove built-in form typography styles
+  (keys to remember is all of it is interactive elements)
+*/
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+/*
+  7. Avoid text overflows
+*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+  margin: 0;
+}
+/*
+  8. I usually use ul li to have a list of elements and find the
+default padding is sometimes annoying to me
+*/
+ul {
+  padding: 0;
+}
+
+ul li {
+  list-style: none;
+  display: inline-block;
+  cursor: pointer;
+}
+/*
+  9. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
+}
+
+@font-face {
+  font-family: "New Nexa Regular";
+  src: url("assets/fonts/Nexa-Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "New Nexa Light";
+  src: url("assets/fonts/Nexa_Light.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "New Nexa Bold";
+  src: url("assets/fonts/Nexa_Bold.otf") format("opentype");
+}
+@font-face {
+  font-family: "New Nexa ExtraBold";
+  src: url("assets/fonts/Nexa-Heavy.otf") format("opentype");
+}
+
+body {
+  max-width: 1190px;
+  margin: 0 auto;
+  font-family: "New Nexa Light", sans-serif;
+}
+
+.bottom-content {
+  background: url("assets/fundo2.webp") no-repeat top center;
+  background-size: cover;
+}
+
+.column-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 6vw;
+  padding: 6vw 6vw 0 6vw;
+}
+
+.sr-images-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3.5vw;
+}
+
+.sr-images-container p {
+  font-size: 2.5vw;
+  line-height: 2.5vw;
+  text-align: center;
+  color: #58595b;
+}
+
+.inner-wrapper {
+  width: 100%;
+  padding: 4vw 8vw;
+  border-top: 1px solid #22a9e1;
+  border-bottom: 1px solid #22a9e1;
+  color: #58595b;
+}
+
+.inner-wrapper > h2 {
+  font-size: 4vw;
+  line-height: 4vw;
+  text-align: center;
+  font-family: "New Nexa ExtraBold", sans-serif;
+  font-weight: 900;
+}
+
+.inner-wrapper > p {
+  font-size: 1.5vw;
+  line-height: 1.5vw;
+  text-align: center;
+}
+
+h2 {
+  font-family: "New Nexa ExtraBold", sans-serif;
+  font-weight: 900;
+  font-size: 3.5vw;
+
+  text-align: center;
+  color: #58595b;
+}
+
+p {
+  text-align: center;
+}
+
+.real-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 6vw;
+  margin-bottom: 2vw;
+}
+
+.real-logo > img {
+  width: 28vw;
+}
+
+.footer-text {
+  font-size: 0.95vw;
+  text-align: left;
+  margin-bottom: 4vw;
+}
+
+.footer-image {
+  width: 24vw;
+  margin-bottom: 4vw;
+}
+
+span {
+  color: black;
+  font-family: "New Nexa ExtraBold", sans-serif;
+}
+
+.sub-title {
+  margin-top: 2vw;
+}
+
+@media screen and (min-width: 1200px) {
+  div {
+    font-size: 36px;
+  }
+}
+
+/* #58595b
+#22a9e1 #0672b9
+#1fa9e1
+*/
