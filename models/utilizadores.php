@@ -20,19 +20,5 @@ class Utilizadores extends Base
         return $query->fetchAll();
     }
 
-    public function findUtilizadorByEmail($email)
-    {
-        $query = $this->db->prepare("
-			SELECT 
-                *
-			FROM 
-				users
-            WHERE
-                email = ?
-		");
-
-        $query->execute([$email]);
-
-        return $query->fetch();
-    }
+    
 }

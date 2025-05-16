@@ -26,30 +26,30 @@ if (isset($_POST["send"])) {
         mb_strlen($_POST["password"]) <= 255 &&
         filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)
     ) {
-        require("models/utilizadores.php");
-        $model = new Utilizadores();
+        require("models/users.php");
+        $model = new Users();
 
-        $currentUser = $model->findUtilizadorByEmail($_POST["email"]);
+        $currentUser = $model->findUserByEmail($_POST["email"]);
 
         if (!empty($currentUser)) {
             $userPassword = $currentUser["password"];
             if (password_verify($_POST["password"], $userPassword)) {
-                $_SESSION["user_id"] = $currentUser["user_id"];
+                $_SESSION["user_id"] = $currentUser["id"];
 
                 if ($currentUser["user_type"] === "admin") {
-                    header("Location: /adminheader");
+                    header("Location: /");
                 } else {
                     header("Location: /");
                 }
             } else {
-                $message = "Password is not valid";
+                $message = "A password não é válida";
                 $email = retainFormData($_POST["email"]);
             }
         } else {
-            $message = "Email is not registered";
+            $message = "O email não está registado";
         }
     } else {
-        $message = "Please fill the form correctly!";
+        $message = "Por favor preencha todos campos!";
         $email = retainFormData($_POST["email"]);
     }
     generateCSRFToken();

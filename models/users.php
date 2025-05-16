@@ -11,13 +11,46 @@ class Users extends Base
 			SELECT 
 				*
 			FROM 
-				Utilizador
+				users
 		");
 
 		$query->execute();
 
 		return $query->fetchAll();
 	}
+
+	public function findUserByEmail($email)
+    {
+        $query = $this->db->prepare("
+			SELECT 
+                *
+			FROM 
+				users
+            WHERE
+                email = ?
+		");
+
+        $query->execute([$email]);
+
+        return $query->fetch();
+    }
+
+	public function RegisterUser($formData) {
+
+        $query = $this->db->prepare("
+            INSERT INTO users
+                (nome, email, password)
+                VALUES(?, ?, ?)
+            ");
+
+        $query->execute (
+            [
+				$formData["nome"],
+                $formData["email"], 
+                $formData["password"]
+            ]
+        );
+    }
 
 
 
