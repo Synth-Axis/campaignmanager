@@ -23,8 +23,10 @@ if (isset($_POST["send"])){
     }
 
     if (
+        !empty($_POST["nome"]) &&
         !empty($_POST["email"]) &&
         !empty($_POST["password"]) &&
+        mb_strlen($_POST["nome"]) >= 2 &&
         mb_strlen($_POST["password"]) >= 8 &&
         mb_strlen($_POST["password"]) <= 255 &&
         filter_var($_POST["email"], FILTER_VALIDATE_EMAIL) &&

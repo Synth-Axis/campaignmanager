@@ -49,7 +49,7 @@ if (isset($_POST["send"])) {
             $message = "O email não está registado";
         }
     } else {
-        $message = "Por favor preencha todos campos!";
+        $message = "Por favor preencha todos os campos!";
         $email = retainFormData($_POST["email"]);
     }
     generateCSRFToken();
