@@ -1,5 +1,7 @@
 <?php
 
+define("ENV", parse_ini_file(".env"));
+
 function dd($var)
 {
     echo "<pre>";

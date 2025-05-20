@@ -22,13 +22,20 @@ if (isset($_POST["send"])){
         $_POST[ $key ] = htmlspecialchars(strip_tags(trim($value)));
     }
 
+    $nome = $_POST["nome"] ?? "";
+    $email = $_POST["email"] ?? "";
+
+
     if (
         !empty($_POST["nome"]) &&
         !empty($_POST["email"]) &&
         !empty($_POST["password"]) &&
+        !empty($_POST["passwordCheck"]) &&
         mb_strlen($_POST["nome"]) >= 2 &&
         mb_strlen($_POST["password"]) >= 8 &&
         mb_strlen($_POST["password"]) <= 255 &&
+        mb_strlen($_POST["passwordCheck"]) >= 8 &&
+        mb_strlen($_POST["passwordCheck"]) <= 255 &&
         filter_var($_POST["email"], FILTER_VALIDATE_EMAIL) &&
         $_POST["password"] === $_POST["passwordCheck"]
     ){
@@ -39,15 +46,17 @@ if (isset($_POST["send"])){
             $modelUsers->RegisterUser( $_POST );
             header("Location: login");
         }
-        $message = "Email already exists";
+        $message = "O email já se encontra registado";
 
     }
     else if($_POST["password"] !== $_POST["passwordCheck"]){
-        $message = "Passwords do not match";
+        $nome = retainFormData($_POST["nome"]);
+        $message = "As passwords não são iguais";
         $email = retainFormData($_POST["email"]);
     }
     else {
-        $message = "All fields are mandatory";
+        $message = "Todos os campos são obrigatórios";
+        $nome = retainFormData($_POST["nome"]);
         $email = retainFormData($_POST["email"]);
     }
 

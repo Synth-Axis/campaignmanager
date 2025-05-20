@@ -15,5 +15,7 @@ class Base{
                 PDO::ATTR_STRINGIFY_FETCHES => false
             ]
         );
+        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 }
+
