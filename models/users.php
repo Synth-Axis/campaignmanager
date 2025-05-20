@@ -35,6 +35,22 @@ class Users extends Base
         return $query->fetch();
     }
 
+	public function findUserById($id)
+    {
+        $query = $this->db->prepare("
+			SELECT 
+                *
+			FROM 
+				users
+            WHERE
+                user_id = ?
+		");
+
+        $query->execute([$id]);
+
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+
 	public function RegisterUser($formData) {
 
         $query = $this->db->prepare("

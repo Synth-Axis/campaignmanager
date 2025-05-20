@@ -6,13 +6,13 @@
 
             <div>
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">O seu Email</label>
-                <input type="email" name="email" id="email" value="<?= $email ?>" placeholder="name@company.com"
+                <input type="email" name="email" id="email" value="<?= $email ?>" placeholder="name@realvidaseguros.pt"
                     class="block w-full p-2.5 text-sm rounded-lg border border-gray-300 bg-gray-50 text-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" />
             </div>
 
             <div>
                 <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">A sua password</label>
-                <input type="password" name="password" id="password" placeholder="••••••••" minlength="8" maxlength="255"
+                <input type="password" name="password" id="password" placeholder="" minlength="8" maxlength="255"
                     class="block w-full p-2.5 text-sm rounded-lg border border-gray-300 bg-gray-50 text-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" />
             </div>
 

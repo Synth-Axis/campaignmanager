@@ -50,7 +50,6 @@ if (isset($_POST["send"])) {
                     $tokenHash = hash('sha256', $token);
                     $expiresAt = date("Y-m-d H:i:s", time() + 60 * 60 * 24 * 30); // 30 dias
                     $model->storeRememberToken($currentUser["user_id"], $tokenHash, $expiresAt);
-                
                     setcookie("remember_token", $token, time() + 60 * 60 * 24 * 30, "/", "", false, true); // HttpOnly
                 }
                 if ($currentUser["user_type"] === "admin") {
