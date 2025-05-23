@@ -12,7 +12,8 @@ class Channels extends Base
 			SELECT 
 				*
 			FROM 
-				agentee
+				Canal
+            ORDER BY nome ASC
 		");
 
         $query->execute();

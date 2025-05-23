@@ -11,7 +11,8 @@ class Managers extends Base
 			SELECT 
 				*
 			FROM 
-				gestor
+				Gestor
+            ORDER BY gestor_nome ASC
 		");
 
         $query->execute();

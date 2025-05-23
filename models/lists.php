@@ -2,23 +2,20 @@
 
 require_once("dbconfig.php");
 
-class Utilizadores extends Base
+class Lists extends Base
 {
 
-    public function getAllUtilizadores()
+    public function getAllLists()
     {
-
         $query = $this->db->prepare("
 			SELECT 
 				*
 			FROM 
-				agente
+				Listas
 		");
 
         $query->execute();
 
         return $query->fetchAll();
     }
-
-    
 }

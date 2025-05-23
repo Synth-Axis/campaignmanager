@@ -1,6 +1,8 @@
 <?php
 
-define("ENV", parse_ini_file(".env"));
+if (!defined("ENV")) {
+    define("ENV", parse_ini_file(".env"));
+}
 
 function dd($var)
 {
