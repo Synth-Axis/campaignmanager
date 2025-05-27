@@ -18,4 +18,11 @@ class Lists extends Base
 
         return $query->fetchAll();
     }
+
+    public function criarLista($nome)
+    {
+        $stmt = $this->db->prepare("INSERT INTO listas (lista_nome) VALUES (:nome)");
+        $stmt->bindParam(':nome', $nome);
+        $stmt->execute();
+    }
 }

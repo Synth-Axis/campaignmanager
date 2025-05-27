@@ -1,5 +1,12 @@
 <?php
 
+require("models/users.php");
+$model = new Users();
+
+if (isset($_SESSION["user_id"])) {
+    $currentUser = $model->findUserById($_SESSION["user_id"]);
+}
+
 require("models/publico.php");
 require("models/channels.php");
 require("models/lists.php");
@@ -21,13 +28,13 @@ if (!isset($_SESSION["csrf_token"])) {
     generateCSRFToken();
 }
 
-if (isset($_POST["send"])){
+if (isset($_POST["send"])) {
     if (!isset($_POST["csrf_token"]) || $_POST["csrf_token"] !== $_SESSION["csrf_token"]) {
         die("CSRF token validation failed.");
     }
 
-    foreach($_POST as $key => $value){
-        $_POST[ $key ] = htmlspecialchars(strip_tags(trim($value)));
+    foreach ($_POST as $key => $value) {
+        $_POST[$key] = htmlspecialchars(strip_tags(trim($value)));
     }
 
     $nome = $_POST["nome"] ?? "";
@@ -44,10 +51,10 @@ if (isset($_POST["send"])){
         mb_strlen($_POST["nome"]) >= 2 &&
         mb_strlen($_POST["agente"]) >= 2 &&
         filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)
-    ){
+    ) {
         $userEmail = $modelPublico->findPublicoByEmail($_POST["email"]);
 
-        if( empty( $userEmail )){
+        if (empty($userEmail)) {
             $modelPublico->RegisterPublico([
                 "nome" => $_POST["nome"],
                 "email" => $_POST["email"],
@@ -61,9 +68,7 @@ if (isset($_POST["send"])){
             exit;
         }
         $message = "O email já se encontra registado";
-
-    }
-    else {
+    } else {
         $message = "Todos os campos são obrigatórios";
         $nome = retainFormData($_POST["nome"]);
         $email = retainFormData($_POST["email"]);
@@ -72,4 +77,13 @@ if (isset($_POST["send"])){
     generateCSRFToken();
 }
 
-require ("views/publico.php");
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'nova_lista') {
+    $nomeLista = trim($_POST['nova_lista_nome']);
+    if (!empty($nomeLista)) {
+        $modelLists->criarLista($nomeLista);
+        header("Location: publico");
+        exit;
+    }
+}
+
+require("views/publico.php");
