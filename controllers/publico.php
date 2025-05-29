@@ -86,4 +86,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'nova_
     }
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'editar_lista') {
+    $listaId = $_POST['lista_id'] ?? null;
+    $novoNome = trim($_POST['lista_nome'] ?? '');
+
+    if ($listaId && $novoNome !== '') {
+        $modelLists->atualizarNomeLista($listaId, $novoNome);
+        header("Location: publico");
+        exit;
+    }
+}
+
 require("views/publico.php");

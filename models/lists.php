@@ -25,4 +25,14 @@ class Lists extends Base
         $stmt->bindParam(':nome', $nome);
         $stmt->execute();
     }
+
+    public function atualizarNomeLista($id, $novoNome)
+    {
+        $query = $this->db->prepare("
+            UPDATE listas
+            SET lista_nome = ?
+            WHERE lista_id = ?
+        ");
+        $query->execute([$novoNome, $id]);
+    }
 }

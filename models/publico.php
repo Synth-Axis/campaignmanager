@@ -36,7 +36,8 @@ class Publico extends Base
         return $query->fetch();
     }
 
-    public function RegisterPublico($formData) {
+    public function RegisterPublico($formData)
+    {
 
         $query = $this->db->prepare("
             INSERT INTO Publico
@@ -44,10 +45,10 @@ class Publico extends Base
                 VALUES(?, ?, ?, ?, ?, ?)
             ");
 
-        $query->execute (
+        $query->execute(
             [
                 $formData["nome"],
-                $formData["email"], 
+                $formData["email"],
                 $formData["agente_id"],
                 $formData["gestor_id"],
                 $formData["canal_id"],

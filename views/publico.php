@@ -172,15 +172,11 @@
                     <tr class="border-b border-gray-100 dark:border-gray-700">
                         <td class="py-2 px-3"><?= htmlspecialchars($lista['lista_nome']) ?></td>
                         <td class="py-2 px-3 text-right">
-                            <div class="relative inline-block text-left">
-                                <button type="button" onclick="toggleDropdown(this)" class="inline-flex items-center justify-center w-8 h-8 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full focus:outline-none">
-                                    ⋮
-                                </button>
-                                <div class="dropdown-menu absolute right-0 z-20 mt-2 w-28 origin-top-right bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-md shadow-lg hidden">
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">Editar</a>
-                                    <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-100 dark:hover:bg-red-600 dark:hover:text-white">Apagar</a>
-                                </div>
-                            </div>
+                            <select class="select-acao-lista bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg p-1 cursor-pointer" data-id="<?= $lista['lista_id'] ?>">
+                                <option selected disabled>Ações</option>
+                                <option value="editar">Editar</option>
+                                <option value="apagar">Apagar</option>
+                            </select>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -189,13 +185,11 @@
     </section>
 
     <!-- Modal wrapper -->
-    <div id="modal-nova-lista" class="modal fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
-        <!-- Conteúdo da modal -->
+    <div id="modal-nova-lista" class="modal hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
         <div class="modal-content bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-md p-6 space-y-4 relative">
-            <!-- Botão de fechar -->
-            <button type="button" class="fechar-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white text-xl leading-none focus:outline-none cursor-pointer">&times;</button>
 
             <h3 class="text-lg font-medium text-gray-900 dark:text-white">Criar Nova Lista</h3>
+
             <form method="POST" action="" id="form-nova-lista">
                 <input type="hidden" name="action" value="nova_lista">
                 <div>
@@ -204,16 +198,16 @@
                         class="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white">
                 </div>
                 <div class="flex justify-end gap-2 mt-4">
-                    <button type="button" class="fechar-modal px-4 py-2 bg-gray-200 dark:bg-gray-600 rounded hover:bg-gray-300 dark:hover:bg-gray-500 text-gray-700 dark:text-white">
-                        Cancelar
-                    </button>
-                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer">
                         Criar
                     </button>
                 </div>
             </form>
+
         </div>
     </div>
+
+
 
 </main>
 

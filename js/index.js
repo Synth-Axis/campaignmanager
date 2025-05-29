@@ -1,15 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Tabs
   const tabs = document.querySelectorAll(".tab-link");
-
   tabs.forEach((tab) => {
     tab.addEventListener("click", function (e) {
       e.preventDefault();
       const targetId = this.getAttribute("data-tab");
+      const targetTab = document.getElementById(targetId);
+      if (!targetTab) return;
 
-      document.querySelectorAll('[id^="tab-"]').forEach((tabContent) => {
-        tabContent.classList.add("hidden");
-      });
+      document
+        .querySelectorAll('[id^="tab-"]')
+        .forEach((t) => t.classList.add("hidden"));
 
       tabs.forEach((link) => {
         link.classList.remove(
@@ -26,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
         );
       });
 
-      document.getElementById(targetId).classList.remove("hidden");
+      targetTab.classList.remove("hidden");
 
       this.classList.remove(
         "text-gray-500",
@@ -43,14 +44,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  const firstTab = document.querySelector(
-    '.tab-link[data-tab="tab-visaogeral"]'
-  );
-  if (firstTab) {
-    firstTab.click();
-  }
+  // Ativar primeira tab visível
+  const firstTab = Array.from(
+    document.querySelectorAll(".tab-link[data-tab]")
+  ).find((tab) => document.getElementById(tab.dataset.tab));
+  if (firstTab) firstTab.click();
 
-  // Modal abrir
+  // Abrir modal
   document.querySelectorAll(".abrir-modal").forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
@@ -63,38 +63,38 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Fechar modal ao clicar fora (opcional)
+  // Fechar modal ao clicar fora da .modal-content
   window.addEventListener("click", function (e) {
     if (
       e.target.classList.contains("abrir-modal") ||
-      e.target.closest(".abrir-modal")
+      e.target.closest(".abrir-modal") ||
+      e.target.classList.contains("fechar-modal") ||
+      e.target.closest(".fechar-modal")
     )
       return;
-    if (
-      !e.target.closest(".modal-content") &&
-      !e.target.closest(".abrir-modal")
-    ) {
+
+    if (!e.target.closest(".modal-content")) {
       document
         .querySelectorAll(".modal")
         .forEach((m) => m.classList.add("hidden"));
     }
   });
 
-  // Dropdown
-  document.querySelectorAll(".dropdown-toggle").forEach((btn) => {
-    btn.addEventListener("click", function (event) {
-      event.stopPropagation();
-      const menu = btn.nextElementSibling;
-      document.querySelectorAll(".dropdown-menu").forEach((m) => {
-        if (m !== menu) m.classList.add("hidden");
-      });
-      menu.classList.toggle("hidden");
-    });
-  });
+  // Combobox de ações
+  document.querySelectorAll(".select-acao-lista").forEach((select) => {
+    select.addEventListener("change", function () {
+      const acao = this.value;
+      const id = this.dataset.id;
 
-  window.addEventListener("click", function () {
-    document
-      .querySelectorAll(".dropdown-menu")
-      .forEach((m) => m.classList.add("hidden"));
+      if (acao === "editar") {
+        window.location.href = `/editar-lista?id=${id}`;
+      } else if (acao === "apagar") {
+        if (confirm("Tem a certeza que deseja apagar esta lista?")) {
+          window.location.href = `/apagar-lista?id=${id}`;
+        }
+      }
+
+      this.selectedIndex = 0;
+    });
   });
 });
