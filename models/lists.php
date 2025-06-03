@@ -24,6 +24,8 @@ class Lists extends Base
         $stmt = $this->db->prepare("INSERT INTO listas (lista_nome) VALUES (:nome)");
         $stmt->bindParam(':nome', $nome);
         $stmt->execute();
+
+        return $this->db->lastInsertId(); // Adiciona isto
     }
 
     public function atualizarNomeLista($id, $novoNome)
@@ -34,5 +36,11 @@ class Lists extends Base
             WHERE lista_id = ?
         ");
         $query->execute([$novoNome, $id]);
+    }
+
+    public function apagarLista($id)
+    {
+        $stmt = $this->db->prepare("DELETE FROM listas WHERE lista_id = ?");
+        $stmt->execute([$id]);
     }
 }

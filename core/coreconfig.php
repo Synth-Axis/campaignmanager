@@ -1,19 +1,20 @@
 <?php
 
-require("models/users.php");
-require("models/agents.php");
-require("models/managers.php");
-require("models/channels.php");
-require("models/publico.php");
+if (!defined('ENV')) {
+    define('ENV', parse_ini_file(__DIR__ . '/../.env'));
+}
+
+require_once(__DIR__ . "/../models/users.php");
+require_once(__DIR__ . "/../models/managers.php");
+require_once(__DIR__ . "/../models/channels.php");
+require_once(__DIR__ . "/../models/publico.php");
 
 $modelUsers = new Users();
-$modelAgents = new Agents();
 $modelManagers = new Managers();
 $modelChannels = new Channels();
 $modelPublico = new Publico();
 
 $users = $modelUsers->getAllUsers();
-$agents = $modelAgents->getAllAgents();
 $managers = $modelManagers->getAllManagers();
 $channels = $modelChannels->getAllChannels();
 $Publico = $modelPublico->getAllPublico();

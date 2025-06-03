@@ -172,7 +172,7 @@
                     <tr class="border-b border-gray-100 dark:border-gray-700">
                         <td class="py-2 px-3"><?= htmlspecialchars($lista['lista_nome']) ?></td>
                         <td class="py-2 px-3 text-right">
-                            <select class="select-acao-lista bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg p-1 cursor-pointer" data-id="<?= $lista['lista_id'] ?>">
+                            <select onchange="handleListaAcao(this)" class="select-acao-lista bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg p-1 cursor-pointer" data-id="<?= $lista['lista_id'] ?>" data-nome="<?= htmlspecialchars($lista['lista_nome']) ?>">
                                 <option selected disabled>Ações</option>
                                 <option value="editar">Editar</option>
                                 <option value="apagar">Apagar</option>
@@ -184,9 +184,9 @@
         </table>
     </section>
 
-    <!-- Modal wrapper -->
-    <div id="modal-nova-lista" class="modal hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div class="modal-content bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-md p-6 space-y-4 relative">
+    <!-- Modal Listas wrapper -->
+    <div id="modal-nova-lista" class="modal hidden fixed inset-0 flex items-center justify-center z-50">
+        <div class="modal-content bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-600 rounded-lg shadow-lg w-full max-w-md p-6 space-y-4 relative">
 
             <h3 class="text-lg font-medium text-gray-900 dark:text-white">Criar Nova Lista</h3>
 
@@ -204,6 +204,45 @@
                 </div>
             </form>
 
+        </div>
+    </div>
+
+    <!-- Modal Editar Lista -->
+    <div id="modal-editar-lista" class="modal hidden fixed inset-0 flex items-center justify-center z-50">
+        <div class="modal-content bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-600 rounded-lg shadow-lg w-full max-w-md p-6 space-y-4 relative">
+            <h3 class="text-lg font-medium text-gray-900 dark:text-white">Editar Lista</h3>
+
+            <form method="POST" id="form-editar-lista">
+                <input type="hidden" name="action" value="editar_lista">
+                <input type="hidden" name="lista_id" id="editar_lista_id">
+                <div>
+                    <label for="editar_lista_nome" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Novo nome</label>
+                    <input type="text" name="lista_nome" id="editar_lista_nome" required
+                        class="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white">
+                </div>
+                <div class="flex justify-end gap-2 mt-4">
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer">
+                        Alterar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Alerta Custom -->
+    <div id="alerta-custom" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 hidden transition-opacity duration-300 opacity-0 text-center">
+        <span id="alerta-mensagem"></span>
+    </div>
+
+    <!-- Modal de Confirmação Apagar -->
+    <div id="modal-confirmar-apagar" class="modal hidden fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+        <div class="modal-content bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-600 rounded-lg shadow-lg w-full max-w-sm p-6 space-y-4 relative">
+            <h3 class="text-lg font-medium text-gray-900 dark:text-white">Confirmar Apagar</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300">Tem a certeza que deseja apagar esta lista?</p>
+            <div class="flex justify-end gap-2 mt-4">
+                <button id="cancelar-apagar" class="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 dark:bg-gray-700 dark:text-white">Cancelar</button>
+                <button id="confirmar-apagar" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Apagar</button>
+            </div>
         </div>
     </div>
 

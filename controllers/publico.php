@@ -80,11 +80,40 @@ if (isset($_POST["send"])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'nova_lista') {
     $nomeLista = trim($_POST['nova_lista_nome']);
     if (!empty($nomeLista)) {
-        $modelLists->criarLista($nomeLista);
+        $id = $modelLists->criarLista($nomeLista);
+
+        if (
+            isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest'
+        ) {
+            header('Content-Type: application/json');
+            echo json_encode(['id' => $id, 'nome' => $nomeLista]);
+            exit;
+        }
+
         header("Location: publico");
         exit;
     }
+
+    if (
+        isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+        strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest'
+    ) {
+        http_response_code(400);
+        header('Content-Type: application/json');
+        echo json_encode(['erro' => 'Nome da lista não pode estar vazio']);
+        exit;
+    }
 }
+
+// Apenas inclui a view se não for um pedido AJAX
+if (
+    !isset($_SERVER['HTTP_X_REQUESTED_WITH']) ||
+    strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest'
+) {
+    require("views/publico.php");
+}
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'editar_lista') {
     $listaId = $_POST['lista_id'] ?? null;
@@ -97,4 +126,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'edita
     }
 }
 
-require("views/publico.php");
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'apagar_lista') {
+    $listaId = $_POST['lista_id'] ?? null;
+    if ($listaId) {
+        $modelLists->apagarLista($listaId);
+        header("Location: publico");
+        exit;
+    }
+}
