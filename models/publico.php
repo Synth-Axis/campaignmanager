@@ -41,19 +41,19 @@ class Publico extends Base
 
         $query = $this->db->prepare("
             INSERT INTO Publico
-                (nome, email, agente_id, gestor_id, canal_id, listas_id)
-                VALUES(?, ?, ?, ?, ?, ?)
+                (nome, email, gestor_id, canal_id, listas_id)
+                VALUES(?, ?, ?, ?, ?)
             ");
 
         $query->execute(
             [
                 $formData["nome"],
                 $formData["email"],
-                $formData["agente_id"],
                 $formData["gestor_id"],
                 $formData["canal_id"],
                 $formData["listas_id"]
             ]
         );
+        return $this->db->lastInsertId();
     }
 }

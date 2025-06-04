@@ -1,11 +1,15 @@
 <?php
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/../log_erros.txt'); // Caminho absoluto
 error_reporting(E_ALL);
 
-require_once("../models/publico.php");
-require_once("../core/dbconfig.php");
+// Log para confirmar início do script
+error_log("Início do script importar_gestores.php");
+
+require_once(__DIR__ . '/../core/coreconfig.php');
+require_once(__DIR__ . '/../models/publico.php');
+
 
 // Permitir apenas POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -36,15 +40,13 @@ $resultados = [];
 foreach ($input as $item) {
     $nome = trim($item['nome'] ?? '');
     $email = trim($item['email'] ?? '');
-    $agente = $item['agente_id'] ?? null;
     $gestor = $item['gestor_id'] ?? null;
-    $lista = $item['lista_id'] ?? null;
+    $lista = $item['listas_id'] ?? null;
     $canal = $item['canal_id'] ?? null;
 
     if (
         mb_strlen($nome) < 2 ||
-        !filter_var($email, FILTER_VALIDATE_EMAIL) ||
-        empty($agente)
+        !filter_var($email, FILTER_VALIDATE_EMAIL)
     ) {
         $resultados[] = [
             'email' => $email,
@@ -68,10 +70,10 @@ foreach ($input as $item) {
     $modelPublico->RegisterPublico([
         'nome' => $nome,
         'email' => $email,
-        'agente_id' => $agente,
         'gestor_id' => $gestor,
-        'lista_id' => $lista,
         'canal_id' => $canal,
+        'lista_id' => $lista,
+
     ]);
 
     $resultados[] = [
