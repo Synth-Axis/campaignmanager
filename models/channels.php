@@ -21,20 +21,15 @@ class Channels extends Base
         return $query->fetchAll();
     }
 
-    public function criarCanal($formData)
+    public function criarCanal($nome)
     {
-
         $query = $this->db->prepare("
-            INSERT INTO Canal
-                (nome)
-                VALUES(?)
-            ");
+        INSERT INTO Canal (nome)
+        VALUES (?)
+    ");
 
-        $query->execute(
-            [
-                $formData["nome"],
+        $query->execute([$nome]);
 
-            ]
-        );
+        return $this->db->lastInsertId();
     }
 }

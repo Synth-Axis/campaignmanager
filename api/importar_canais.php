@@ -1,6 +1,14 @@
 <?php
-require_once("../models/channels.php");
-require_once("../core/dbconfig.php");
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/../log_erros.txt'); // Caminho absoluto
+error_reporting(E_ALL);
+
+// Log para confirmar início do script
+error_log("Início do script importar_gestores.php");
+
+require_once(__DIR__ . '/../core/coreconfig.php');
+require_once(__DIR__ . '/../models/channels.php');
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     http_response_code(405);
