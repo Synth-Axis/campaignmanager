@@ -1,7 +1,8 @@
 <?php
-require("core/basefunctions.php");
-require("core/CSRF.php");
-require_once(__DIR__ . '/../models/user.php');
+
+require_once(__DIR__ . '/../core/basefunctions.php');
+require_once(__DIR__ . '/../core/CSRF.php');
+require_once(__DIR__ . '/../models/users.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $token = $_POST['token'] ?? '';
@@ -24,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $hash = password_hash($password, PASSWORD_DEFAULT);
-    $model->updatePassword($user['gestor_id'], $hash);
+    $model->updatePassword($user['user_id'], $hash);
 
     header("Location: /login?redefinido=1");
     exit;

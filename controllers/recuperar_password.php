@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $token = bin2hex(random_bytes(32));
     $userModel->storeResetToken($user['user_id'], $token);
 
-    $resetLink = ENV["ADDRESS"] . "/redefinir-password?token=$token";
+    $resetLink = ENV["ADDRESS"] . "/redefinir_password?token=$token";
     $subject = "Recuperação de Palavra-passe";
     $body = "Clique neste link para redefinir a sua palavra-passe:<br><a href='$resetLink'>$resetLink</a>";
 
