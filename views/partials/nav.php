@@ -4,7 +4,7 @@ $currentPage = basename($_SERVER['REQUEST_URI']);
 
 
 <nav class="bg-white border-gray-200 dark:bg-gray-900">
-    <div class="max-w-screen-xl mx-auto flex items-center justify-between p-4">
+    <div class="max-w-screen-2xl mx-auto flex items-center justify-between p-4">
 
         <!-- Left group: Menu button + Logo -->
         <div class="flex items-center space-x-10">

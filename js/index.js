@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Tabs
+  // Tabs principais
   const tabs = document.querySelectorAll(".tab-link");
   tabs.forEach((tab) => {
     tab.addEventListener("click", function (e) {
@@ -8,10 +8,12 @@ document.addEventListener("DOMContentLoaded", function () {
       const targetTab = document.getElementById(targetId);
       if (!targetTab) return;
 
+      // Esconde todos os tabs principais
       document
         .querySelectorAll('[id^="tab-"]')
         .forEach((t) => t.classList.add("hidden"));
 
+      // Remove estilos de ativo das tabs principais
       tabs.forEach((link) => {
         link.classList.remove(
           "text-white",
@@ -27,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
         );
       });
 
+      // Mostra o tab selecionado
       targetTab.classList.remove("hidden");
       this.classList.remove(
         "text-gray-500",
@@ -41,17 +44,99 @@ document.addEventListener("DOMContentLoaded", function () {
         "font-semibold"
       );
 
+      // Quando muda para tab principal, remove o subtab guardado (reset)
+      if (targetId !== "tab-novocontacto") {
+        sessionStorage.removeItem("contactSubTab");
+      }
+
       // Guardar tab atual no sessionStorage
       sessionStorage.setItem("tabAtual", targetId);
     });
   });
 
-  // Ativar tab guardada
-  const tabGuardada = sessionStorage.getItem("tabAtual");
+  // Ativar tab guardada, ou Visão Geral por padrão
+  let tabGuardada = sessionStorage.getItem("tabAtual");
   const tabInicial =
-    tabGuardada || document.querySelector(".tab-link[data-tab]")?.dataset.tab;
+    tabGuardada ||
+    document.querySelector(".tab-link[data-tab]")?.dataset.tab ||
+    "tab-visaogeral";
+  // Se não existir tabGuardada, guarda "tab-visaogeral" como padrão
+  if (!tabGuardada) sessionStorage.setItem("tabAtual", "tab-visaogeral");
+
   if (tabInicial) {
     document.querySelector(`.tab-link[data-tab="${tabInicial}"]`)?.click();
+  }
+
+  // Tabs secundários de Contactos
+  document.querySelectorAll(".contact-tab-link").forEach(function (tab) {
+    tab.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      // Desativa todos
+      document.querySelectorAll(".contact-tab-link").forEach(function (l) {
+        l.classList.remove(
+          "text-blue-700",
+          "bg-blue-50",
+          "dark:text-white",
+          "dark:bg-gray-700",
+          "font-semibold"
+        );
+        // Garante que tiramos cores antigas mesmo se estavam em hover
+        l.classList.add(
+          "text-gray-500",
+          "bg-white",
+          "dark:text-gray-400",
+          "dark:bg-gray-800"
+        );
+      });
+
+      // Ativa este (igual ao hover)
+      this.classList.remove(
+        "text-gray-500",
+        "bg-white",
+        "dark:text-gray-400",
+        "dark:bg-gray-800"
+      );
+      this.classList.add(
+        "text-blue-700",
+        "bg-blue-50",
+        "dark:text-white",
+        "dark:bg-gray-700",
+        "font-semibold"
+      );
+
+      // Esconde todos os conteúdos de contactos
+      document
+        .querySelectorAll(".contact-tab-content")
+        .forEach(function (content) {
+          content.classList.add("hidden");
+        });
+
+      // Mostra o conteúdo do subtab selecionado
+      const target = document.getElementById(
+        this.getAttribute("data-contacttab")
+      );
+      if (target) target.classList.remove("hidden");
+
+      // Guarda o subtab ativo no sessionStorage
+      sessionStorage.setItem(
+        "contactSubTab",
+        this.getAttribute("data-contacttab")
+      );
+    });
+  });
+
+  // Ativar subtab guardado ou o primeiro por defeito
+  const subTabGuardado = sessionStorage.getItem("contactSubTab");
+  const subTabInicial =
+    subTabGuardado ||
+    document
+      .querySelector(".contact-tab-link[data-contacttab]")
+      ?.getAttribute("data-contacttab");
+  if (subTabInicial) {
+    document
+      .querySelector(`.contact-tab-link[data-contacttab="${subTabInicial}"]`)
+      ?.click();
   }
 
   // Abrir modal
