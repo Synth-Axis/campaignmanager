@@ -1,4 +1,5 @@
 <?php require __DIR__ . '/partials/head.php'; ?>
+<?php require __DIR__ . '/partials/nav.php'; ?>
 
 <main class="min-h-screen flex items-center justify-center">
     <form method="POST" action="register" class="w-full max-w-sm p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow space-y-6">

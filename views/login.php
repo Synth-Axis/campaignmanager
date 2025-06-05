@@ -1,4 +1,5 @@
 <?php require __DIR__ . '/partials/head.php'; ?>
+<?php require __DIR__ . '/partials/nav.php'; ?>
 
 <main class="min-h-screen flex items-center justify-center">
     <form method="POST" action="login" class="w-full max-w-sm p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow space-y-6">
@@ -21,7 +22,7 @@
                 <input id="remember" name="remember" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600" />
                 <label for="remember" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Lembrar-me!</label>
             </div>
-            <a href="#" class="text-sm text-blue-600 hover:underline dark:text-blue-400">Perdeu a Password?</a>
+            <a href="/recuperar_password" class="text-sm text-blue-600 hover:underline dark:text-blue-400">Perdeu a Password?</a>
         </div>
 
         <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">
