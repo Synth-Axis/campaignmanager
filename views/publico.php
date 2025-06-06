@@ -89,7 +89,7 @@
         <div id="tab-todos-contactos" class="contact-tab-content hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-6 space-y-4 w-full">
 
             <!-- Linha de título + pesquisa -->
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-2">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-6">
                 <h5 class="text-lg font-semibold text-gray-900 dark:text-white">Todos os Contactos</h5>
                 <div class="relative w-full md:w-72">
                     <input
@@ -134,9 +134,9 @@
         </div>
 
         <!-- Inserir Contacto -->
-        <form id="tab-inserir-contacto" method="POST" action="novo-registo" class="contact-tab-content hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-6 space-y-6">
+        <form id="tab-inserir-contacto" method="POST" action="novo-registo" class="contact-tab-content hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-8 space-y-6">
             <h5 class="text-lg font-semibold text-gray-900 dark:text-white">Novo registo</h5>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-10">
                 <div>
                     <label for="nome" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome</label>
                     <input type="text" name="nome" id="nome" value="<?= htmlspecialchars($nome ?? '') ?>" placeholder="Insira o nome"
@@ -182,7 +182,7 @@
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                         <option value="" <?= empty($canal_id) ? 'selected' : '' ?>>Selecione o canal</option>
                         <?php foreach ($channels as $canal): ?>
-                            <option value="<?= htmlspecialchars($canal['id']) ?>" <?= (isset($canal_id) && $canal_id == $canal['id']) ? 'selected' : '' ?>>
+                            <option value="<?= htmlspecialchars($canal['canal_id']) ?>" <?= (isset($canal_id) && $canal_id == $canal['canal_id']) ? 'selected' : '' ?>>
                                 <?= htmlspecialchars($canal['nome']) ?>
                             </option>
                         <?php endforeach; ?>
@@ -204,11 +204,17 @@
             </div>
         </form>
 
-        <!-- Importar por Ficheiro -->
-        <div id="tab-importar-ficheiro" class="contact-tab-content hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-6 space-y-4">
+        <!-- Torna o container mais largo -->
+        <div id="tab-importar-ficheiro"
+            class="contact-tab-content hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-6 space-y-4 w-full max-w-4xl mx-auto">
             <h5 class="text-lg font-semibold text-gray-900 dark:text-white">Importar Contactos por Ficheiro</h5>
-            <form method="POST" action="importar-contactos" enctype="multipart/form-data" class="space-y-4">
-                <input type="file" name="ficheiro" accept=".csv,.xlsx" required class="block w-full text-sm text-gray-900 dark:text-white border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+            <form id="form-importar-ficheiro" method="POST" action="/api/importar_publico.php" enctype="multipart/form-data" class="space-y-4">
+                <input
+                    type="file"
+                    name="ficheiro"
+                    accept=".csv,.xlsx"
+                    required
+                    class="p-2 block max-w-4xl text-sm text-gray-900 dark:text-white border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
                 <button type="submit" class="px-5 py-2 text-white bg-blue-600 rounded hover:bg-blue-700">Importar</button>
             </form>
         </div>

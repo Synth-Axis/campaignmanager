@@ -24,6 +24,8 @@ $channels = $modelChannels->getAllChannels();
 $listas = $modelLists->getAllLists();
 $gestores = $modelManagers->getAllManagers();
 
+$contactos = $modelPublico->getAllPublico();
+
 if (!isset($_SESSION["csrf_token"])) {
     generateCSRFToken();
 }

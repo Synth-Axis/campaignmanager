@@ -313,4 +313,43 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   window.handleListaAcao = handleListaAcao;
+
+  // SUBMISSÃO AJAX - Importar Contactos por Ficheiro
+  const formImportar = document.getElementById("form-importar-ficheiro");
+  if (formImportar) {
+    formImportar.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(formImportar);
+
+      try {
+        const resposta = await fetch(formImportar.action, {
+          method: "POST",
+          body: formData,
+        });
+
+        const resultado = await resposta.json();
+
+        if (resposta.ok && resultado.resultados) {
+          const total = resultado.resultados.length;
+          const sucesso = resultado.resultados.filter((r) => r.sucesso).length;
+          const erro = total - sucesso;
+
+          mostrarAlerta(
+            `✅ Importados: ${sucesso}, ❌ Com erro: ${erro}`,
+            erro > 0 ? "error" : "success"
+          );
+
+          formImportar.reset(); // limpa o input file
+        } else {
+          throw new Error("Erro de resposta");
+        }
+      } catch (err) {
+        mostrarAlerta(
+          "❌ Erro ao importar ficheiro. Verifique o formato.",
+          "error"
+        );
+      }
+    });
+  }
 });
