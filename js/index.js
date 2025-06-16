@@ -54,89 +54,121 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Ativar tab guardada, ou Visão Geral por padrão
+  // Ativar tab/subtab guardados (sem clique automático!
+
+  // --- Contactos: Pesquisa + Paginação AJAX ---
+  const inputPesquisa = document.getElementById("pesquisar-contactos");
+  const tbodyContactos = document.getElementById("tabela-contactos");
   let tabGuardada = sessionStorage.getItem("tabAtual");
   const tabInicial =
     tabGuardada ||
     document.querySelector(".tab-link[data-tab]")?.dataset.tab ||
     "tab-visaogeral";
-  // Se não existir tabGuardada, guarda "tab-visaogeral" como padrão
   if (!tabGuardada) sessionStorage.setItem("tabAtual", "tab-visaogeral");
 
-  if (tabInicial) {
-    document.querySelector(`.tab-link[data-tab="${tabInicial}"]`)?.click();
-  }
-
-  // Tabs secundários de Contactos
-  document.querySelectorAll(".contact-tab-link").forEach(function (tab) {
-    tab.addEventListener("click", function (e) {
-      e.preventDefault();
-
-      // Desativa todos
-      document.querySelectorAll(".contact-tab-link").forEach(function (l) {
-        l.classList.remove(
-          "text-blue-700",
-          "bg-blue-50",
-          "dark:text-white",
-          "dark:bg-gray-700",
-          "font-semibold"
-        );
-        // Garante que tiramos cores antigas mesmo se estavam em hover
-        l.classList.add(
-          "text-gray-500",
-          "bg-white",
-          "dark:text-gray-400",
-          "dark:bg-gray-800"
-        );
-      });
-
-      // Ativa este (igual ao hover)
-      this.classList.remove(
-        "text-gray-500",
-        "bg-white",
-        "dark:text-gray-400",
-        "dark:bg-gray-800"
-      );
-      this.classList.add(
-        "text-blue-700",
-        "bg-blue-50",
-        "dark:text-white",
-        "dark:bg-gray-700",
-        "font-semibold"
-      );
-
-      // Esconde todos os conteúdos de contactos
-      document
-        .querySelectorAll(".contact-tab-content")
-        .forEach(function (content) {
-          content.classList.add("hidden");
-        });
-
-      // Mostra o conteúdo do subtab selecionado
-      const target = document.getElementById(
-        this.getAttribute("data-contacttab")
-      );
-      if (target) target.classList.remove("hidden");
-
-      // Guarda o subtab ativo no sessionStorage
-      sessionStorage.setItem(
-        "contactSubTab",
-        this.getAttribute("data-contacttab")
-      );
-    });
-  });
-
-  // Ativar subtab guardado ou o primeiro por defeito
   const subTabGuardado = sessionStorage.getItem("contactSubTab");
   const subTabInicial =
     subTabGuardado ||
     document
       .querySelector(".contact-tab-link[data-contacttab]")
       ?.getAttribute("data-contacttab");
-  if (subTabInicial) {
+
+  // Funções para ativar tab e subtab SEM clique
+  function ativarTab(tabId) {
     document
-      .querySelector(`.contact-tab-link[data-contacttab="${subTabInicial}"]`)
-      ?.click();
+      .querySelectorAll('[id^="tab-"]')
+      .forEach((t) => t.classList.add("hidden"));
+    document.querySelectorAll(".tab-link").forEach((link) => {
+      link.classList.remove(
+        "text-white",
+        "bg-gray-700",
+        "dark:bg-gray-700",
+        "font-semibold"
+      );
+      link.classList.add(
+        "text-gray-500",
+        "dark:text-gray-400",
+        "bg-white",
+        "dark:bg-gray-800"
+      );
+    });
+
+    const targetTab = document.getElementById(tabId);
+    const tabEl = document.querySelector(`.tab-link[data-tab="${tabId}"]`);
+    if (targetTab && tabEl) {
+      targetTab.classList.remove("hidden");
+      tabEl.classList.remove(
+        "text-gray-500",
+        "bg-white",
+        "dark:text-gray-400",
+        "dark:bg-gray-800"
+      );
+      tabEl.classList.add(
+        "text-white",
+        "bg-gray-700",
+        "dark:bg-gray-700",
+        "font-semibold"
+      );
+    }
+  }
+
+  function ativarSubTab(subTabId) {
+    document
+      .querySelectorAll(".contact-tab-content")
+      .forEach(function (content) {
+        content.classList.add("hidden");
+      });
+    document.querySelectorAll(".contact-tab-link").forEach(function (l) {
+      l.classList.remove(
+        "text-blue-700",
+        "bg-blue-50",
+        "dark:text-white",
+        "dark:bg-gray-700",
+        "font-semibold"
+      );
+      l.classList.add(
+        "text-gray-500",
+        "bg-white",
+        "dark:text-gray-400",
+        "dark:bg-gray-800"
+      );
+    });
+
+    const target = document.getElementById(subTabId);
+    const tabEl = document.querySelector(
+      `.contact-tab-link[data-contacttab="${subTabId}"]`
+    );
+    if (target && tabEl) {
+      target.classList.remove("hidden");
+      tabEl.classList.remove(
+        "text-gray-500",
+        "bg-white",
+        "dark:text-gray-400",
+        "dark:bg-gray-800"
+      );
+      tabEl.classList.add(
+        "text-blue-700",
+        "bg-blue-50",
+        "dark:text-white",
+        "dark:bg-gray-700",
+        "font-semibold"
+      );
+    }
+  }
+
+  // Ativa só no load inicial
+  ativarTab(tabInicial);
+  if (tabInicial === "tab-novocontacto" && subTabInicial) {
+    ativarSubTab(subTabInicial);
+
+    // Só faz fetchContactos quando ambos estão ativos
+    if (
+      subTabInicial === "tab-todos-contactos" &&
+      inputPesquisa &&
+      tbodyContactos
+    ) {
+      fetchContactos("", 1);
+    }
   }
 
   // Abrir modal
@@ -351,5 +383,105 @@ document.addEventListener("DOMContentLoaded", function () {
         );
       }
     });
+  }
+
+  // Criar (ou obter) container de paginação
+  const porPagina = 50;
+  let termoAtual = "";
+  let paginaAtual = 1;
+  let totalPaginas = 1;
+  let debounceTimer = null;
+
+  // Container para paginação
+  const paginacaoDiv = document.getElementById("paginacao-contactos");
+  if (!paginacaoDiv && tbodyContactos) {
+    paginacaoDiv = document.createElement("div");
+    paginacaoDiv.id = "paginacao-contactos";
+    tbodyContactos.parentNode.appendChild(paginacaoDiv);
+  }
+
+  function renderPaginacao() {
+    if (!paginacaoDiv) return;
+    paginacaoDiv.innerHTML = "";
+    if (totalPaginas <= 1) return;
+    let html = `<div class="flex gap-6 items-center justify-center">`;
+    html += `<button ${
+      paginaAtual === 1 ? "disabled" : ""
+    } id="pag-anterior" class="cursor-pointer px-4 py-2 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed">Anterior</button>`;
+    html += `<span class="text-white font-semibold">Página ${paginaAtual} de ${totalPaginas}</span>`;
+    html += `<button ${
+      paginaAtual === totalPaginas ? "disabled" : ""
+    } id="pag-seguinte" class="cursor-pointer px-4 py-2 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed">Seguinte</button>`;
+    html += `</div>`;
+    paginacaoDiv.innerHTML = html;
+
+    document.getElementById("pag-anterior").onclick = () => {
+      if (paginaAtual > 1) {
+        paginaAtual--;
+        fetchContactos(termoAtual, paginaAtual);
+      }
+    };
+    document.getElementById("pag-seguinte").onclick = () => {
+      if (paginaAtual < totalPaginas) {
+        paginaAtual++;
+        fetchContactos(termoAtual, paginaAtual);
+      }
+    };
+  }
+
+  function fetchContactos(termo = "", pagina = 1) {
+    fetch(
+      `/api/pesquisar_contactos.php?q=${encodeURIComponent(
+        termo
+      )}&page=${pagina}`
+    )
+      .then((r) => r.json())
+      .then((data) => {
+        tbodyContactos.innerHTML = "";
+        if (
+          !data.registos ||
+          !Array.isArray(data.registos) ||
+          !data.registos.length
+        ) {
+          tbodyContactos.innerHTML = `<tr><td colspan="8" class="py-2 px-3 text-center text-gray-400">Sem resultados</td></tr>`;
+        } else {
+          data.registos.forEach((c) => {
+            tbodyContactos.innerHTML += `
+            <tr class="border-b border-gray-100 dark:border-gray-700">
+              <td class="py-2 px-3">${c.publico_id ?? ""}</td>
+              <td class="py-2 px-3">${c.nome ?? ""}</td>
+              <td class="py-2 px-3">${c.email ?? ""}</td>
+              <td class="py-2 px-3">${c.gestor_nome ?? ""}</td>
+              <td class="py-2 px-3">${c.canal_nome ?? ""}</td>
+              <td class="py-2 px-3">${c.lista_nome ?? ""}</td>
+              <td class="py-2 px-3">${c.data_registo ?? ""}</td>
+              <td class="py-2 px-3 text-right"></td>
+            </tr>`;
+          });
+        }
+        // Atualiza o total de páginas
+        totalPaginas = Number.isFinite(data.total)
+          ? Math.ceil(data.total / porPagina) || 1
+          : 1;
+        renderPaginacao();
+      })
+      .catch((error) => {
+        tbodyContactos.innerHTML = `<tr><td colspan="8" class="py-2 px-3 text-center text-red-400">Erro ao carregar contactos</td></tr>`;
+      });
+  }
+
+  // --- Pesquisa (com debounce) ---
+  if (inputPesquisa && tbodyContactos) {
+    inputPesquisa.addEventListener("input", function () {
+      clearTimeout(debounceTimer);
+      termoAtual = inputPesquisa.value.trim();
+      paginaAtual = 1;
+      debounceTimer = setTimeout(() => {
+        fetchContactos(termoAtual, paginaAtual);
+      }, 300);
+    });
+
+    // Carrega primeira página ao iniciar
+    fetchContactos("", 1);
   }
 });

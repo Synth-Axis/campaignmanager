@@ -60,7 +60,8 @@
     </section>
 
     <!-- TAB: Contactos -->
-    <section id="tab-novocontacto" class="hidden w-full max-w-6xl p-0">
+    <section id="tab-novocontacto" class="hidden w-full max-w-full p-0">
+
         <!-- Tabs secundários de contactos, visual compacto -->
         <div class="w-full flex justify-center -mt-4 mb-8">
             <ul class="flex max-w-lg w-full text-xs font-medium text-center text-gray-500 dark:text-gray-400 bg-transparent rounded-md shadow-none gap-4" id="contactos-subtabs">
@@ -86,7 +87,8 @@
         </div>
 
         <!-- Todos os Contactos -->
-        <div id="tab-todos-contactos" class="contact-tab-content hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-6 space-y-4 w-full">
+        <div id="tab-todos-contactos" class="contact-tab-content hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-6 mb-10 space-y-4 w-full max-w-7xl mx-auto">
+
 
             <!-- Linha de título + pesquisa -->
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-6">
@@ -108,33 +110,36 @@
             <table class="w-full text-sm text-left text-gray-700 dark:text-gray-300 border-collapse">
                 <thead>
                     <tr class="border-b border-gray-200 dark:border-gray-600">
+                        <th class="py-2 px-3">ID</th>
                         <th class="py-2 px-3">Nome</th>
                         <th class="py-2 px-3">Email</th>
                         <th class="py-2 px-3">Gestor</th>
                         <th class="py-2 px-3">Canal</th>
                         <th class="py-2 px-3">Lista</th>
+                        <th class="py-2 px-3">Data Registo</th>
                         <th class="py-2 px-3 text-right">Ações</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tabela-contactos">
                     <?php foreach ($contactos as $contacto): ?>
                         <tr class="border-b border-gray-100 dark:border-gray-700">
+                            <td class="py-2 px-3"><?= htmlspecialchars($contacto['publico_id']) ?></td>
                             <td class="py-2 px-3"><?= htmlspecialchars($contacto['nome']) ?></td>
                             <td class="py-2 px-3"><?= htmlspecialchars($contacto['email']) ?></td>
                             <td class="py-2 px-3"><?= htmlspecialchars($contacto['gestor_nome'] ?? '') ?></td>
                             <td class="py-2 px-3"><?= htmlspecialchars($contacto['canal_nome'] ?? '') ?></td>
                             <td class="py-2 px-3"><?= htmlspecialchars($contacto['lista_nome'] ?? '') ?></td>
-                            <td class="py-2 px-3 text-right">
-                                <!-- Botões de ação -->
-                            </td>
+                            <td class="py-2 px-3"><?= htmlspecialchars($contacto['data_registo'] ?? '') ?></td>
+                            <td class="py-2 px-3 text-right"></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            <div id="paginacao-contactos" class="flex justify-center mt-4"></div>
         </div>
 
         <!-- Inserir Contacto -->
-        <form id="tab-inserir-contacto" method="POST" action="novo-registo" class="contact-tab-content hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-8 space-y-6">
+        <form id="tab-inserir-contacto" method="POST" action="novo-registo" class="max-w-l mx-auto contact-tab-content hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-8 space-y-6">
             <h5 class="text-lg font-semibold text-gray-900 dark:text-white">Novo registo</h5>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-10">
                 <div>
