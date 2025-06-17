@@ -193,19 +193,13 @@
             <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">
             <div class="col-span-2 mt-10 flex justify-center">
                 <button type="submit" name="send"
-                    class="w-full max-w-xs px-5 py-2.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800">
+                    class="cursor-pointer w-full max-w-xs px-5 py-2.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800">
                     Submeter
                 </button>
             </div>
             <div class="h-5 flex justify-center items-center">
                 <?php if (!empty($_SESSION['message'])): ?>
-                    <?php
-                    $type = $_SESSION['message_type'] ?? 'success';
-                    $color = $type === 'success'
-                        ? 'bg-green-600 text-white'
-                        : 'bg-red-600 text-white';
-                    ?>
-                    <div class="px-4 py-2 rounded <?= $color ?>">
+                    <div class="<?= ($_SESSION['message_type'] ?? 'success') === 'success' ? 'text-green-600' : 'text-red-600' ?>">
                         <?= $_SESSION['message'] ?>
                     </div>
                     <?php unset($_SESSION['message'], $_SESSION['message_type']); ?>

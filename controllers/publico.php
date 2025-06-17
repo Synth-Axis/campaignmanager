@@ -51,8 +51,6 @@ if (isset($_POST["send"])) {
     $lista  = $_POST["lista"]  !== "" ? (int)$_POST["lista"]  : null;
     $canal  = $_POST["canal"]  !== "" ? (int)$_POST["canal"]  : null;
 
-
-
     if (
         !empty($_POST["nome"]) &&
         !empty($_POST["email"]) &&
@@ -70,21 +68,24 @@ if (isset($_POST["send"])) {
                 "lista_id"  => $lista,
             ]);
             $_SESSION['message'] = "Contacto registado com sucesso";
-            $_SESSION['message_type'] = "success"; // <-- sucesso
+            $_SESSION['message_type'] = "success";
             header("Location: publico");
             exit;
         }
         $_SESSION['message'] = "O email já se encontra registado";
         $_SESSION['message_type'] = "error";
+        header("Location: publico");
+        exit;
     } else {
         $_SESSION['message'] = "Todos os campos são obrigatórios";
         $_SESSION['message_type'] = "error";
-        $nome = retainFormData($_POST["nome"]);
-        $email = retainFormData($_POST["email"]);
+        header("Location: publico");
+        exit;
     }
 
     generateCSRFToken();
 }
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'nova_lista') {
     $nomeLista = trim($_POST['nova_lista_nome']);
