@@ -60,7 +60,7 @@
     </section>
 
     <!-- TAB: Contactos -->
-    <section id="tab-novocontacto" class="hidden w-full max-w-full p-0">
+    <section id="tab-novocontacto" class="hidden w-full max-w-full p-0 px-50">
 
         <!-- Tabs secundários de contactos, visual compacto -->
         <div class="w-full flex justify-center -mt-4 mb-8">
@@ -87,7 +87,7 @@
         </div>
 
         <!-- Todos os Contactos -->
-        <div id="tab-todos-contactos" class="contact-tab-content hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-6 mb-10 space-y-4 w-full max-w-7xl mx-auto">
+        <div id="tab-todos-contactos" class="contact-tab-content hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-6 mb-10 space-y-4 w-full mx-auto">
 
 
             <!-- Linha de título + pesquisa -->
@@ -139,7 +139,7 @@
         </div>
 
         <!-- Inserir Contacto -->
-        <form id="tab-inserir-contacto" method="POST" action="novo-registo" class="max-w-l mx-auto contact-tab-content hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-8 space-y-6">
+        <form id="tab-inserir-contacto" method="POST" action="novo-registo" class="max-w-4xl mx-auto contact-tab-content hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-8 space-y-6">
             <h5 class="text-lg font-semibold text-gray-900 dark:text-white">Novo registo</h5>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-10">
                 <div>

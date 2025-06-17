@@ -67,7 +67,7 @@ class Publico extends Base
         return $this->db->lastInsertId();
     }
 
-    public function pesquisarPublico($termo, $page = 1, $limit = 50)
+    public function pesquisarPublico($termo, $page = 1, $limit = 10000)
     {
         $offset = ($page - 1) * $limit;
         $sqlBase = "
