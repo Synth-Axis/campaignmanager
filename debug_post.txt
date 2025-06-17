@@ -1,0 +1,157 @@
+2025-06-17 11:58:21
+Array
+(
+)
+2025-06-17 11:58:55
+Array
+(
+    [nome] => Manuel Lorena
+    [email] => manuel.lorena@realvidaseguros.pt
+    [gestor] => 83
+    [lista] => 
+    [canal] => 2
+    [csrf_token] => fa24be08f3c5f64b321071d621e524a4019b0ce6a51535a5f2f1b5fa96644186
+    [send] => 
+)
+2025-06-17 12:02:39
+Array
+(
+    [nome] => Manuel Lorena
+    [email] => manuel.lorena@realvidaseguros.pt
+    [gestor] => 83
+    [lista] => 
+    [canal] => 2
+    [csrf_token] => fa24be08f3c5f64b321071d621e524a4019b0ce6a51535a5f2f1b5fa96644186
+    [send] => 
+)
+2025-06-17 12:02:41
+Array
+(
+)
+2025-06-17 12:02:43
+Array
+(
+)
+2025-06-17 12:02:53
+Array
+(
+    [nome] => Manuel Lorena
+    [email] => manuel.lorena@realvidaseguros.pt
+    [gestor] => 83
+    [lista] => 
+    [canal] => 
+    [csrf_token] => 7da60ad2df13e9c6dd51e6c13dfc2b198e7e0f31675933bfc31c84216ac1f415
+    [send] => 
+)
+2025-06-17 12:03:45
+Array
+(
+    [nome] => Manuel Lorena
+    [email] => manuel.lorena@realvidaseguros.pt
+    [gestor] => 83
+    [lista] => 
+    [canal] => 2
+    [csrf_token] => 076ca1ff61dd706a6ea2f898d9e1af72bc5bc26e6351b6834f357e757063b110
+    [send] => 
+)
+2025-06-17 12:05:59
+Array
+(
+)
+2025-06-17 12:06:21
+Array
+(
+    [nome] => Manuel Lorena
+    [email] => manuel.lorena@realvidaseguros.pt
+    [gestor] => 83
+    [lista] => 
+    [canal] => 2
+    [csrf_token] => f4fec6c2e3ef0b922cf58117500374840bd6671b9d2499e580802a689de599e5
+    [send] => 
+)
+2025-06-17 12:08:36
+Array
+(
+)
+2025-06-17 12:09:01
+Array
+(
+    [nome] => Manuel Lorena
+    [email] => manuel.lorena@realvidaseguros.pt
+    [gestor] => 83
+    [lista] => 
+    [canal] => 
+    [csrf_token] => 73edfd36ed133da58fbd9ca969338b448f6351e9fe2dbd2695a10db198eb358d
+    [send] => 
+)
+2025-06-17 12:12:00
+Array
+(
+    [nome] => Manuel Lorena
+    [email] => manuel.lorena@realvidaseguros.pt
+    [gestor] => 83
+    [lista] => 
+    [canal] => 
+    [csrf_token] => 73edfd36ed133da58fbd9ca969338b448f6351e9fe2dbd2695a10db198eb358d
+    [send] => 
+)
+2025-06-17 12:12:02
+Array
+(
+)
+2025-06-17 12:12:03
+Array
+(
+)
+2025-06-17 12:12:17
+Array
+(
+    [nome] => Manuel Lorena
+    [email] => manuel.lorena@realvidaseguros.pt
+    [gestor] => 83
+    [lista] => 
+    [canal] => 2
+    [csrf_token] => 54478d9662bf34a984319687d74bb1ea47ecf88f48ac7f940b06bed81b5927d7
+    [send] => 
+)
+2025-06-17 12:14:48
+Array
+(
+)
+2025-06-17 12:15:03
+Array
+(
+    [nome] => Manuel Lorena
+    [email] => manuel.lorena@realvidaseguros.pt
+    [gestor] => 83
+    [lista] => 
+    [canal] => 2
+    [csrf_token] => e436fbf1b1c0e122c703653dec9a8a18b4c0b84f9641079f95bc646328595742
+    [send] => 
+)
+2025-06-17 12:15:36
+Array
+(
+    [nome] => Manuel Lorena
+    [email] => manuel.lorena@realvidaseguros.pt
+    [gestor] => 83
+    [lista] => 1
+    [canal] => 2
+    [csrf_token] => afb26ec655d8a396f566b187e289033d6ef0e298f0559ccb03503d3a6760f794
+    [send] => 
+)
+2025-06-17 12:17:16
+Array
+(
+    [nome] => Manuel Lorena
+    [email] => manuel.lorena@realvidaseguros.pt
+    [gestor] => 83
+    [lista] => 
+    [canal] => 2
+    [csrf_token] => 6979e3070d0959c34ee229c055b670d28bccc10290745c9333f60c7d1d38e73a
+    [send] => 
+)
+2025-06-17 12:17:16
+Array
+(
+)

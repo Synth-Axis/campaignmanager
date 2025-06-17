@@ -1,5 +1,11 @@
 <?php
 
+/*ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+file_put_contents('debug_post.txt', date('Y-m-d H:i:s') . "\n" . print_r($_POST, true), FILE_APPEND); */
+
 require("models/users.php");
 $model = new Users();
 
@@ -41,37 +47,38 @@ if (isset($_POST["send"])) {
 
     $nome = $_POST["nome"] ?? "";
     $email = $_POST["email"] ?? "";
-    $agente = $_POST["agente"] ?? "";
-    $gestor = $_POST["gestor"] ?? "";
-    $lista = $_POST["lista"] ?? "";
-    $canal = $_POST["canal"] ?? "";
+    $gestor = $_POST["gestor"] !== "" ? (int)$_POST["gestor"] : null;
+    $lista  = $_POST["lista"]  !== "" ? (int)$_POST["lista"]  : null;
+    $canal  = $_POST["canal"]  !== "" ? (int)$_POST["canal"]  : null;
+
+
 
     if (
         !empty($_POST["nome"]) &&
         !empty($_POST["email"]) &&
-        !empty($_POST["agente"]) &&
         mb_strlen($_POST["nome"]) >= 2 &&
-        mb_strlen($_POST["agente"]) >= 2 &&
         filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)
     ) {
         $userEmail = $modelPublico->findPublicoByEmail($_POST["email"]);
 
         if (empty($userEmail)) {
             $modelPublico->RegisterPublico([
-                "nome" => $_POST["nome"],
-                "email" => $_POST["email"],
-                "agente_id" => $_POST["agente"],
-                "gestor_id" => $_POST["gestor"],
-                "canal_id" => $_POST["canal"],
-                "lista_id" => $_POST["lista"],
+                "nome"      => $nome,
+                "email"     => $email,
+                "gestor_id" => $gestor,
+                "canal_id"  => $canal,
+                "lista_id"  => $lista,
             ]);
             $_SESSION['message'] = "Contacto registado com sucesso";
-            header("Location: login");
+            $_SESSION['message_type'] = "success"; // <-- sucesso
+            header("Location: publico");
             exit;
         }
-        $message = "O email já se encontra registado";
+        $_SESSION['message'] = "O email já se encontra registado";
+        $_SESSION['message_type'] = "error";
     } else {
-        $message = "Todos os campos são obrigatórios";
+        $_SESSION['message'] = "Todos os campos são obrigatórios";
+        $_SESSION['message_type'] = "error";
         $nome = retainFormData($_POST["nome"]);
         $email = retainFormData($_POST["email"]);
     }
@@ -136,3 +143,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'apaga
         exit;
     }
 }
+
+require("views/publico.php");

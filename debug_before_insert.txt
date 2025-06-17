@@ -1,0 +1,8 @@
+Array
+(
+    [nome] => Manuel Lorena
+    [email] => manuel.lorena@realvidaseguros.pt
+    [gestor_id] => 83
+    [canal_id] => 2
+    [lista_id] => 
+)

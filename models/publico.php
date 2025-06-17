@@ -55,15 +55,13 @@ class Publico extends Base
                 VALUES(?, ?, ?, ?, ?)
             ");
 
-        $query->execute(
-            [
-                $formData["nome"],
-                $formData["email"],
-                $formData["gestor_id"],
-                $formData["canal_id"],
-                $formData["lista_id"]
-            ]
-        );
+        $query->execute([
+            $formData["nome"],
+            $formData["email"],
+            $formData["gestor_id"],
+            $formData["canal_id"],
+            $formData["lista_id"]
+        ]);
         return $this->db->lastInsertId();
     }
 

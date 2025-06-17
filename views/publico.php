@@ -139,7 +139,7 @@
         </div>
 
         <!-- Inserir Contacto -->
-        <form id="tab-inserir-contacto" method="POST" action="novo-registo" class="max-w-4xl mx-auto contact-tab-content hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-8 space-y-6">
+        <form id="tab-inserir-contacto" method="POST" action="" class="max-w-4xl mx-auto contact-tab-content hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-8 space-y-6">
             <h5 class="text-lg font-semibold text-gray-900 dark:text-white">Novo registo</h5>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-10">
                 <div>
@@ -152,11 +152,7 @@
                     <input type="email" name="email" id="email" value="<?= htmlspecialchars($email ?? '') ?>" placeholder="name@empresa.com"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                 </div>
-                <div>
-                    <label for="agente" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Agente</label>
-                    <input type="text" name="agente" id="agente" value="<?= htmlspecialchars($agente ?? '') ?>" placeholder="Nome do agente"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                </div>
+
                 <div class="col-span-2 md:col-span-1">
                     <label for="gestor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gestor</label>
                     <select name="gestor" id="gestor"
@@ -195,16 +191,24 @@
                 </div>
             </div>
             <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">
-            <div class="col-span-2 mt-3">
+            <div class="col-span-2 mt-10 flex justify-center">
                 <button type="submit" name="send"
-                    class="w-full px-5 py-2.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800">
+                    class="w-full max-w-xs px-5 py-2.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800">
                     Submeter
                 </button>
             </div>
             <div class="h-5 flex justify-center items-center">
                 <?php if (!empty($_SESSION['message'])): ?>
-                    <div><?= $_SESSION['message'] ?></div>
-                    <?php unset($_SESSION['message']); ?>
+                    <?php
+                    $type = $_SESSION['message_type'] ?? 'success';
+                    $color = $type === 'success'
+                        ? 'bg-green-600 text-white'
+                        : 'bg-red-600 text-white';
+                    ?>
+                    <div class="px-4 py-2 rounded <?= $color ?>">
+                        <?= $_SESSION['message'] ?>
+                    </div>
+                    <?php unset($_SESSION['message'], $_SESSION['message_type']); ?>
                 <?php endif; ?>
             </div>
         </form>
@@ -214,13 +218,18 @@
             class="contact-tab-content hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-6 space-y-4 w-full max-w-4xl mx-auto">
             <h5 class="text-lg font-semibold text-gray-900 dark:text-white">Importar Contactos por Ficheiro</h5>
             <form id="form-importar-ficheiro" method="POST" action="/api/importar_publico.php" enctype="multipart/form-data" class="space-y-4">
-                <input
-                    type="file"
-                    name="ficheiro"
-                    accept=".csv,.xlsx"
-                    required
-                    class="p-2 block max-w-4xl text-sm text-gray-900 dark:text-white border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
-                <button type="submit" class="px-5 py-2 text-white bg-blue-600 rounded hover:bg-blue-700">Importar</button>
+                <label for="ficheiro" class="block max-w-2xs p-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer text-gray-500 dark:text-gray-400 text-sm text-center hover:bg-blue-50 dark:hover:bg-blue-800 transition">
+                    <span id="ficheiro-label-text">Escolher o ficheiro CSV/Excel</span>
+                    <input
+                        type="file"
+                        id="ficheiro"
+                        name="ficheiro"
+                        accept=".csv,.xlsx"
+                        required
+                        class="hidden"
+                        onchange="document.getElementById('ficheiro-label-text').innerText = this.files[0]?.name || 'Escolher o ficheiro CSV/Excel'">
+                </label>
+                <button type="submit" class="cursor-pointer px-5 py-2 text-white bg-blue-600 rounded hover:bg-blue-700">Importar</button>
             </form>
         </div>
     </section>
@@ -332,10 +341,6 @@
             </div>
         </div>
     </div>
-
-
-
 </main>
-
 
 <?php require __DIR__ . '/partials/footer.php'; ?>
