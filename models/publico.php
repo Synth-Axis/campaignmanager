@@ -112,4 +112,11 @@ class Publico extends Base
         $stmt->execute();
         return (int)$stmt->fetchColumn();
     }
+
+    public function getAllEmailsByListId($lista_id)
+    {
+        $query = $this->db->prepare("SELECT email FROM Publico WHERE lista_id = ?");
+        $query->execute([$lista_id]);
+        return array_column($query->fetchAll(PDO::FETCH_ASSOC), 'email');
+    }
 }

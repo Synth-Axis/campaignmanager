@@ -27,7 +27,7 @@ $currentPage = basename($_SERVER['REQUEST_URI']);
             <div class="hidden md:flex space-x-8">
                 <a href="#" class="text-blue-700 font-medium">Início</a>
                 <a href="/publico" class="text-gray-900 dark:text-white hover:text-blue-700">Público</a>
-                <a href="#" class="text-gray-900 dark:text-white hover:text-blue-700">Campanhas</a>
+                <a href="/campanhas" class="text-gray-900 dark:text-white hover:text-blue-700">Campanhas</a>
                 <a href="#" class="text-gray-900 dark:text-white hover:text-blue-700">Relatórios</a>
             </div>
         <?php endif; ?>
