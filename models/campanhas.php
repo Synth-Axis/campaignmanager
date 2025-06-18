@@ -13,6 +13,7 @@ class Campaigns extends Base
                 c.nome,
                 c.assunto,
                 c.lista_id,
+                c.estado,
                 l.lista_nome,
                 c.html,
                 c.data_criacao
@@ -29,14 +30,15 @@ class Campaigns extends Base
     {
         $query = $this->db->prepare("
             INSERT INTO campaigns
-                (nome, assunto, lista_id, html, data_criacao)
-                VALUES (?, ?, ?, ?, NOW())
+                (nome, assunto, lista_id, html, estado, data_criacao)
+                VALUES (?, ?, ?, ?, ?, NOW())
         ");
         return $query->execute([
             $data['nome'],
             $data['assunto'],
             $data['lista_id'],
-            $data['html']
+            $data['html'],
+            $data['estado'] ?? 'rascunho',
         ]);
     }
 
@@ -44,30 +46,47 @@ class Campaigns extends Base
     public function getCampaignById($id)
     {
         $query = $this->db->prepare("
-            SELECT * FROM campaigns WHERE campaign_id = ?
+            SELECT 
+                c.*,
+                l.lista_nome
+            FROM campaigns c
+            LEFT JOIN listas l ON c.lista_id = l.lista_id
+            WHERE c.campaign_id = ?
         ");
         $query->execute([$id]);
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 
-    // (Opcional) Editar campanha
+    // Editar campanha completa (inclui estado)
     public function updateCampaign($id, $data)
     {
         $query = $this->db->prepare("
-            UPDATE campaigns
-            SET nome = ?, assunto = ?, lista_id = ?, html = ?
-            WHERE campaign_id = ?
-        ");
+        UPDATE campaigns
+        SET nome = ?, assunto = ?, lista_id = ?, html = ?, estado = ?
+        WHERE campaign_id = ?
+    ");
         return $query->execute([
             $data['nome'],
             $data['assunto'],
             $data['lista_id'],
             $data['html'],
+            $data['estado'],
             $id
         ]);
     }
 
-    // (Opcional) Apagar campanha
+    // Atualizar apenas o estado da campanha
+    public function updateEstado($id, $estado)
+    {
+        $query = $this->db->prepare("
+            UPDATE campaigns
+            SET estado = ?
+            WHERE campaign_id = ?
+        ");
+        return $query->execute([$estado, $id]);
+    }
+
+    // Apagar campanha
     public function deleteCampaign($id)
     {
         $query = $this->db->prepare("

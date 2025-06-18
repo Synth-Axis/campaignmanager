@@ -7,12 +7,6 @@ error_reporting(E_ALL);
 file_put_contents('debug_post.txt', date('Y-m-d H:i:s') . "\n" . print_r($_POST, true), FILE_APPEND); */
 
 require("models/users.php");
-$model = new Users();
-
-if (isset($_SESSION["user_id"])) {
-    $currentUser = $model->findUserById($_SESSION["user_id"]);
-}
-
 require("models/publico.php");
 require("models/channels.php");
 require("models/lists.php");
@@ -20,22 +14,29 @@ require("models/managers.php");
 require("core/basefunctions.php");
 require("core/CSRF.php");
 
-$message = "";
-$email = "";
+$model = new Users();
 $modelPublico = new Publico();
 $modelChannels = new Channels();
 $modelLists = new Lists();
 $modelManagers = new Managers();
+
+if (isset($_SESSION["user_id"])) {
+    $currentUser = $model->findUserById($_SESSION["user_id"]);
+}
+
 $channels = $modelChannels->getAllChannels();
 $listas = $modelLists->getAllLists();
 $gestores = $modelManagers->getAllManagers();
-
 $contactos = $modelPublico->getAllPublico();
 
+// CSRF
 if (!isset($_SESSION["csrf_token"])) {
     generateCSRFToken();
 }
 
+// ---------------------- HANDLERS DE POST ----------------------
+
+// Registo de novo contacto
 if (isset($_POST["send"])) {
     if (!isset($_POST["csrf_token"]) || $_POST["csrf_token"] !== $_SESSION["csrf_token"]) {
         die("CSRF token validation failed.");
@@ -51,15 +52,8 @@ if (isset($_POST["send"])) {
     $lista  = $_POST["lista"]  !== "" ? (int)$_POST["lista"]  : null;
     $canal  = $_POST["canal"]  !== "" ? (int)$_POST["canal"]  : null;
 
-    if (
-        !empty($_POST["nome"]) &&
-        !empty($_POST["email"]) &&
-        mb_strlen($_POST["nome"]) >= 2 &&
-        filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)
-    ) {
-        $userEmail = $modelPublico->findPublicoByEmail($_POST["email"]);
-
-        if (empty($userEmail)) {
+    if (!empty($nome) && !empty($email) && mb_strlen($nome) >= 2 && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (empty($modelPublico->findPublicoByEmail($email))) {
             $modelPublico->RegisterPublico([
                 "nome"      => $nome,
                 "email"     => $email,
@@ -69,24 +63,20 @@ if (isset($_POST["send"])) {
             ]);
             $_SESSION['message'] = "Contacto registado com sucesso";
             $_SESSION['message_type'] = "success";
-            header("Location: publico");
-            exit;
+        } else {
+            $_SESSION['message'] = "O email já se encontra registado";
+            $_SESSION['message_type'] = "error";
         }
-        $_SESSION['message'] = "O email já se encontra registado";
-        $_SESSION['message_type'] = "error";
-        header("Location: publico");
-        exit;
     } else {
         $_SESSION['message'] = "Todos os campos são obrigatórios";
         $_SESSION['message_type'] = "error";
-        header("Location: publico");
-        exit;
     }
 
-    generateCSRFToken();
+    header("Location: publico");
+    exit;
 }
 
-
+// Criar nova lista (AJAX ou normal)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'nova_lista') {
     $nomeLista = trim($_POST['nova_lista_nome']);
     if (!empty($nomeLista)) {
@@ -116,15 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'nova_
     }
 }
 
-// Apenas inclui a view se não for um pedido AJAX
-if (
-    !isset($_SERVER['HTTP_X_REQUESTED_WITH']) ||
-    strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest'
-) {
-    require("views/publico.php");
-}
-
-
+// Editar lista
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'editar_lista') {
     $listaId = $_POST['lista_id'] ?? null;
     $novoNome = trim($_POST['lista_nome'] ?? '');
@@ -136,6 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'edita
     }
 }
 
+// Apagar lista
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'apagar_lista') {
     $listaId = $_POST['lista_id'] ?? null;
     if ($listaId) {
@@ -145,4 +128,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'apaga
     }
 }
 
-require("views/publico.php");
+// ---------------------- INCLUIR VIEW (só se não for AJAX) ----------------------
+if (
+    !isset($_SERVER['HTTP_X_REQUESTED_WITH']) ||
+    strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest'
+) {
+    require("views/publico.php");
+    exit;
+}

@@ -336,5 +336,6 @@
         </div>
     </div>
 </main>
+<script src="js/index.js"></script>
 
 <?php require __DIR__ . '/partials/footer.php'; ?>

@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
     paginaAtual = 1;
     debounceTimer = setTimeout(() => {
       fetchContactos(termoAtual, paginaAtual);
-    }, 300);
+    }, 50);
   }
   function renderPaginacao() {
     const paginacaoDiv = document.getElementById("paginacao-contactos");
@@ -411,12 +411,4 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
-
-  //Preview do HTML
-
-  document.getElementById("preview-btn").addEventListener("click", function () {
-    var html = document.getElementById("editor").value;
-    var previewFrame = document.getElementById("html-preview");
-    previewFrame.srcdoc = html;
-  });
 });

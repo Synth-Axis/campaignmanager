@@ -28,26 +28,47 @@ $listas = $modelLists->getAllLists();
 $campanhas = $modelCampaigns->getAllCampaigns();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Valida e guarda a nova campanha
-    $nome = trim($_POST['nome'] ?? "");
-    $assunto = trim($_POST['assunto'] ?? "");
+    $acao     = $_POST['action'] ?? '';
+    $nome     = trim($_POST['nome'] ?? "");
+    $assunto  = trim($_POST['assunto'] ?? "");
     $lista_id = $_POST['lista'] ?? null;
-    $html = $_POST['html'] ?? "";
+    $html     = $_POST['html'] ?? "";
 
-    if ($nome && $assunto && $lista_id && $html) {
-        // Guarda primeiro a campanha
+    if (!$nome || !$assunto || !$lista_id || !$html) {
+        $_SESSION['message'] = "Todos os campos são obrigatórios.";
+        $_SESSION['message_type'] = "error";
+        header("Location: campanhas");
+        exit;
+    }
+
+    if ($acao === 'gravar') {
+        // Só guarda com estado "rascunho"
         $ok = $modelCampaigns->createCampaign([
-            'nome' => $nome,
-            'assunto' => $assunto,
+            'nome'     => $nome,
+            'assunto'  => $assunto,
             'lista_id' => $lista_id,
-            'html' => $html,
+            'html'     => $html,
+            'estado'   => 'rascunho',
         ]);
+
+        $_SESSION['message'] = $ok ? "Campanha guardada como rascunho." : "Erro ao guardar campanha.";
+        $_SESSION['message_type'] = $ok ? "success" : "error";
+        header("Location: campanhas");
+        exit;
+    } elseif ($acao === 'enviar') {
+        // Guarda com estado "enviada" e envia emails
+        $ok = $modelCampaigns->createCampaign([
+            'nome'     => $nome,
+            'assunto'  => $assunto,
+            'lista_id' => $lista_id,
+            'html'     => $html,
+            'estado'   => 'enviada',
+        ]);
+
         if ($ok) {
-            // Envia os emails para todos os contactos da lista
-            $emails = $modelPublico->getAllEmailsByListId($lista_id);
-            $total = count($emails);
+            $emails  = $modelPublico->getAllEmailsByListId($lista_id);
             $sucesso = 0;
-            $erro = 0;
+            $erro    = 0;
 
             foreach ($emails as $destinatario) {
                 if (send_email($destinatario, $assunto, $html)) {
@@ -57,20 +78,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
 
-            // (Opcional) podes guardar as estatísticas de envio na tabela campanhas
-
-            $mensagem = "Campanha criada e enviada com sucesso! Emails enviados: $sucesso";
-            if ($erro > 0) $mensagem .= " | Falhas: $erro";
-            $mensagem_tipo = $erro > 0 ? "error" : "success";
-            header("Location: campanhas"); // reload clean
-            exit;
+            $_SESSION['message'] = "Campanha enviada. Sucesso: $sucesso" . ($erro > 0 ? " | Falhas: $erro" : "");
+            $_SESSION['message_type'] = $erro > 0 ? "error" : "success";
         } else {
-            $mensagem = "Erro ao guardar a campanha.";
-            $mensagem_tipo = "error";
+            $_SESSION['message'] = "Erro ao guardar e enviar a campanha.";
+            $_SESSION['message_type'] = "error";
         }
-    } else {
-        $mensagem = "Todos os campos são obrigatórios.";
-        $mensagem_tipo = "error";
+
+        header("Location: campanhas");
+        exit;
     }
 }
 
