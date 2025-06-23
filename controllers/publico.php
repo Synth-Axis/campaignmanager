@@ -20,6 +20,12 @@ $modelChannels = new Channels();
 $modelLists = new Lists();
 $modelManagers = new Managers();
 
+
+$totalContactos = $modelPublico->contarPublico();
+$contactosUltimos30Dias = $modelPublico->contarNovosUltimos30Dias();
+$novosHoje = $modelPublico->contarNovosHoje();
+$dadosGrafico = $modelPublico->getCrescimentoPorDia(30);
+
 if (isset($_SESSION["user_id"])) {
     $currentUser = $model->findUserById($_SESSION["user_id"]);
 }

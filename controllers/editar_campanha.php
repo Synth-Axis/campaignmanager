@@ -1,5 +1,9 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require_once(__DIR__ . '/../models/campanhas.php');
 require_once(__DIR__ . '/../models/lists.php');
 require_once(__DIR__ . '/../models/publico.php');
@@ -47,7 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'nome'     => $nome,
                 'assunto'  => $assunto,
                 'lista_id' => $lista_id,
-                'html'     => $html
+                'html'     => $html,
+                'estado'   => $estado
             ]);
 
             $mensagem = $ok ? "Campanha atualizada com sucesso." : "Erro ao atualizar.";
@@ -58,7 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'nome'     => $nome,
                 'assunto'  => $assunto,
                 'lista_id' => $lista_id,
-                'html'     => $html
+                'html'     => $html,
+                'estado'   => 'enviada'
             ]);
 
             $emails   = $modelPublico->getAllEmailsByListId($lista_id);

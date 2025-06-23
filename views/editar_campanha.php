@@ -2,7 +2,7 @@
 <?php require __DIR__ . '/partials/nav.php'; ?>
 
 <main class="min-h-screen flex flex-col items-center my-10 gap-8">
-    <section class="w-full max-w-7xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-8">
+    <section class="w-full max-w-screen-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-8">
         <a href="/campanhas" class="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 mb-4">
             ← Voltar à Lista de Campanhas
         </a>
@@ -44,6 +44,16 @@
                             <?= htmlspecialchars($lista['lista_nome']) ?>
                         </option>
                     <?php endforeach; ?>
+                </select>
+            </div>
+
+            <div class="mb-8">
+                <label for="estado" class="block text-sm font-medium text-gray-900 dark:text-gray-300 mb-1">Estado da Campanha</label>
+                <select name="estado" id="estado" required
+                    class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <option value="rascunho">Rascunho</option>
+                    <option value="agendada">Agendada</option>
+                    <option value="enviada">Enviada</option>
                 </select>
             </div>
 

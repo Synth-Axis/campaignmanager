@@ -54,7 +54,7 @@
     </section>
 
     <!-- TAB: Nova Campanha -->
-    <section id="tab-nova-campanha" class="hidden tab-content w-full max-w-7xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-8">
+    <section id="tab-nova-campanha" class="hidden tab-content w-full max-w-screen-2xl mx-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-8">
         <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6">Nova Campanha de Email</h3>
         <form id="form-nova-campanha" method="POST" action="campanhas" class="w-full">
             <div class="mb-4">

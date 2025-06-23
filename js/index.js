@@ -411,4 +411,62 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
+
+  // -------------------- GRÁFICO DE CONTACTOS --------------------
+  const selectPeriodo = document.getElementById("filtro-periodo");
+  const graficoCanvas = document.getElementById("grafico-crescimento");
+  let chartInstance;
+
+  function desenharGrafico(dados) {
+    const labels = dados.map((d) => d.dia);
+    const valores = dados.map((d) => d.total);
+
+    if (chartInstance) chartInstance.destroy(); // limpa anterior
+
+    const ctx = graficoCanvas.getContext("2d");
+    chartInstance = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Novos Contactos",
+            data: valores,
+            fill: false,
+            borderColor: "rgb(59, 130, 246)",
+            tension: 0.1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+        },
+        scales: {
+          y: { beginAtZero: true },
+        },
+      },
+    });
+  }
+
+  function carregarGrafico(periodoLabel) {
+    fetch(
+      `/api/crescimento_contactos.php?periodo=${encodeURIComponent(
+        periodoLabel
+      )}`
+    )
+      .then((res) => res.json())
+      .then((data) => desenharGrafico(data))
+      .catch((err) => console.error("Erro ao buscar dados do gráfico:", err));
+  }
+
+  // Inicializa gráfico com valor inicial da combobox
+  if (selectPeriodo && graficoCanvas) {
+    carregarGrafico(selectPeriodo.value);
+
+    selectPeriodo.addEventListener("change", function () {
+      carregarGrafico(this.value);
+    });
+  }
 });

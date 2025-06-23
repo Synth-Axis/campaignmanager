@@ -113,10 +113,63 @@ class Publico extends Base
         return (int)$stmt->fetchColumn();
     }
 
+    public function contarNovosUltimos30Dias()
+    {
+        $stmt = $this->db->prepare("SELECT COUNT(*) FROM Publico WHERE data_registo >= CURDATE() - INTERVAL 30 DAY");
+        $stmt->execute();
+        return (int) $stmt->fetchColumn();
+    }
+
     public function getAllEmailsByListId($lista_id)
     {
         $query = $this->db->prepare("SELECT email FROM Publico WHERE lista_id = ?");
         $query->execute([$lista_id]);
         return array_column($query->fetchAll(PDO::FETCH_ASSOC), 'email');
+    }
+
+    public function getCrescimentoPorDia($dias)
+    {
+        $inicio = new DateTime();
+        $inicio->modify("-$dias days");
+        $hoje = new DateTime();
+
+        // Inicializa o array com todos os dias
+        $diasIntervalo = [];
+        $periodo = new DatePeriod($inicio, new DateInterval('P1D'), $hoje->modify('+1 day'));
+        foreach ($periodo as $data) {
+            $diasIntervalo[$data->format('Y-m-d')] = 0;
+        }
+
+        // Vai buscar os reais da base de dados
+        $stmt = $this->db->prepare("
+        SELECT DATE(data_registo) as dia, COUNT(*) as total
+        FROM Publico
+        WHERE data_registo >= CURDATE() - INTERVAL :dias DAY
+        GROUP BY DATE(data_registo)
+    ");
+        $stmt->bindValue(":dias", $dias, PDO::PARAM_INT);
+        $stmt->execute();
+
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $diasIntervalo[$row['dia']] = (int) $row['total'];
+        }
+
+        // Reconvertendo em array final
+        $resultado = [];
+        foreach ($diasIntervalo as $dia => $total) {
+            $resultado[] = [
+                'dia' => $dia,
+                'total' => $total
+            ];
+        }
+
+        return $resultado;
+    }
+
+    public function contarNovosHoje()
+    {
+        $stmt = $this->db->prepare("SELECT COUNT(*) FROM Publico WHERE DATE(data_registo) = CURDATE()");
+        $stmt->execute();
+        return (int) $stmt->fetchColumn();
     }
 }
