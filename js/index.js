@@ -200,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   data-gestor="${c.gestor_id ?? ""}"
                   data-lista="${c.lista_id ?? ""}"
                   data-canal="${c.canal_id ?? ""}">
-                  <option selected disabled>Ações</option>
+                  <option selected disabled>Acções</option>
                   <option value="editar">Editar</option>
                   <option value="apagar">Apagar</option>
                 </select>
@@ -298,7 +298,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .classList.remove("hidden");
 
           // Repor o select para a opção default após usar
-          select.value = "Ações";
+          select.value = "Acções";
         })
         .catch(() => {
           alert("Erro ao obter dados do contacto.");

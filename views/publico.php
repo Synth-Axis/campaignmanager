@@ -194,7 +194,7 @@
                                     data-gestor="<?= htmlspecialchars($contacto['gestor_nome'] ?? '') ?>"
                                     data-canal="<?= htmlspecialchars($contacto['canal_nome'] ?? '') ?>"
                                     data-lista="<?= htmlspecialchars($contacto['lista_nome'] ?? '') ?>">
-                                    <option selected disabled>Ações</option>
+                                    <option selected disabled>Acções</option>
                                     <option value="editar">Editar</option>
                                     <option value="apagar">Apagar</option>
                                 </select>
@@ -322,7 +322,7 @@
             <thead>
                 <tr class="border-b border-gray-200 dark:border-gray-600">
                     <th scope="col" class="py-2 px-3">Nome da Lista</th>
-                    <th scope="col" class="py-2 px-3 text-right">Ações</th>
+                    <th scope="col" class="py-2 px-3 text-right">Acções</th>
                 </tr>
             </thead>
             <tbody>
@@ -331,7 +331,7 @@
                         <td class="py-2 px-3"><?= htmlspecialchars($lista['lista_nome']) ?></td>
                         <td class="py-2 px-3 text-right">
                             <select onchange="handleListaAcao(this)" class="cursor-pointer select-acao-lista bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg p-1 cursor-pointer" data-id="<?= $lista['lista_id'] ?>" data-nome="<?= htmlspecialchars($lista['lista_nome']) ?>">
-                                <option selected disabled>Ações</option>
+                                <option selected disabled>Acções</option>
                                 <option value="editar">Editar</option>
                                 <option value="apagar">Apagar</option>
                             </select>
