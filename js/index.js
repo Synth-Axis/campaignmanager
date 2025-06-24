@@ -1,17 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Estado global para contactos (evita redeclarações)
   let termoAtual = "";
   let paginaAtual = 1;
   let totalPaginas = 1;
   const porPagina = 50;
   let debounceTimer = null;
 
+  let entidadeParaApagar = null; // "lista" ou "contacto"
+  let idParaApagar = null;
+  let linhaParaRemover = null;
+
   // -------------------- TABS PRINCIPAIS --------------------
   const tabs = document.querySelectorAll(".tab-link");
   let tabAtual = sessionStorage.getItem("tabAtual") || "tab-visaogeral";
 
   function ativarTab(tabId) {
-    // Esconde todos os tabs principais
     document
       .querySelectorAll('[id^="tab-"]')
       .forEach((t) => t.classList.add("hidden"));
@@ -36,8 +38,8 @@ document.addEventListener("DOMContentLoaded", function () {
       targetTab.classList.remove("hidden");
       linkEl.classList.remove(
         "text-gray-500",
-        "dark:text-gray-400",
         "bg-white",
+        "dark:text-gray-400",
         "dark:bg-gray-800"
       );
       linkEl.classList.add(
@@ -47,21 +49,20 @@ document.addEventListener("DOMContentLoaded", function () {
         "font-semibold"
       );
     }
+
     sessionStorage.setItem("tabAtual", tabId);
 
-    // Sempre que entras em contactos, reatribui handlers das subtabs
     if (tabId === "tab-novocontacto") {
-      reatribuirListenersSubTabs(); // <- CHAMA ESTA FUNÇÃO LOGO QUE ENTRAS EM CONTACTOS
+      reatribuirListenersSubTabs();
       ativarSubTab(
         sessionStorage.getItem("contactSubTab") || "tab-todos-contactos"
       );
     }
   }
 
-  // Função que garante que os listeners estão sempre ativos
   function reatribuirListenersSubTabs() {
     document.querySelectorAll(".contact-tab-link").forEach((tab) => {
-      tab.onclick = null; // Remove antigos, se existirem
+      tab.onclick = null;
       tab.addEventListener("click", function (e) {
         e.preventDefault();
         ativarSubTab(this.getAttribute("data-contacttab"));
@@ -69,17 +70,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  tabs.forEach((tab) => {
-    tab.addEventListener("click", function (e) {
-      e.preventDefault();
-      const targetId = this.getAttribute("data-tab");
-      if (targetId !== "tab-novocontacto")
-        sessionStorage.removeItem("contactSubTab");
-      ativarTab(targetId);
-    });
-  });
-
-  // -------------------- TABS SECUNDÁRIAS (Contactos) --------------------
   function ativarSubTab(subTabId) {
     document
       .querySelectorAll(".contact-tab-content")
@@ -128,6 +118,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute("data-tab");
+      if (targetId !== "tab-novocontacto")
+        sessionStorage.removeItem("contactSubTab");
+      ativarTab(targetId);
+    });
+  });
+
   document.querySelectorAll(".contact-tab-link").forEach((tab) => {
     tab.addEventListener("click", function (e) {
       e.preventDefault();
@@ -135,10 +135,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // -------------------- INICIALIZAÇÃO --------------------
   ativarTab(tabAtual);
 
-  // -------------------- CONTACTOS: PESQUISA E PAGINAÇÃO --------------------
   function inicializarPesquisaContactos() {
     const inputPesquisa = document.getElementById("pesquisar-contactos");
     if (!inputPesquisa) return;
@@ -146,48 +144,23 @@ document.addEventListener("DOMContentLoaded", function () {
     inputPesquisa.value = "";
     inputPesquisa.addEventListener("input", debounceInputHandler);
   }
+
   function destruirPesquisaContactos() {
     const inputPesquisa = document.getElementById("pesquisar-contactos");
     if (inputPesquisa)
       inputPesquisa.removeEventListener("input", debounceInputHandler);
   }
+
   function debounceInputHandler(e) {
     clearTimeout(debounceTimer);
     termoAtual = e.target.value.trim();
     paginaAtual = 1;
-    debounceTimer = setTimeout(() => {
-      fetchContactos(termoAtual, paginaAtual);
-    }, 50);
+    debounceTimer = setTimeout(
+      () => fetchContactos(termoAtual, paginaAtual),
+      50
+    );
   }
-  function renderPaginacao() {
-    const paginacaoDiv = document.getElementById("paginacao-contactos");
-    if (!paginacaoDiv) return;
-    paginacaoDiv.innerHTML = "";
-    if (totalPaginas <= 1) return;
-    let html = `<div class="flex gap-6 items-center justify-center">`;
-    html += `<button ${
-      paginaAtual === 1 ? "disabled" : ""
-    } id="pag-anterior" class="cursor-pointer px-4 py-2 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed">Anterior</button>`;
-    html += `<span class="text-white font-semibold">Página ${paginaAtual} de ${totalPaginas}</span>`;
-    html += `<button ${
-      paginaAtual === totalPaginas ? "disabled" : ""
-    } id="pag-seguinte" class="cursor-pointer px-4 py-2 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed">Seguinte</button>`;
-    html += `</div>`;
-    paginacaoDiv.innerHTML = html;
 
-    document.getElementById("pag-anterior").onclick = () => {
-      if (paginaAtual > 1) {
-        paginaAtual--;
-        fetchContactos(termoAtual, paginaAtual);
-      }
-    };
-    document.getElementById("pag-seguinte").onclick = () => {
-      if (paginaAtual < totalPaginas) {
-        paginaAtual++;
-        fetchContactos(termoAtual, paginaAtual);
-      }
-    };
-  }
   function fetchContactos(termo = "", pagina = 1) {
     const tbodyContactos = document.getElementById("tabela-contactos");
     if (!tbodyContactos) return;
@@ -209,8 +182,9 @@ document.addEventListener("DOMContentLoaded", function () {
           tbodyContactos.innerHTML = `<tr><td colspan="8" class="py-2 px-3 text-center text-gray-400">Sem resultados</td></tr>`;
         } else {
           data.registos.forEach((c) => {
-            tbodyContactos.innerHTML += `
-            <tr class="border-b border-gray-100 dark:border-gray-700">
+            const row = document.createElement("tr");
+            row.className = "border-b border-gray-100 dark:border-gray-700";
+            row.innerHTML = `
               <td class="py-2 px-3">${c.publico_id ?? ""}</td>
               <td class="py-2 px-3">${c.nome ?? ""}</td>
               <td class="py-2 px-3">${c.email ?? ""}</td>
@@ -218,48 +192,71 @@ document.addEventListener("DOMContentLoaded", function () {
               <td class="py-2 px-3">${c.canal_nome ?? ""}</td>
               <td class="py-2 px-3">${c.lista_nome ?? ""}</td>
               <td class="py-2 px-3">${c.data_registo ?? ""}</td>
-              <td class="py-2 px-3 text-right"></td>
-            </tr>`;
+              <td class="py-2 px-3 text-right">
+                <select class="select-acao-contacto bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg p-1 cursor-pointer"
+                  data-id="${c.publico_id}"
+                  data-nome="${c.nome ?? ""}"
+                  data-email="${c.email ?? ""}"
+                  data-gestor="${c.gestor_id ?? ""}"
+                  data-lista="${c.lista_id ?? ""}"
+                  data-canal="${c.canal_id ?? ""}">
+                  <option selected disabled>Ações</option>
+                  <option value="editar">Editar</option>
+                  <option value="apagar">Apagar</option>
+                </select>
+              </td>`;
+            tbodyContactos.appendChild(row);
           });
+
+          // Aplicar os listeners após inserir linhas
+          tbodyContactos
+            .querySelectorAll(".select-acao-contacto")
+            .forEach((select) => {
+              select.addEventListener("change", function () {
+                handleAcaoContacto(this);
+              });
+            });
         }
         totalPaginas = Number.isFinite(data.total)
           ? Math.ceil(data.total / porPagina) || 1
           : 1;
         renderPaginacao();
       })
-      .catch((error) => {
+      .catch(() => {
         tbodyContactos.innerHTML = `<tr><td colspan="8" class="py-2 px-3 text-center text-red-400">Erro ao carregar contactos</td></tr>`;
       });
   }
 
-  // -------------------- MODAIS --------------------
-  document.querySelectorAll(".abrir-modal").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const target = btn.dataset.modal;
-      const modal = document.getElementById(`modal-${target}`);
-      if (modal) {
-        modal.classList.remove("hidden");
-        modal.querySelector("input[type='text']")?.focus();
-      }
-    });
-  });
-  window.addEventListener("click", function (e) {
-    if (
-      e.target.classList.contains("abrir-modal") ||
-      e.target.closest(".abrir-modal") ||
-      e.target.classList.contains("fechar-modal") ||
-      e.target.closest(".fechar-modal")
-    )
-      return;
-    if (!e.target.closest(".modal-content")) {
-      document
-        .querySelectorAll(".modal")
-        .forEach((m) => m.classList.add("hidden"));
-    }
-  });
+  function renderPaginacao() {
+    const paginacaoDiv = document.getElementById("paginacao-contactos");
+    if (!paginacaoDiv) return;
+    paginacaoDiv.innerHTML = "";
+    if (totalPaginas <= 1) return;
+    paginacaoDiv.innerHTML = `
+      <div class="flex gap-6 items-center justify-center">
+        <button ${
+          paginaAtual === 1 ? "disabled" : ""
+        } id="pag-anterior" class="cursor-pointer px-4 py-2 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed">Anterior</button>
+        <span class="text-white font-semibold">Página ${paginaAtual} de ${totalPaginas}</span>
+        <button ${
+          paginaAtual === totalPaginas ? "disabled" : ""
+        } id="pag-seguinte" class="cursor-pointer px-4 py-2 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed">Seguinte</button>
+      </div>`;
 
-  // -------------------- TOAST ALERTS --------------------
+    document.getElementById("pag-anterior").onclick = () => {
+      if (paginaAtual > 1) {
+        paginaAtual--;
+        fetchContactos(termoAtual, paginaAtual);
+      }
+    };
+    document.getElementById("pag-seguinte").onclick = () => {
+      if (paginaAtual < totalPaginas) {
+        paginaAtual++;
+        fetchContactos(termoAtual, paginaAtual);
+      }
+    };
+  }
+
   function mostrarAlerta(mensagem, tipo = "success") {
     const alerta = document.getElementById("alerta-custom");
     const span = document.getElementById("alerta-mensagem");
@@ -275,109 +272,123 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 3000);
   }
 
-  // -------------------- LISTAS: CRIAR, EDITAR, APAGAR --------------------
-  let listaIdParaApagar = null;
-  let linhaParaRemover = null;
-  document.getElementById("cancelar-apagar")?.addEventListener("click", () => {
-    document.getElementById("modal-confirmar-apagar").classList.add("hidden");
-    listaIdParaApagar = null;
-    linhaParaRemover = null;
-  });
-  document.getElementById("confirmar-apagar")?.addEventListener("click", () => {
-    if (!listaIdParaApagar) return;
-    fetch("", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: `action=apagar_lista&lista_id=${encodeURIComponent(
-        listaIdParaApagar
-      )}`,
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error("Erro ao apagar");
-        if (linhaParaRemover) linhaParaRemover.remove();
-        mostrarAlerta("Lista apagada com sucesso!");
-      })
-      .catch(() => mostrarAlerta("Erro ao apagar a lista.", "error"))
-      .finally(() => {
-        document
-          .getElementById("modal-confirmar-apagar")
-          .classList.add("hidden");
-        listaIdParaApagar = null;
-        linhaParaRemover = null;
-      });
-  });
-  document
-    .getElementById("form-nova-lista")
-    ?.addEventListener("submit", function (e) {
-      e.preventDefault();
-      const nomeInput = document.getElementById("nova_lista_nome");
-      const nome = nomeInput.value.trim();
-      if (!nome) return mostrarAlerta("O nome da lista é obrigatório", "error");
-      fetch("", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          "X-Requested-With": "XMLHttpRequest",
-        },
-        body: `action=nova_lista&nova_lista_nome=${encodeURIComponent(nome)}`,
-      })
-        .then((res) => {
-          if (!res.ok) throw new Error("Erro ao criar lista");
-          return res.json(); // deve devolver { id: ..., nome: ... }
-        })
+  // -------------------- MODAIS & AÇÕES --------------------
+  window.handleAcaoContacto = function (select) {
+    const acao = select.value;
+    const id = select.dataset.id;
+
+    if (acao === "editar") {
+      fetch(`/api/get_contacto.php?id=${encodeURIComponent(id)}`)
+        .then((res) => res.json())
         .then((data) => {
-          const tbody = document.querySelector("#tab-listas tbody");
-          if (!tbody) return;
-          const novaLinha = document.createElement("tr");
-          novaLinha.className = "border-b border-gray-100 dark:border-gray-700";
-          novaLinha.innerHTML = `
-          <td class="py-2 px-3">${data.nome}</td>
-          <td class="py-2 px-3 text-right">
-            <select onchange="handleListaAcao(this)" class="select-acao-lista bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg p-1 cursor-pointer" data-id="${data.id}" data-nome="${data.nome}">
-              <option selected disabled>Ações</option>
-              <option value="editar">Editar</option>
-              <option value="apagar">Apagar</option>
-            </select>
-          </td>
-        `;
-          tbody.appendChild(novaLinha);
-          document.getElementById("modal-nova-lista").classList.add("hidden");
-          nomeInput.value = "";
-          mostrarAlerta("Lista criada com sucesso!");
-          novaLinha
-            .querySelector("select")
-            .addEventListener("change", function () {
-              handleListaAcao(this);
-            });
+          if (!data || !data.publico_id) {
+            alert("Contacto não encontrado.");
+            return;
+          }
+
+          document.getElementById("editar_contacto_id").value = data.publico_id;
+          document.getElementById("editar_nome").value = data.nome || "";
+          document.getElementById("editar_email").value = data.email || "";
+          document.getElementById("editar_gestor").value = data.gestor_id || "";
+          document.getElementById("editar_lista").value = data.lista_id || "";
+          document.getElementById("editar_canal").value = data.canal_id || "";
+
+          document
+            .getElementById("modal-editar-contacto")
+            .classList.remove("hidden");
+
+          // Repor o select para a opção default após usar
+          select.value = "Ações";
         })
         .catch(() => {
-          mostrarAlerta("Erro ao criar lista.", "error");
+          alert("Erro ao obter dados do contacto.");
         });
-    });
-  function handleListaAcao(select) {
+    }
+
+    if (acao === "apagar") {
+      entidadeParaApagar = "contacto";
+      idParaApagar = id;
+      linhaParaRemover = select.closest("tr");
+      document.getElementById("texto-confirmacao").textContent =
+        "Tem a certeza que deseja apagar este contacto?";
+      document
+        .getElementById("modal-confirmar-apagar")
+        .classList.remove("hidden");
+    }
+  };
+
+  window.handleListaAcao = function (select) {
     const acao = select.value;
     const id = select.dataset.id;
     const nome = select.dataset.nome;
+
     if (acao === "editar") {
       document.getElementById("editar_lista_id").value = id;
       document.getElementById("editar_lista_nome").value = nome;
       document.getElementById("modal-editar-lista").classList.remove("hidden");
     }
+
     if (acao === "apagar") {
-      listaIdParaApagar = id;
+      entidadeParaApagar = "lista";
+      idParaApagar = id;
       linhaParaRemover = select.closest("tr");
+      document.getElementById("texto-confirmacao").textContent =
+        "Tem a certeza que deseja apagar esta lista?";
       document
         .getElementById("modal-confirmar-apagar")
         .classList.remove("hidden");
     }
+
     select.selectedIndex = 0;
-  }
-  document.querySelectorAll(".select-acao-lista").forEach((select) => {
-    select.addEventListener("change", function () {
-      handleListaAcao(this);
-    });
+  };
+
+  document.getElementById("cancelar-apagar")?.addEventListener("click", () => {
+    document.getElementById("modal-confirmar-apagar").classList.add("hidden");
+    entidadeParaApagar = null;
+    idParaApagar = null;
+    linhaParaRemover = null;
   });
-  window.handleListaAcao = handleListaAcao;
+
+  document.getElementById("confirmar-apagar")?.addEventListener("click", () => {
+    if (!entidadeParaApagar || !idParaApagar) return;
+
+    const body =
+      entidadeParaApagar === "lista"
+        ? `action=apagar_lista&lista_id=${encodeURIComponent(idParaApagar)}`
+        : `action=apagar_contacto&contacto_id=${encodeURIComponent(
+            idParaApagar
+          )}`;
+
+    fetch("", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: body,
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Erro ao apagar");
+        if (linhaParaRemover && entidadeParaApagar === "lista")
+          linhaParaRemover.remove();
+        if (entidadeParaApagar === "contacto")
+          fetchContactos(termoAtual, paginaAtual);
+        mostrarAlerta(
+          `${
+            entidadeParaApagar === "lista" ? "Lista" : "Contacto"
+          } apagado com sucesso!`
+        );
+      })
+      .catch(() =>
+        mostrarAlerta(`Erro ao apagar ${entidadeParaApagar}.`, "error")
+      )
+      .finally(() => {
+        document
+          .getElementById("modal-confirmar-apagar")
+          .classList.add("hidden");
+        entidadeParaApagar = null;
+        idParaApagar = null;
+        linhaParaRemover = null;
+        select.selectedIndex = 0;
+      });
+  });
 
   // -------------------- IMPORTAÇÃO FICHEIRO --------------------
   const formImportar = document.getElementById("form-importar-ficheiro");
@@ -399,7 +410,7 @@ document.addEventListener("DOMContentLoaded", function () {
             `✅ Importados: ${sucesso}, ❌ Com erro: ${erro}`,
             erro > 0 ? "error" : "success"
           );
-          formImportar.reset(); // limpa o input file
+          formImportar.reset();
         } else {
           throw new Error("Erro de resposta");
         }
@@ -421,7 +432,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const labels = dados.map((d) => d.dia);
     const valores = dados.map((d) => d.total);
 
-    if (chartInstance) chartInstance.destroy(); // limpa anterior
+    if (chartInstance) chartInstance.destroy();
 
     const ctx = graficoCanvas.getContext("2d");
     chartInstance = new Chart(ctx, {
@@ -461,7 +472,6 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch((err) => console.error("Erro ao buscar dados do gráfico:", err));
   }
 
-  // Inicializa gráfico com valor inicial da combobox
   if (selectPeriodo && graficoCanvas) {
     carregarGrafico(selectPeriodo.value);
 
@@ -469,4 +479,42 @@ document.addEventListener("DOMContentLoaded", function () {
       carregarGrafico(this.value);
     });
   }
+
+  // Permite fechar modais ao clicar fora do conteúdo
+  document.querySelectorAll(".modal").forEach((modal) => {
+    modal.addEventListener("click", function (e) {
+      const conteudo = modal.querySelector(".modal-content");
+      if (!conteudo.contains(e.target)) {
+        modal.classList.add("hidden");
+      }
+    });
+  });
+
+  document
+    .getElementById("form-editar-contacto")
+    ?.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const form = e.target;
+      const formData = new FormData(form);
+
+      fetch("", {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            document
+              .getElementById("modal-editar-contacto")
+              .classList.add("hidden");
+            fetchContactos(termoAtual, paginaAtual);
+            mostrarAlerta("✅ Contacto atualizado com sucesso!");
+          } else {
+            mostrarAlerta("❌ Erro ao atualizar o contacto.", "error");
+          }
+        })
+        .catch(() => {
+          mostrarAlerta("❌ Erro na comunicação com o servidor.", "error");
+        });
+    });
 });

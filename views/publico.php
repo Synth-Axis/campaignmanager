@@ -51,7 +51,7 @@
             <!-- Coluna Esquerda: 3 cards -->
             <div class="space-y-6 col-span-1 md:col-span-2 lg:col-span-2">
                 <!-- Card Resumo -->
-                <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
+                <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
                     <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-2">Resumo</h3>
                     <p class="text-3xl font-bold text-gray-900 dark:text-white"><?= $totalContactos ?></p>
                     <p class="text-sm text-gray-600 dark:text-gray-400">Todos contatos</p>
@@ -59,18 +59,18 @@
                 </div>
 
                 <!-- Card Crescimento recente -->
-                <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
-                    <h3 class="text-2xl font-bold text-gray-500 dark:text-gray-300 mb-2">Crescimento recente</h3>
+                <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-2">Crescimento recente</h3>
                     <p class="text-sm text-gray-700 dark:text-gray-200">Últimos 30 dias</p>
                     <p class="text-sm mt-1 text-gray-600 dark:text-gray-400">Novos contactos: <?= $contactosUltimos30Dias ?></p>
                     <p class="text-sm text-gray-600 dark:text-gray-400">Desinscritos: 0</p>
                 </div>
 
                 <!-- Card Desempenho -->
-                <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
+                <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
                     <div class="flex justify-between items-stretch mb-2 min-h-[4rem]">
-                        <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white tracking-tight self-end">
-                            Desempenho do público
+                        <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white tracking-tight self-start">
+                            Desempenho</br>do público
                         </h3>
                         <select class="rounded-md self-start text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded px-2 py-1 text-gray-700 dark:text-white">
                             <option>Últimos 7 dias</option>
@@ -90,9 +90,9 @@
 
             <!-- Coluna Direita: Gráfico -->
             <div class="col-span-1 md:col-span-3 lg:col-span-3">
-                <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm h-full">
+                <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
                     <div class="flex justify-between items-stretch mb-2 min-h-[4rem]">
-                        <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white tracking-tight self-end mb-2">
+                        <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white tracking-tight self-start mb-2">
                             Crescimento de contactos
                         </h3>
                         <select id="filtro-periodo" class="rounded-md self-start text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded px-2 py-1 text-gray-700 dark:text-white">
@@ -139,6 +139,7 @@
         </div>
 
         <!-- Todos os Contactos -->
+
         <div id="tab-todos-contactos" class="contact-tab-content hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-6 mb-10 space-y-4 w-full mx-auto">
 
 
@@ -159,6 +160,8 @@
                     </span>
                 </div>
             </div>
+
+
             <table class="w-full text-sm text-left text-gray-700 dark:text-gray-300 border-collapse">
                 <thead>
                     <tr class="border-b border-gray-200 dark:border-gray-600">
@@ -169,11 +172,12 @@
                         <th class="py-2 px-3">Canal</th>
                         <th class="py-2 px-3">Lista</th>
                         <th class="py-2 px-3">Data Registo</th>
-                        <th class="py-2 px-3 text-right">Ações</th>
+                        <th class="py-2 px-3 text-right">Acções</th>
                     </tr>
                 </thead>
                 <tbody id="tabela-contactos">
                     <?php foreach ($contactos as $contacto): ?>
+
                         <tr class="border-b border-gray-100 dark:border-gray-700">
                             <td class="py-2 px-3"><?= htmlspecialchars($contacto['publico_id']) ?></td>
                             <td class="py-2 px-3"><?= htmlspecialchars($contacto['nome']) ?></td>
@@ -182,7 +186,19 @@
                             <td class="py-2 px-3"><?= htmlspecialchars($contacto['canal_nome'] ?? '') ?></td>
                             <td class="py-2 px-3"><?= htmlspecialchars($contacto['lista_nome'] ?? '') ?></td>
                             <td class="py-2 px-3"><?= htmlspecialchars($contacto['data_registo'] ?? '') ?></td>
-                            <td class="py-2 px-3 text-right"></td>
+                            <td class="py-2 px-3 text-right">
+                                <select onchange="handleAcaoContacto(this)" class="select-acao-contacto bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg p-1 cursor-pointer"
+                                    data-id="<?= $contacto['publico_id'] ?>"
+                                    data-nome="<?= htmlspecialchars($contacto['nome']) ?>"
+                                    data-email="<?= htmlspecialchars($contacto['email']) ?>"
+                                    data-gestor="<?= htmlspecialchars($contacto['gestor_nome'] ?? '') ?>"
+                                    data-canal="<?= htmlspecialchars($contacto['canal_nome'] ?? '') ?>"
+                                    data-lista="<?= htmlspecialchars($contacto['lista_nome'] ?? '') ?>">
+                                    <option selected disabled>Ações</option>
+                                    <option value="editar">Editar</option>
+                                    <option value="apagar">Apagar</option>
+                                </select>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -314,7 +330,7 @@
                     <tr class="border-b border-gray-100 dark:border-gray-700">
                         <td class="py-2 px-3"><?= htmlspecialchars($lista['lista_nome']) ?></td>
                         <td class="py-2 px-3 text-right">
-                            <select onchange="handleListaAcao(this)" class="select-acao-lista bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg p-1 cursor-pointer" data-id="<?= $lista['lista_id'] ?>" data-nome="<?= htmlspecialchars($lista['lista_nome']) ?>">
+                            <select onchange="handleListaAcao(this)" class="cursor-pointer select-acao-lista bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg p-1 cursor-pointer" data-id="<?= $lista['lista_id'] ?>" data-nome="<?= htmlspecialchars($lista['lista_nome']) ?>">
                                 <option selected disabled>Ações</option>
                                 <option value="editar">Editar</option>
                                 <option value="apagar">Apagar</option>
@@ -371,6 +387,56 @@
         </div>
     </div>
 
+    <!-- Modal Editar Contacto -->
+    <div id="modal-editar-contacto" class="modal hidden fixed inset-0 flex items-center justify-center z-50">
+        <div class="modal-content bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-600 rounded-lg shadow-lg w-full max-w-xl p-6 space-y-4 relative">
+            <h3 class="text-lg font-medium text-gray-900 dark:text-white">Editar Contacto</h3>
+            <form method="POST" id="form-editar-contacto">
+                <input type="hidden" name="action" value="editar_contacto">
+                <input type="hidden" name="contacto_id" id="editar_contacto_id">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="editar_nome" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nome</label>
+                        <input type="text" name="nome" id="editar_nome" required
+                            class="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white">
+                    </div>
+                    <div>
+                        <label for="editar_email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                        <input type="email" name="email" id="editar_email" required
+                            class="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white">
+                    </div>
+                    <div>
+                        <label for="editar_gestor" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Gestor</label>
+                        <select name="gestor" id="editar_gestor" class="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white">
+                            <?php foreach ($gestores as $gestor): ?>
+                                <option value="<?= $gestor['gestor_id'] ?>"><?= $gestor['gestor_nome'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="editar_lista" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Lista</label>
+                        <select name="lista" id="editar_lista" class="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white">
+                            <?php foreach ($listas as $lista): ?>
+                                <option value="<?= $lista['lista_id'] ?>"><?= $lista['lista_nome'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="editar_canal" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Canal</label>
+                        <select name="canal" id="editar_canal" class="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white">
+                            <?php foreach ($channels as $canal): ?>
+                                <option value="<?= $canal['canal_id'] ?>"><?= $canal['nome'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-2 mt-4">
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer">Guardar Alterações</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Alerta Custom -->
     <div id="alerta-custom" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 hidden transition-opacity duration-300 opacity-0 text-center">
         <span id="alerta-mensagem"></span>
@@ -380,7 +446,7 @@
     <div id="modal-confirmar-apagar" class="modal hidden fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
         <div class="modal-content bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-600 rounded-lg shadow-lg w-full max-w-sm p-6 space-y-4 relative">
             <h3 class="text-lg font-medium text-gray-900 dark:text-white">Confirmar Apagar</h3>
-            <p class="text-sm text-gray-600 dark:text-gray-300">Tem a certeza que deseja apagar esta lista?</p>
+            <p id="texto-confirmacao" class="text-sm text-gray-600 dark:text-gray-300">Tem a certeza que deseja apagar esta lista?</p>
             <div class="flex justify-end gap-2 mt-4">
                 <button id="cancelar-apagar" class="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 dark:bg-gray-700 dark:text-white">Cancelar</button>
                 <button id="confirmar-apagar" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Apagar</button>

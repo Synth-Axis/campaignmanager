@@ -5,24 +5,28 @@ require_once("dbconfig.php");
 class Publico extends Base
 {
 
+
     public function getAllPublico()
     {
         try {
             $query = $this->db->prepare("
-            SELECT 
-                p.publico_id,
-                p.nome,
-                p.email,
-                g.gestor_nome,
-                c.nome AS canal_nome,
-                l.lista_nome,
-                p.data_registo
-            FROM Publico p
-            LEFT JOIN gestor g ON p.gestor_id = g.gestor_id
-            LEFT JOIN canal c ON p.canal_id = c.canal_id
-            LEFT JOIN listas l ON p.lista_id = l.lista_id
-            ORDER BY p.nome ASC
-        ");
+        SELECT 
+            p.publico_id,
+            p.nome,
+            p.email,
+            p.gestor_id,
+            g.gestor_nome,
+            p.canal_id,
+            c.nome AS canal_nome,
+            p.lista_id,
+            l.lista_nome,
+            p.data_registo
+        FROM Publico p
+        LEFT JOIN gestor g ON p.gestor_id = g.gestor_id
+        LEFT JOIN canal c ON p.canal_id = c.canal_id
+        LEFT JOIN listas l ON p.lista_id = l.lista_id
+        ORDER BY p.nome ASC
+    ");
             $query->execute();
             return $query->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
@@ -171,5 +175,34 @@ class Publico extends Base
         $stmt = $this->db->prepare("SELECT COUNT(*) FROM Publico WHERE DATE(data_registo) = CURDATE()");
         $stmt->execute();
         return (int) $stmt->fetchColumn();
+    }
+
+    public function updatePublico($data)
+    {
+        $query = $this->db->prepare("
+        UPDATE Publico
+        SET nome = :nome,
+            email = :email,
+            gestor_id = :gestor_id,
+            canal_id = :canal_id,
+            lista_id = :lista_id
+        WHERE publico_id = :publico_id
+    ");
+        return $query->execute([
+            ':nome' => $data['nome'],
+            ':email' => $data['email'],
+            ':gestor_id' => $data['gestor_id'],
+            ':canal_id' => $data['canal_id'],
+            ':lista_id' => $data['lista_id'],
+            ':publico_id' => $data['publico_id']
+        ]);
+    }
+
+    public function apagarPublico($id)
+    {
+        $id = (int)$id;
+        $sql = "DELETE FROM publico WHERE publico_id = :id";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([':id' => $id]);
     }
 }

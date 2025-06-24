@@ -5,6 +5,9 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 file_put_contents('debug_post.txt', date('Y-m-d H:i:s') . "\n" . print_r($_POST, true), FILE_APPEND); */
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    error_log(print_r($_POST, true));
+}
 
 require("models/users.php");
 require("models/publico.php");
@@ -132,6 +135,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'apaga
         header("Location: publico");
         exit;
     }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'apagar_contacto') {
+    $contactoId = $_POST['contacto_id'] ?? null;
+    if ($contactoId) {
+        $modelPublico->apagarPublico($contactoId);
+        header("Location: publico");
+        exit;
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'editar_contacto') {
+
+    $dados = [
+        'publico_id' => $_POST['contacto_id'] ?? null,
+        'nome' => $_POST['nome'] ?? '',
+        'email' => $_POST['email'] ?? '',
+        'gestor_id' => $_POST['gestor'] ?? null,
+        'canal_id' => $_POST['canal'] ?? null,
+        'lista_id' => $_POST['lista'] ?? null,
+    ];
+
+    try {
+        $ok = $modelPublico->updatePublico($dados);
+        echo json_encode(['success' => $ok]);
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode(['success' => false, 'erro' => $e->getMessage()]);
+    }
+    exit;
 }
 
 // ---------------------- INCLUIR VIEW (só se não for AJAX) ----------------------
