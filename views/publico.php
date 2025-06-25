@@ -389,7 +389,7 @@
 
     <!-- Modal Editar Contacto -->
     <div id="modal-editar-contacto" class="modal hidden fixed inset-0 flex items-center justify-center z-50">
-        <div class="modal-content bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-600 rounded-lg shadow-lg w-full max-w-xl p-6 space-y-4 relative">
+        <div class="modal-content bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-600 rounded-lg shadow-lg w-full max-w-4xl p-6 space-y-4 relative">
             <h3 class="text-lg font-medium text-gray-900 dark:text-white">Editar Contacto</h3>
             <form method="POST" id="form-editar-contacto">
                 <input type="hidden" name="action" value="editar_contacto">
