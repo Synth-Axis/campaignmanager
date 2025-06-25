@@ -205,4 +205,28 @@ class Publico extends Base
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([':id' => $id]);
     }
+
+    public function getPublicoByIds($ids)
+    {
+        if (empty($ids)) return [];
+        $in = str_repeat('?,', count($ids) - 1) . '?';
+        $sql = "
+            SELECT 
+                p.publico_id,
+                p.nome,
+                p.email,
+                g.gestor_nome AS gestor,
+                c.nome AS canal,
+                l.lista_nome AS lista,
+                p.data_registo
+            FROM Publico p
+            LEFT JOIN gestor g ON p.gestor_id = g.gestor_id
+            LEFT JOIN canal c ON p.canal_id = c.canal_id
+            LEFT JOIN listas l ON p.lista_id = l.lista_id
+            WHERE p.publico_id IN ($in)
+            ORDER BY p.nome ASC";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute($ids);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

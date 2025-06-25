@@ -185,6 +185,11 @@ document.addEventListener("DOMContentLoaded", function () {
             const row = document.createElement("tr");
             row.className = "border-b border-gray-100 dark:border-gray-700";
             row.innerHTML = `
+              <td class="py-2 px-3">
+                  <input type="checkbox" class="checkbox-contacto" name="contactosSelecionados[]" value=${
+                    c.publico_id ?? ""
+                  }>
+              </td>
               <td class="py-2 px-3">${c.publico_id ?? ""}</td>
               <td class="py-2 px-3">${c.nome ?? ""}</td>
               <td class="py-2 px-3">${c.email ?? ""}</td>
@@ -516,5 +521,41 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(() => {
           mostrarAlerta("❌ Erro na comunicação com o servidor.", "error");
         });
+    });
+
+  // Selecionar todos os contactos
+  document
+    .getElementById("selecionar-todos")
+    .addEventListener("change", function () {
+      document
+        .querySelectorAll(".checkbox-contacto")
+        .forEach((cb) => (cb.checked = this.checked));
+    });
+
+  // Exportar contactos
+  document
+    .getElementById("selecionar-todos")
+    ?.addEventListener("change", function () {
+      document
+        .querySelectorAll(".checkbox-contacto")
+        .forEach((cb) => (cb.checked = this.checked));
+    });
+
+  document
+    .getElementById("form-exportar-contactos")
+    ?.addEventListener("submit", function (e) {
+      const selecionados = document.querySelectorAll(
+        ".checkbox-contacto:checked"
+      );
+      const hidden = document.getElementById("exportar-todos");
+      hidden.value = selecionados.length === 0 ? "1" : "0";
+
+      selecionados.forEach((cb) => {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = "contactosSelecionados[]";
+        input.value = cb.value;
+        this.appendChild(input);
+      });
     });
 });

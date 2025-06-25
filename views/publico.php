@@ -161,10 +161,29 @@
                 </div>
             </div>
 
+            <form method="POST" action="/api/exportar_contactos.php" id="form-exportar-contactos">
+                <div class="flex items-center gap-4 mb-4 flex-wrap">
+                    <label class="text-sm text-gray-700 dark:text-gray-300">Exportar como:</label>
+                    <select name="formato" class="border rounded px-2 py-1 text-gray-700 dark:text-gray-300">
+                        <option value="csv">CSV</option>
+                        <option value="xlsx">XLSX</option>
+                    </select>
 
+                    <label class="text-sm text-gray-700 dark:text-gray-300">Campos:</label>
+                    <?php foreach (['publico_id' => 'ID', 'nome' => 'Nome', 'email' => 'Email', 'gestor' => 'Gestor', 'canal' => 'Canal', 'lista' => 'Lista', 'data_registo' => 'Data Registo'] as $campo => $rotulo): ?>
+                        <label class="text-sm mr-2">
+                            <input type="checkbox" name="campos[]" value="<?= $campo ?>" checked> <?= $rotulo ?>
+                        </label>
+                    <?php endforeach; ?>
+
+                    <input type="hidden" name="todos" id="exportar-todos" value="0">
+                    <button type="submit" class="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Exportar</button>
+                </div>
+            </form>
             <table class="w-full text-sm text-left text-gray-700 dark:text-gray-300 border-collapse">
                 <thead>
                     <tr class="border-b border-gray-200 dark:border-gray-600">
+                        <th class="py-2 px-3"><input type="checkbox" id="selecionar-todos"></th>
                         <th class="py-2 px-3">ID</th>
                         <th class="py-2 px-3">Nome</th>
                         <th class="py-2 px-3">Email</th>
@@ -179,6 +198,9 @@
                     <?php foreach ($contactos as $contacto): ?>
 
                         <tr class="border-b border-gray-100 dark:border-gray-700">
+                            <td class="py-2 px-3">
+                                <input type="checkbox" class="checkbox-contacto" name="contactosSelecionados[]" value="<?= $contacto['publico_id'] ?>">
+                            </td>
                             <td class="py-2 px-3"><?= htmlspecialchars($contacto['publico_id']) ?></td>
                             <td class="py-2 px-3"><?= htmlspecialchars($contacto['nome']) ?></td>
                             <td class="py-2 px-3"><?= htmlspecialchars($contacto['email']) ?></td>
