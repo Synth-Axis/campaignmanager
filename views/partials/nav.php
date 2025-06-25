@@ -17,9 +17,9 @@ $currentPage = basename($_SERVER['REQUEST_URI']);
                     Menu
                 </button>
             <?php endif; ?>
-            <a href="/" class="flex items-center space-x-3">
+            <!-- <a href="/" class="flex items-center space-x-3">
                 <img src="../assets/img/Logo_RV-01.png" class="h-8" alt="RSV Logo" />
-            </a>
+            </a> -->
         </div>
 
         <?php if (!empty($_SESSION['user_id'])): ?>
