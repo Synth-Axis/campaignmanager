@@ -36,13 +36,15 @@ if (!$campanha) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $acao     = $_POST['action'] ?? '';
+    file_put_contents("debug_envio_teste.txt", print_r($_POST, true));
+    $emails_teste = $_POST['emails_teste'] ?? '';
     $nome     = trim($_POST['nome'] ?? "");
     $assunto  = trim($_POST['assunto'] ?? "");
     $lista_id = $_POST['lista'] ?? null;
     $html     = $_POST['html'] ?? "";
     $estado   = $_POST['estado'] ?? "rascunho";
 
-    if (!$nome || !$assunto || !$lista_id || !$html) {
+    if ($acao !== 'enviar_teste' && (!$nome || !$assunto || !$lista_id || !$html)) {
         $mensagem = "Todos os campos são obrigatórios.";
         $mensagem_tipo = "error";
     } else {
@@ -77,6 +79,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 } else {
                     $erro++;
                 }
+            }
+        } elseif ($acao === 'enviar_teste') {
+            if (!$nome || !$assunto || !$html) {
+                $mensagem = "Para enviar um teste, preencha o nome, assunto e conteúdo da campanha.";
+                $mensagem_tipo = "error";
+            } elseif (!$emails_teste) {
+                $mensagem = "Indique pelo menos um email de teste.";
+                $mensagem_tipo = "error";
+            } else {
+                $emailsArray = array_map('trim', explode(',', $emails_teste));
+                $sucesso = 0;
+                $erro = 0;
+
+                foreach ($emailsArray as $email) {
+                    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                        if (send_email($email, $assunto . " [TESTE]", $html)) {
+                            $sucesso++;
+                        } else {
+                            $erro++;
+                        }
+                    } else {
+                        $erro++;
+                    }
+                }
+
+                $mensagem = "Email de teste enviado. Sucesso: $sucesso" . ($erro > 0 ? " | Falhas: $erro" : "");
+                $mensagem_tipo = $erro > 0 ? "error" : "success";
             }
 
             // Atualiza estado após envio

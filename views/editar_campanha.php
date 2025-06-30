@@ -70,6 +70,12 @@
                             Ver Preview
                         </button>
 
+                        <button type="button"
+                            class="cursor-pointer px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
+                            onclick="document.getElementById('modal-envio-teste').classList.remove('hidden')">
+                            Enviar Email de Teste
+                        </button>
+
                         <button type="submit" name="action" value="gravar"
                             class="cursor-pointer px-5 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 font-medium">
                             Guardar Alterações
@@ -94,6 +100,32 @@
             </div>
         </form>
     </section>
+
+    <!-- Modal de Enviar Email de Teste -->
+    <div id="modal-envio-teste" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-xl w-full max-w-md relative">
+            <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Enviar Email de Teste</h2>
+
+            <form method="POST">
+                <input type="hidden" name="action" value="enviar_teste">
+                <input type="hidden" name="nome" value="<?= htmlspecialchars($campanha['nome']) ?>">
+                <input type="hidden" name="assunto" value="<?= htmlspecialchars($campanha['assunto']) ?>">
+                <input type="hidden" name="html" value="<?= htmlspecialchars($campanha['html']) ?>">
+
+                <label for="emails_teste" class="block mb-2 text-white">Emails de teste</label>
+                <input type="text" name="emails_teste" id="emails_teste"
+                    class="cursor-pointer w-full border rounded p-2 mb-4 text-gray-900 dark:text-white"
+                    placeholder="ex: nome@email.pt, outro@teste.com" required>
+
+                <div class="flex justify-end gap-3">
+                    <button type="button" onclick="document.getElementById('modal-envio-teste').classList.add('hidden')"
+                        class="cursor-pointer px-4 py-2 bg-gray-300 text-gray-800 rounded">Cancelar</button>
+                    <button type="submit"
+                        class="cursor-pointer px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700">Enviar Teste</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </main>
 
 <script src="/js/campanhas.js"></script>

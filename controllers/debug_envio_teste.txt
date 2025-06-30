@@ -1,0 +1,118 @@
+Array
+(
+    [action] => enviar_teste
+    [nome] => Summer Life 2025
+    [assunto] => Não perca a melhor festa deste verão
+    [html] => <!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Email Responsivo</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+    }
+
+    table {
+      border-spacing: 0;
+      border-collapse: collapse;
+    }
+
+    .email-container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .email-container {
+        width: 95% !important;
+      }
+
+      .fluid {
+        width: 100% !important;
+        height: auto !important;
+      }
+
+      .stack-column {
+        display: block !important;
+        width: 100% !important;
+        text-align: center !important;
+      }
+
+      .fluid-66 {
+        width: 66% !important;
+      }
+
+      .fluid-100 {
+        width: 100% !important;
+      }
+    }
+
+    .mail-detail-content th {
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Main Email Container -->
+  <table class="email-container" width="600" cellpadding="0" cellspacing="0" role="presentation">
+    <tr>
+      <td>
+        <img src="https://api.smtprelay.co/userfile/57b5b7e9-45ec-4ecd-8140-21f643dbb33f/Teaser-Summerlife25._Prancheta_1_co%CC%81pia_2.png" width=100%>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            color: #000;
+            text-align: center;
+            line-height: 1.5;
+          ">
+        Esta mensagem é automática, por favor não responda a este email porque
+        o mesmo não será lido.
+        <br><br>
+          Real Vida Seguros, S.A., Sede: Avenida de França, 316, Edifício
+          Capitólio, 4050-276 Porto
+        <br><br>
+          Linha de Apoio: 220 410 700 (custo de chamada para rede fixa nacional)
+        <br>
+          info.agentes@realvidaseguros.pt | www.realvidaseguros.pt
+        <br>
+          © 2025 Real Vida Seguros
+      </td>
+    </tr>
+
+    <tr>
+      <td style="
+            padding: 10px 20px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            color: #156aa9;
+            text-align: center;
+          ">
+        Enviado por marketing.comunicacao@mail.realvidaseguros.pt para {email}
+      </td>
+    </tr>
+
+    <tr>
+      <td style="text-align: center; padding: 10px">
+        <a href="https://mkt.mail.realvidaseguros.pt/certifiedby_pt/?campaign_id=4f8b79ef07b36d2cf9b65fe7eea24cb4&f=QLde1mH6eBRY" target="_blank">
+          <img src="https://mkt.segurosrealvida.pt/recursos/.Emailbuilder/privacy/eg-privacy.png" alt="E-goi Privacy" width="100" height="21" style="border: 0">
+        </a>
+      </td>
+    </tr>
+  </table>
+</body>
+
+</html>
+    [emails_teste] => manuel.lorena@realvidaseguros.pt, alexandre.garcia@realvidaseguros.pt
+)
