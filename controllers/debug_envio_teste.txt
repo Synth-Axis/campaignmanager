@@ -111,6 +111,7 @@ Array
       </td>
     </tr>
   </table>
+<img src="https://realvidaseguros.pt/track/open.php?cid=123&email=utilizador@email.com" width="1" height="1" style="display:none;" />
 </body>
 
 </html>
