@@ -121,7 +121,7 @@
                     <button type="button" onclick="document.getElementById('modal-envio-teste').classList.add('hidden')"
                         class="cursor-pointer px-4 py-2 bg-gray-300 text-gray-800 rounded">Cancelar</button>
                     <button type="submit"
-                        class="cursor-pointer px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700">Enviar Teste</button>
+                        class="cursor-pointer goit cpx-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700">Enviar Teste</button>
                 </div>
             </form>
         </div>
