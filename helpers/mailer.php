@@ -23,7 +23,7 @@ function send_email($to, $subject, $body)
         $mail->Port       = ENV["PHPMAILER_PORT"];
 
         // Remetente e destinatário
-        $mail->setFrom('marketing.comunicacao@realvidaseguros.pt', 'Marketing e Comunicação - Real Vida Seguros');
+        $mail->setFrom('marketing.comunicacao@realvidaseguros.pt', 'Real Vida Seguros, SA');
         $mail->addAddress($to);
 
         // Conteúdo do email

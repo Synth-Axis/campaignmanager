@@ -114,5 +114,5 @@ Array
 </body>
 
 </html>
-    [emails_teste] => manuel.lorena@realvidaseguros.pt, alexandre.garcia@realvidaseguros.pt
+    [emails_teste] => garcia.sergio.alexandre@gmail.com
 )

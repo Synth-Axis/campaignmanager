@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                 }
 
-                $mensagem = "Email de teste enviado. Sucesso: $sucesso" . ($erro > 0 ? " | Falhas: $erro" : "");
+                $mensagem = "Email(s) de teste enviado(s) com sucesso: $sucesso" . ($erro > 0 ? " | Falhas: $erro" : "");
                 $mensagem_tipo = $erro > 0 ? "error" : "success";
             }
 
