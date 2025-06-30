@@ -171,7 +171,7 @@
 
                     <label class="text-sm text-gray-700 dark:text-gray-300">Campos:</label>
                     <?php foreach (['publico_id' => 'ID', 'nome' => 'Nome', 'email' => 'Email', 'gestor' => 'Gestor', 'canal' => 'Canal', 'lista' => 'Lista', 'data_registo' => 'Data Registo'] as $campo => $rotulo): ?>
-                        <label class="text-sm mr-2">
+                        <label class="text-sm mr-2 text-white">
                             <input type="checkbox" name="campos[]" value="<?= $campo ?>" checked> <?= $rotulo ?>
                         </label>
                     <?php endforeach; ?>
