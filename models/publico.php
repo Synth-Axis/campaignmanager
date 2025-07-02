@@ -229,4 +229,13 @@ class Publico extends Base
         $stmt->execute($ids);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function updateQrCodeByEmail($email, $qrCodeBase64)
+    {
+        $stmt = $this->db->prepare("UPDATE publico SET qr_code = :qrcode WHERE email = :email");
+        return $stmt->execute([
+            ':qrcode' => $qrCodeBase64,
+            ':email' => $email
+        ]);
+    }
 }

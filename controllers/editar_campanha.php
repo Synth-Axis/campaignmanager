@@ -10,7 +10,7 @@ require_once(__DIR__ . '/../models/publico.php');
 require_once(__DIR__ . '/../models/users.php');
 require_once(__DIR__ . '/../core/basefunctions.php');
 require_once(__DIR__ . '/../helpers/mailer.php');
-
+require_once(__DIR__ . '/../helpers/qrcode.php');
 
 $modelCampaigns = new Campaigns();
 $modelLists = new Lists();
@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                 }
 
-                $mensagem = "Email(s) de teste enviado(s) com sucesso: $sucesso" . ($erro > 0 ? " | Falhas: $erro" : "");
+                $mensagem = "Email de teste enviado(s) com Sucesso: $sucesso" . ($erro > 0 ? " | Falhas: $erro" : "");
                 $mensagem_tipo = $erro > 0 ? "error" : "success";
             }
 

@@ -1,119 +1,589 @@
 Array
 (
-    [action] => enviar_teste
-    [nome] => Summer Life 2025
-    [assunto] => Não perca a melhor festa deste verão
-    [html] => <!DOCTYPE html>
-<html lang="pt">
+    [id] => 2
+    [nome] => QR Code
+    [assunto] => QR Code
+    [lista] => 1
+    [estado] => rascunho
+    [html] => <html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Email Responsivo</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #ffffff;
+    body{
+      background: white;
     }
-
-    table {
-      border-spacing: 0;
-      border-collapse: collapse;
-    }
-
-    .email-container {
-      width: 100%;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    @media only screen and (max-width: 600px) {
+    @media screen and (max-width:600px) {
       .email-container {
-        width: 95% !important;
+        width: 100% !important;
+        margin: auto !important
       }
 
       .fluid {
-        width: 100% !important;
+        max-width: 100% !important;
         height: auto !important;
+        margin-left: auto !important;
+        margin-right: auto !important
       }
 
-      .stack-column {
+      .stack-column,
+      .stack-column-center {
         display: block !important;
         width: 100% !important;
-        text-align: center !important;
+        max-width: 100% !important;
+        direction: ltr !important
       }
 
+      .center-on-narrow,
+      .stack-column-center {
+        text-align: center !important
+      }
+
+      .center-on-narrow {
+        display: block !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        float: none !important
+      }
+
+      table.center-on-narrow {
+        display: inline-block !important
+      }
+    }
+
+    @media only screen and (max-width:600px) {
+      .email-container {
+        width: 95% !important;
+        min-width: 0 !important
+      }
+
+      table.button.small-expanded {
+        width: 100% !important
+      }
+
+      img.fluid {
+        height: auto !important
+      }
+
+      td.columns,
+      th.columns {
+        box-sizing: border-box !important;
+        padding: 0 !important;
+        display: block !important;
+        width: 100% !important
+      }
+
+      td.columns.first,
+      th.columns.first {
+        padding-bottom: 20px !important;
+        padding-right: 0 !important
+      }
+
+      td.columns.middle,
+      th.columns.middle {
+        padding-bottom: 20px !important
+      }
+
+      td.columns.last,
+      th.columns.last {
+        padding-left: 0 !important
+      }
+    }
+  </style>
+  <style>
+    @media only screen and (max-width: 600px) {
       .fluid-66 {
         width: 66% !important;
       }
-
+    }
+  </style>
+  <style>
+    @media screen and (max-width: 600px) {
       .fluid-100 {
         width: 100% !important;
       }
     }
-
+  </style>
+  <style>
     .mail-detail-content th {
-      padding: 0;
+      padding: 0
     }
   </style>
+  <!--[if mso]> <style> ul,ol{margin-left:23px !important} </style> <![endif]-->
+  <meta name="viewport" content="width=device-width">
+  <style type="text/css">
+    @media (prefers-color-scheme: dark) {
+      .pixel-darkgoi {
+        background-image: url('https://mkt.mail.realvidaseguros.pt/statst.php?l=4f8b79ef07b36d2cf9b65fe7eea24cb4&u=aee1fc5eea&ca_id=132718&cl_id=294066&l_id=88&m_id=182713&hf=2256&i=1&th=dark') !important;
+      }
+    }
+
+    [data-ogsb] .pixel-darkgoi {
+      background-image: url('https://mkt.mail.realvidaseguros.pt/statst.php?l=4f8b79ef07b36d2cf9b65fe7eea24cb4&u=aee1fc5eea&ca_id=132718&cl_id=294066&l_id=88&m_id=182713&hf=2256&i=1&th=dark') !important;
+    }
+  </style>
+  
 </head>
 
-<body>
-  <!-- Main Email Container -->
-  <table class="email-container" width="600" cellpadding="0" cellspacing="0" role="presentation">
-    <tr>
-      <td>
-        <img src="https://api.smtprelay.co/userfile/57b5b7e9-45ec-4ecd-8140-21f643dbb33f/Teaser-Summerlife25._Prancheta_1_co%CC%81pia_2.png" width=100%>
-      </td>
-    </tr>
-
-    <tr>
-      <td style="
-            padding: 20px;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            color: #000;
-            text-align: center;
-            line-height: 1.5;
-          ">
-        Esta mensagem é automática, por favor não responda a este email porque
-        o mesmo não será lido.
-        <br><br>
-          Real Vida Seguros, S.A., Sede: Avenida de França, 316, Edifício
-          Capitólio, 4050-276 Porto
-        <br><br>
-          Linha de Apoio: 220 410 700 (custo de chamada para rede fixa nacional)
-        <br>
-          info.agentes@realvidaseguros.pt | www.realvidaseguros.pt
-        <br>
-          © 2025 Real Vida Seguros
-      </td>
-    </tr>
-
-    <tr>
-      <td style="
-            padding: 10px 20px;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            color: #156aa9;
-            text-align: center;
-          ">
-        Enviado por marketing.comunicacao@mail.realvidaseguros.pt para {email}
-      </td>
-    </tr>
-
-    <tr>
-      <td style="text-align: center; padding: 10px">
-        <a href="https://mkt.mail.realvidaseguros.pt/certifiedby_pt/?campaign_id=4f8b79ef07b36d2cf9b65fe7eea24cb4&f=QLde1mH6eBRY" target="_blank">
-          <img src="https://mkt.segurosrealvida.pt/recursos/.Emailbuilder/privacy/eg-privacy.png" alt="E-goi Privacy" width="100" height="21" style="border: 0">
-        </a>
-      </td>
-    </tr>
-  </table>
-<img src="https://realvidaseguros.pt/track/open.php?cid=123&email=utilizador@email.com" width="1" height="1" style="display:none;" />
+<body width="100%" style="padding: 0; height: 100%; width: 100%; margin: 0;">
+  <div style="display: none; font-size: 0; line-height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; color: #ffffff;">
+    31 de Maio de 2025 Quinta do Paul, Leiria Apresente este email com o seu QR code no momento da acreditação. Obrigado
+    pela sua presença Até ja! Esta mensagem é automática, por favor não responda a este email porque o mesmo não será
+    lido. Real Vida Seg ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌
+    &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌
+    &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌
+    &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌
+    &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌
+    &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp; ‌ &nbsp;</div>
+  <div style="background:#ffffff; display:flex; margin-top: -2px">
+    <div class="pixel-darkgoi" style="width:1px;height:1px;"></div> <img src="https://mkt.mail.realvidaseguros.pt/statst.php?l=4f8b79ef07b36d2cf9b65fe7eea24cb4&amp;u=aee1fc5eea&amp;ca_id=132718&amp;cl_id=294066&amp;l_id=88&amp;m_id=182713&amp;hf=2256&amp;i=1" style="width: 3px !important; height: 2px !important; overflow: hidden; border:0 solid transparent; margin: 0; line-height:2px; mso-margin-top-alt:2px;" width="3" height="2" align="middle" border="0" alt="">
+  </div>
+  <div>
+    <div class="eb-mail-content" data-editor-version="551f135a">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="transparent" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto; background-color: transparent; background-position: center top; background-repeat: no-repeat; background-size: contain;">
+        <tbody class="cerberus-tbody">
+          <tr id="38b83a82-ad7e-1d35-3dd0-b39db5e62935" data-variation="0">
+            <td valign="top" class="td-container" style="font-size: 0; background-color: transparent;" align="center">
+              <div class="builder-actions-control selected">
+                <table border="0" cellpadding="0" cellspacing="0" width="600" class="email-container" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: auto;" align="center" data-compile="true">
+                  <tbody>
+                    <tr>
+                      <td valign="top" width="100%" dir="ltr" bgcolor="#03AED9" style="background-color: rgb(3, 174, 217); padding: 0 10px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="row" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                          <tbody>
+                            <tr>
+                              <th valign="top" class="stack-column-center columns" width="100%" style="font-weight: 400;">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                                  <tbody>
+                                    <tr>
+                                      <td dir="ltr" valign="top" style="padding: 0;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" data-control="image" class="builder-image-control image-06934cf044df6ec8a7e2cfbded1f62f4" data-compile="true" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                                          <tbody>
+                                            <tr>
+                                              <td valign="top" id="image123" style="padding: 0;">
+                                                <table border="0" cellpadding="0" cellspacing="0" align="center" width="" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                                                  <tbody>
+                                                    <tr>
+                                                      <td style="border: 0;"><img align="center" border="0" class="float-center fluid fluid-66" style="display: block; margin: 0 auto; height: auto; font-size: 12px; max-width: 382.8px; border: 0 !important; outline: none !important; text-decoration: none !important;" id="06934cf0-44df-6ec8-a7e2-cfbded1f62f4" src="https://api.smtprelay.co/userfile/57b5b7e9-45ec-4ecd-8140-21f643dbb33f/Ativo-3150.png" alt=" " width="252" height="232">
+                                                      </td>
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </th>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+          <tr id="685ecce7-b626-ae57-26af-2c4001278d2d" data-variation="0">
+            <td valign="top" class="td-container" style="font-size: 0; background-color: transparent;" align="center">
+              <div class="builder-actions-control selected">
+                <table border="0" cellpadding="0" cellspacing="0" width="600" class="email-container" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: auto;" align="center" data-compile="true">
+                  <tbody>
+                    <tr>
+                      <td valign="top" width="100%" dir="ltr" bgcolor="#03AED9" style="background-color: rgb(3, 174, 217); padding: 0;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="row" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                          <tbody>
+                            <tr>
+                              <th valign="top" class="stack-column-center columns" width="100%" style="font-weight: 400;">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                                  <tbody>
+                                    <tr>
+                                      <td dir="ltr" valign="top" style="padding: 0;">
+                                        <table width="100%" data-control="title" id="e05c0a73-c619-ff31-0731-bd14adcc33e0" data-compile="true" class="title-e05c0a73c619ff310731bd14adcc33e0" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                                          <tbody>
+                                            <tr>
+                                              <td style="font-family: Verdana; font-size: 20px; color: rgb(255, 255, 255); text-align: center; line-height: normal; padding: 0;">
+                                                <p style="font-family: Verdana; font-size: 20px; color: rgb(255, 255, 255); line-height: normal; text-align: center; word-break: break-word; overflow: hidden; margin: 0 auto; padding: 0;">
+                                                  31 de Maio de 2025</p>
+                                                <p style="font-family: Verdana; font-size: 20px; color: rgb(255, 255, 255); line-height: normal; text-align: center; word-break: break-word; overflow: hidden; margin: 0 auto; padding: 0;">
+                                                  Quinta do Paul, Leiria</p>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </th>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+          <tr id="abd7ac68-4c99-ca76-7ea4-49688cf137f0" data-variation="0">
+            <td valign="top" class="td-container" style="font-size: 0; background-color: transparent;" align="center">
+              <div class="builder-actions-control selected">
+                <table border="0" cellpadding="0" cellspacing="0" width="600" class="email-container" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: auto;" align="center" data-compile="true">
+                  <tbody>
+                    <tr>
+                      <td valign="top" width="100%" dir="ltr" bgcolor="#03AED9" style="background-color: rgb(3, 174, 217); padding: 20px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="row" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                          <tbody>
+                            <tr>
+                              <th valign="top" class="stack-column-center columns" width="100%" style="font-weight: 400;">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                                  <tbody>
+                                    <tr>
+                                      <td dir="ltr" valign="top" style="padding: 0;">
+                                        <table width="100%" data-control="title" id="a33dba15-9d7a-cd6d-896e-b12619f9be23" data-compile="true" class="title-a33dba159d7acd6d896eb12619f9be23" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                                          <tbody>
+                                            <tr>
+                                              <td style="font-family: Verdana; font-size: 18px; color: rgb(255, 255, 255); text-align: center; line-height: normal; padding: 0;">
+                                                <p style="font-family: Verdana; font-size: 18px; color: rgb(255, 255, 255); line-height: normal; text-align: center; word-break: break-word; overflow: hidden; margin: 0 auto; padding: 0;">
+                                                  &nbsp;Apresente este email com o seu QR code</p>
+                                                <p style="font-family: Verdana; font-size: 18px; color: rgb(255, 255, 255); line-height: normal; text-align: center; word-break: break-word; overflow: hidden; margin: 0 auto; padding: 0;">
+                                                  no momento da acreditação.</p>
+                                                <p style="font-family: Verdana; font-size: 18px; color: rgb(255, 255, 255); line-height: normal; text-align: center; word-break: break-word; overflow: hidden; margin: 0 auto; padding: 0;">
+                                                  &nbsp;</p>
+                                                <p style="font-family: Verdana; font-size: 18px; color: rgb(255, 255, 255); line-height: normal; text-align: center; word-break: break-word; overflow: hidden; margin: 0 auto; padding: 0;">
+                                                  Obrigado pela sua presença</p>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </th>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+          <tr id="068b85bc-dc8a-172e-00c9-39f862e58076" data-variation="0">
+            <td valign="top" class="td-container" style="font-size: 0; background-color: transparent;" align="center">
+              <div class="builder-actions-control selected">
+                <table border="0" cellpadding="0" cellspacing="0" width="600" class="email-container" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: auto;" align="center" data-compile="true">
+                  <tbody>
+                    <tr>
+                      <td valign="top" width="100%" dir="ltr" bgcolor="#03AED9" style="background-color: rgb(3, 174, 217); padding: 0;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="row" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                          <tbody>
+                            <tr>
+                              <th valign="top" class="stack-column-center columns" width="100%" style="font-weight: 400;">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                                  <tbody>
+                                    <tr>
+                                      <td dir="ltr" valign="top" style="padding: 0;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" data-control="qrcode" class="builder-qrcode-control qrcode-6a1d7ed21ed926945b012ff7c29339c2" data-compile="true" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                                          <tbody>
+                                            <tr>
+                                              <td valign="top">
+                                                <table border="0" cellpadding="0" cellspacing="0" align="center" width="[object Object]" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                                                  <tbody>
+                                                    <tr>
+                                                      <td style="border: 0;">
+<img src="http://localhost/track/qrcode.php?email=<?= urlencode($email) ?>" width="300" height="300" style="display:block; margin:auto;" />
+                                                      </td>
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </th>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+          <tr id="9397cd80-0245-70f8-344d-6469ea6b7be3" data-variation="0">
+            <td valign="top" class="td-container" style="font-size: 0; background-color: transparent;" align="center">
+              <div class="builder-actions-control selected">
+                <table border="0" cellpadding="0" cellspacing="0" width="600" class="email-container" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: auto;" align="center" data-compile="true">
+                  <tbody>
+                    <tr>
+                      <td valign="top" width="100%" dir="ltr" bgcolor="#03AED9" style="background-color: rgb(3, 174, 217); padding: 20px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="row" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                          <tbody>
+                            <tr>
+                              <th valign="top" class="stack-column-center columns" width="100%" style="font-weight: 400;">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                                  <tbody>
+                                    <tr>
+                                      <td dir="ltr" valign="top" style="padding: 0;">
+                                        <table width="100%" data-control="title" id="3920612e-b0b6-d5a8-ec78-90320dd232bd" data-compile="true" class="title-3920612eb0b6d5a8ec7890320dd232bd" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                                          <tbody>
+                                            <tr>
+                                              <td style="font-family: Arial; font-size: 18px; color: rgb(255, 255, 255); text-align: center; line-height: normal; padding: 0;">
+                                                <p style="font-family: Arial; font-size: 18px; color: rgb(255, 255, 255); line-height: normal; text-align: center; word-break: break-word; overflow: hidden; margin: 0 auto; padding: 0;">
+                                                  Até ja!</p>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </th>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+          <tr id="b31e48c2-9448-aac1-7d58-24e3d47ddc6b" data-variation="0">
+            <td valign="top" class="td-container" style="font-size: 0; background-color: transparent;" align="center">
+              <div class="builder-actions-control selected">
+                <table border="0" cellpadding="0" cellspacing="0" width="600" class="email-container" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: auto;" align="center" data-compile="true">
+                  <tbody>
+                    <tr>
+                      <td valign="top" width="100%" dir="ltr" bgcolor="#03AED9" style="background-color: rgb(3, 174, 217); padding: 0;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="row" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                          <tbody>
+                            <tr>
+                              <th valign="top" class="stack-column-center columns" width="100%" style="font-weight: 400;">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                                  <tbody>
+                                    <tr>
+                                      <td dir="ltr" valign="top" style="padding: 0;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" data-control="image" class="builder-image-control image-695829a8f0cd56f800681290bb39a117" data-compile="true" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                                          <tbody>
+                                            <tr>
+                                              <td valign="top" id="image123" style="padding: 0;">
+                                                <table border="0" cellpadding="0" cellspacing="0" align="center" width="" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                                                  <tbody>
+                                                    <tr>
+                                                      <td style="border: 0;"><img align="center" border="0" class="float-center fluid fluid-66" style="display: block; margin: 0 auto; height: auto; font-size: 12px; max-width: 396px; border: 0 !important; outline: none !important; text-decoration: none !important;" id="695829a8-f0cd-56f8-0068-1290bb39a117" src="https://mkt.segurosrealvida.pt/recursos/1041467286956b2e9ceb5ca407e86807/Image/realvidaseguros-positivo.png?t=1681484343000" alt=" " width="261" height="91">
+                                                      </td>
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </th>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+          <tr id="ecfe5037-f686-0015-645c-c666867da903" data-variation="0">
+            <td valign="top" class="td-container" style="font-size: 0; background-color: transparent;" align="center">
+              <div class="builder-actions-control selected">
+                <table border="0" cellpadding="0" cellspacing="0" width="600" class="email-container" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: auto;" align="center" data-compile="true">
+                  <tbody>
+                    <tr>
+                      <td valign="top" width="100%" dir="ltr" bgcolor="#03AED9" style="background-color: rgb(3, 174, 217); padding: 10px 20px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="row" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                          <tbody>
+                            <tr>
+                              <th valign="top" class="stack-column-center columns" width="100%" style="font-weight: 400;">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                                  <tbody>
+                                    <tr>
+                                      <td dir="ltr" valign="top" style="padding: 0;">
+                                        <table align="center" data-control="spacer" class="builder-spacer-control spacer-a10b7e01f958c4e7baa9fd0f86447a9c" style="border-spacing: 0; table-layout: fixed; margin: 0 auto; width: 33%; min-width: 33%; max-width: 33%; border-collapse: separate !important;" width="33%" data-compile="true">
+                                          <tbody>
+                                            <tr>
+                                              <td style="border-top: 1px solid transparent;"></td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </th>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+          <tr id="2e0bb2c5-2b19-bd7a-c7d6-9dc10b3295e4" data-variation="0">
+            <td valign="top" class="td-container" style="font-size: 0; background-color: transparent;" align="center">
+              <div class="builder-actions-control selected">
+                <table border="0" cellpadding="0" cellspacing="0" width="600" class="email-container" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: auto;" align="center" data-compile="true">
+                  <tbody>
+                    <tr>
+                      <td valign="top" width="100%" dir="ltr" bgcolor="transparent" style="background-color: transparent; padding: 10px 0;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="row" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                          <tbody>
+                            <tr>
+                              <th valign="top" class="stack-column-center columns" width="100%" style="font-weight: 400;">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                                  <tbody>
+                                    <tr>
+                                      <td dir="ltr" valign="top" style="padding: 0;">
+                                        <table width="100%" data-control="paragraph" id="70a2a39b-617e-e46d-4992-315a57784bf8" data-compile="true" class="paragraph-70a2a39b617ee46d4992315a57784bf8" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                                          <tbody>
+                                            <tr>
+                                              <td>
+                                                <a href="https://maps.app.goo.gl/in3oT2xbS7Vrj53q8" style=" font-family: Arial; font-size: 14px; color: rgb(0, 0, 0); line-height: 150%; text-align: center; word-break: break-word; overflow: hidden; margin: 0 auto; padding: 0;">📍Localização<br><br></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                              <td style="padding: 0 20px;">
+                                                <p style="font-family: Arial; font-size: 12px; color: rgb(0, 0, 0); line-height: 150%; text-align: center; word-break: break-word; overflow: hidden; margin: 0 auto; padding: 0;">
+                                                  Esta mensagem é automática, por favor não responda a este email porque
+                                                  o mesmo não será lido. &nbsp; &nbsp;&nbsp;
+                                                  <br>Real Vida Seguros, S.A., Sede: Avenida de França, 316, Edifício Capitólio, 4050-276 Porto
+                                                </p>
+                                                <p style="font-family: Arial; font-size: 12px; color: rgb(0, 0, 0); line-height: 150%; text-align: center; word-break: break-word; overflow: hidden; margin: 0 auto; padding: 0;">
+                                                  &nbsp;</p>
+                                                <p style="font-family: Arial; font-size: 12px; color: rgb(0, 0, 0); line-height: 150%; text-align: center; word-break: break-word; overflow: hidden; margin: 0 auto; padding: 0;">
+                                                  Linha de Apoio 220 410 700 custo de chamada para rede fixa nacional.
+                                                </p>
+                                                <p style="font-family: Arial; font-size: 12px; color: rgb(0, 0, 0); line-height: 150%; text-align: center; word-break: break-word; overflow: hidden; margin: 0 auto; padding: 0;">
+                                                  info.agentes@realvidaseguros.pt | www.realvidaseguros.pt &nbsp; &nbsp;
+                                                  <br>Copyright © 2025 Real Vida Seguros
+                                                </p>
+                                                <p style="font-family: Arial; font-size: 12px; color: rgb(0, 0, 0); line-height: 150%; text-align: center; word-break: break-word; overflow: hidden; margin: 0 auto; padding: 0;">
+                                                  &nbsp;</p>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </th>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+          <tr id="74e3e30a-4c14-999e-7bc6-c2f97f0b7ace" data-variation="0">
+            <td valign="top" class="td-container" style="font-size: 0; background-color: transparent;" align="center">
+              <div class="builder-actions-control selected">
+                <table border="0" cellpadding="0" cellspacing="0" width="600" class="email-container" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: auto;" align="center" data-compile="true">
+                  <tbody>
+                    <tr>
+                      <td valign="top" width="100%" dir="ltr" bgcolor="transparent" style="background-color: transparent; padding: 10px 20px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="row" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                          <tbody>
+                            <tr>
+                              <th valign="top" class="stack-column-center columns" width="100%" style="font-weight: 400;">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="row" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                                  <tbody>
+                                    <tr>
+                                      <th valign="top" class="stack-column-center columns" width="100%" style="font-weight: 400;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                                          <tbody>
+                                            <tr>
+                                              <td dir="ltr" valign="top" style="padding: 0;">
+                                                <table width="100%" data-control="paragraph" id="e0687ea5-813b-9948-4e6d-ac7da45d05eb" data-alias="sender_info" data-compile="true" class="paragraph-e0687ea5813b99484e6dac7da45d05eb" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                                                  <tbody>
+                                                    <tr>
+                                                      <td style="padding: 0 20px;">
+                                                        <p style="font-family: Arial; font-size: 12px; color: rgb(21, 106, 169); line-height: 150%; text-align: center; word-break: break-word; overflow: hidden; margin: 0 auto; padding: 0;">
+                                                          Enviado por marketing.comunicacao@mail.realvidaseguros.pt para {email}
+                                                        </p>
+                                                      </td>
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </th>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="row" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                                  <tbody>
+                                    <tr>
+                                      <th valign="top" class="stack-column-center columns" width="100%" style="font-weight: 400;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                                          <tbody>
+                                            <tr>
+                                              <td dir="ltr" valign="top" style="padding: 0;">
+                                                <table border="0" cellpadding="0" cellspacing="0" align="center" data-control="stamp" class="builder-stamp-control" data-alias="security_stamp" data-compile="true" style="border-spacing: 0; border-collapse: collapse; table-layout: fixed; margin: 0 auto;">
+                                                  <tbody>
+                                                    <tr>
+                                                      <td style="text-align: center !important;"><a href="https://mkt.mail.realvidaseguros.pt/certifiedby_pt/?campaign_id=4f8b79ef07b36d2cf9b65fe7eea24cb4&f=QLde1mH6eBRY" target="_blank"><img align="center" class="float-center" style="border: 0; outline: none; text-decoration: none; font-size: 12px; width: 100px;" src="https://mkt.segurosrealvida.pt/recursos/.Emailbuilder/privacy/eg-privacy.png" alt="E-goi Privacy" width="100" height="21"></a>
+                                                      </td>
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </th>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </th>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div style="clear:both !important; height: 0 !important;"></div>
 </body>
 
 </html>
-    [emails_teste] => garcia.sergio.alexandre@gmail.com
+    [action] => gravar
 )
