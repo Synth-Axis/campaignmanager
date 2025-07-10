@@ -126,9 +126,9 @@ class Publico extends Base
 
     public function getAllEmailsByListId($lista_id)
     {
-        $query = $this->db->prepare("SELECT email FROM Publico WHERE lista_id = ?");
+        $query = $this->db->prepare("SELECT email, nome FROM Publico WHERE lista_id = ?");
         $query->execute([$lista_id]);
-        return array_column($query->fetchAll(PDO::FETCH_ASSOC), 'email');
+        return $query->fetchAll(PDO::FETCH_ASSOC); // devolve arrays com 'email' e 'nome'
     }
 
     public function getCrescimentoPorDia($dias)

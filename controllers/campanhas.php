@@ -24,6 +24,10 @@ if (isset($_SESSION["user_id"])) {
     $currentUser = $modelUsers->findUserById($_SESSION["user_id"]);
 }
 
+$totalEntregues = $modelCampaigns->getTotalEntregues();
+$totalAberturas = $modelCampaigns->getTotalAberturas();
+$totalCliques   = $modelCampaigns->getTotalCliques();
+
 $listas = $modelLists->getAllLists();
 $campanhas = $modelCampaigns->getAllCampaigns();
 

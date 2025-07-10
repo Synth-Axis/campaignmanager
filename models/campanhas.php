@@ -57,6 +57,11 @@ class Campaigns extends Base
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function getLastTrackingId()
+    {
+        return $this->db->lastInsertId();
+    }
+
     // Editar campanha completa (inclui estado)
     public function updateCampaign($id, $data)
     {
@@ -93,5 +98,39 @@ class Campaigns extends Base
             DELETE FROM campaigns WHERE campaign_id = ?
         ");
         return $query->execute([$id]);
+    }
+
+    //Tracking
+    public function registarEnvioTracking($campanhaId, $publicoId, $ip = null, $userAgent = null)
+    {
+        $stmt = $this->db->prepare("
+        INSERT INTO tracking_campanha 
+            (campanha_id, publico_id, entregue_em, ip, user_agent)
+        VALUES 
+            (:campanha_id, :publico_id, NOW(), :ip, :user_agent)
+    ");
+        return $stmt->execute([
+            ':campanha_id' => $campanhaId,
+            ':publico_id'  => $publicoId,
+            ':ip'          => $ip,
+            ':user_agent'  => $userAgent
+        ]);
+    }
+    public function getTotalEntregues()
+    {
+        $stmt = $this->db->query("SELECT COUNT(*) FROM tracking_campanha WHERE entregue_em IS NOT NULL");
+        return $stmt->fetchColumn();
+    }
+
+    public function getTotalAberturas()
+    {
+        $stmt = $this->db->query("SELECT COUNT(*) FROM tracking_campanha WHERE aberto_em IS NOT NULL");
+        return $stmt->fetchColumn();
+    }
+
+    public function getTotalCliques()
+    {
+        $stmt = $this->db->query("SELECT COUNT(*) FROM tracking_campanha WHERE clicado_em IS NOT NULL");
+        return $stmt->fetchColumn();
     }
 }

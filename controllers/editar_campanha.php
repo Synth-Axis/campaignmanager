@@ -4,13 +4,18 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+use PHPMailer\PHPMailer\PHPMailer;
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\Writer\PngWriter;
+
 require_once(__DIR__ . '/../models/campanhas.php');
 require_once(__DIR__ . '/../models/lists.php');
 require_once(__DIR__ . '/../models/publico.php');
 require_once(__DIR__ . '/../models/users.php');
 require_once(__DIR__ . '/../core/basefunctions.php');
 require_once(__DIR__ . '/../helpers/mailer.php');
-require_once(__DIR__ . '/../helpers/qrcode.php');
+require_once(__DIR__ . '/../vendor/autoload.php');
 
 $modelCampaigns = new Campaigns();
 $modelLists = new Lists();
@@ -35,13 +40,15 @@ if (!$campanha) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $acao     = $_POST['action'] ?? '';
-    file_put_contents("debug_envio_teste.txt", print_r($_POST, true));
+    $acao = $_POST['action'] ?? '';
     $emails_teste = $_POST['emails_teste'] ?? '';
     $nome     = trim($_POST['nome'] ?? "");
     $assunto  = trim($_POST['assunto'] ?? "");
     $lista_id = $_POST['lista'] ?? null;
     $html     = $_POST['html'] ?? "";
+    $html     = preg_replace('/^\xEF\xBB\xBF/', '', $html);
+    $html     = html_entity_decode($html, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
     $estado   = $_POST['estado'] ?? "rascunho";
 
     if ($acao !== 'enviar_teste' && (!$nome || !$assunto || !$lista_id || !$html)) {
@@ -59,60 +66,138 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $mensagem = $ok ? "Campanha atualizada com sucesso." : "Erro ao atualizar.";
             $mensagem_tipo = $ok ? "success" : "error";
-        } elseif ($acao === 'enviar') {
-            // Atualiza antes de enviar
-            $modelCampaigns->updateCampaign($id, [
-                'nome'     => $nome,
-                'assunto'  => $assunto,
-                'lista_id' => $lista_id,
-                'html'     => $html,
-                'estado'   => 'enviada'
-            ]);
+        } elseif ($acao === 'enviar' || $acao === 'enviar_teste') {
+            $emails = [];
 
-            $emails   = $modelPublico->getAllEmailsByListId($lista_id);
-            $sucesso = 0;
-            $erro    = 0;
+            if ($acao === 'enviar') {
+                $modelCampaigns->updateCampaign($id, [
+                    'nome'     => $nome,
+                    'assunto'  => $assunto,
+                    'lista_id' => $lista_id,
+                    'html'     => $html,
+                    'estado'   => 'enviada'
+                ]);
 
-            foreach ($emails as $destinatario) {
-                if (send_email($destinatario, $assunto, $html)) {
-                    $sucesso++;
+                $emails = $modelPublico->getAllEmailsByListId($lista_id);
+            } else {
+                if (!$nome || !$assunto || !$html) {
+                    $mensagem = "Para enviar um teste, preencha o nome, assunto e conteúdo da campanha.";
+                    $mensagem_tipo = "error";
+                } elseif (!$emails_teste) {
+                    $mensagem = "Indique pelo menos um email de teste.";
+                    $mensagem_tipo = "error";
                 } else {
-                    $erro++;
+                    $emailsArray = array_map('trim', explode(',', $emails_teste));
+                    $emailsInvalidos = [];
+                    $emails = [];
+
+                    foreach ($emailsArray as $em) {
+                        $publico = $modelPublico->findPublicoByEmail($em);
+                        if ($publico) {
+                            $emails[] = [
+                                'email' => $publico['email'],
+                                'nome'  => $publico['nome'] ?? 'Destinatário'
+                            ];
+                        } else {
+                            $emailsInvalidos[] = $em;
+                        }
+                    }
+
+                    if (!empty($emailsInvalidos)) {
+                        $mensagem = "Os seguintes emails de teste não existem na base de dados: " .
+                            htmlspecialchars(implode(', ', $emailsInvalidos), ENT_QUOTES, 'UTF-8');
+                        $mensagem_tipo = "error";
+                    }
+
+                    if (!empty($emails)) {
+                        $modelCampaigns->updateEstado($id, "enviada");
+                    }
                 }
             }
-        } elseif ($acao === 'enviar_teste') {
-            if (!$nome || !$assunto || !$html) {
-                $mensagem = "Para enviar um teste, preencha o nome, assunto e conteúdo da campanha.";
-                $mensagem_tipo = "error";
-            } elseif (!$emails_teste) {
-                $mensagem = "Indique pelo menos um email de teste.";
-                $mensagem_tipo = "error";
-            } else {
-                $emailsArray = array_map('trim', explode(',', $emails_teste));
-                $sucesso = 0;
-                $erro = 0;
 
-                foreach ($emailsArray as $email) {
-                    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                        if (send_email($email, $assunto . " [TESTE]", $html)) {
-                            $sucesso++;
-                        } else {
-                            $erro++;
-                        }
-                    } else {
+            $sucesso = 0;
+            $erro = 0;
+
+            if (!empty($emails)) {
+                foreach ($emails as $destinatario) {
+                    $email = $destinatario['email'];
+                    $nomeDest = $destinatario['nome'] ?? '';
+
+                    $publico = $modelPublico->findPublicoByEmail($email);
+                    if (!$publico) {
+                        continue; // ignora se não existir
+                    }
+
+                    // Regista tracking e obtém tracking_id
+                    $ip = $_SERVER['REMOTE_ADDR'] ?? null;
+                    $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? null;
+                    $modelCampaigns->registarEnvioTracking($id, $publico['publico_id'], $ip, $userAgent);
+
+                    // Vai buscar o último tracking_id gerado
+                    $trackingId = $modelCampaigns->getLastTrackingId();
+
+                    // QR Code
+                    $qr = Builder::create()
+                        ->writer(new PngWriter())
+                        ->data("https://www.realvidaseguros.pt/eventos/admissaoConviteEvento?listid=88&contact=" . urlencode($email))
+                        ->encoding(new Encoding('UTF-8'))
+                        ->size(400)
+                        ->margin(10)
+                        ->build();
+
+                    $imageBinary = $qr->getString();
+                    $modelPublico->updateQrCodeByEmail($email, 'data:image/png;base64,' . base64_encode($imageBinary));
+
+                    // Email setup
+                    $mail = new PHPMailer(true);
+                    $mail->CharSet = 'UTF-8';
+
+                    try {
+                        $mail->isSMTP();
+                        $mail->Host       = ENV["PHPMAILER_HOST"];
+                        $mail->SMTPAuth   = true;
+                        $mail->AuthType   = 'LOGIN';
+                        $mail->Username   = ENV["PHPMAILER_USERNAME"];
+                        $mail->Password   = ENV["PHPMAILER_PASSWORD"];
+                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                        $mail->Port       = ENV["PHPMAILER_PORT"];
+
+                        $mail->setFrom('marketing.comunicacao@realvidaseguros.pt', 'Real Vida Seguros, SA');
+                        $mail->addAddress($email);
+                        $mail->isHTML(true);
+                        $mail->Subject = $assunto;
+
+                        $mail->addStringEmbeddedImage($imageBinary, 'qrcodeCid', 'qrcode.png', 'base64', 'image/png');
+
+                        // Substituição com tracking real
+                        $htmlPersonalizado = str_replace(
+                            ['{qr_code}', '{email}', '{firstname}', '{cid}', '{tracking_id}', '{publico_id}'],
+                            [
+                                '<img src="cid:qrcodeCid" width="300" height="300" style="display:block; margin:auto;" />',
+                                htmlspecialchars($email),
+                                htmlspecialchars($nomeDest),
+                                $id,
+                                $trackingId,
+                                $publico['publico_id']
+                            ],
+                            $html
+                        );
+
+                        file_put_contents("debug_final_html.html", $htmlPersonalizado);
+                        $mail->Body = $htmlPersonalizado;
+                        $mail->send();
+
+                        $sucesso++;
+                    } catch (Exception $e) {
+                        error_log("Erro ao enviar email para $email: " . $mail->ErrorInfo);
                         $erro++;
                     }
                 }
 
-                $mensagem = "Email de teste enviado(s) com Sucesso: $sucesso" . ($erro > 0 ? " | Falhas: $erro" : "");
+
+                $mensagem = "Campanha enviada. Sucesso: $sucesso" . ($erro > 0 ? " | Falhas: $erro" : "");
                 $mensagem_tipo = $erro > 0 ? "error" : "success";
             }
-
-            // Atualiza estado após envio
-            $modelCampaigns->updateEstado($id, "enviada");
-
-            $mensagem = "Campanha enviada. Sucesso: $sucesso" . ($erro > 0 ? " | Falhas: $erro" : "");
-            $mensagem_tipo = $erro > 0 ? "error" : "success";
         } elseif ($acao === 'duplicar') {
             $novo_nome = $nome . " (Cópia)";
 
@@ -135,7 +220,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        $campanha = $modelCampaigns->getCampaignById($id); // Atualiza dados
+        // Atualiza os dados da campanha depois da ação
+        $campanha = $modelCampaigns->getCampaignById($id);
     }
 }
 

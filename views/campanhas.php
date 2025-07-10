@@ -6,7 +6,14 @@
     <!-- TABS PRINCIPAIS -->
     <ul class="w-full max-w-2xl text-sm font-medium text-center text-gray-500 rounded-lg shadow-sm flex dark:divide-gray-700 dark:text-gray-400 mb-8">
         <li class="w-full focus-within:z-10">
-            <a href="#" data-tab="tab-campanhas" class="tab-link inline-block w-full p-4 bg-white dark:bg-gray-800 text-blue-700 font-semibold bg-blue-50 dark:bg-gray-700 border-r border-gray-200 dark:border-gray-700 rounded-s-lg hover:text-gray-700 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-gray-700">
+            <a href="#" data-tab="tab-estatisticas" class="tab-link inline-block w-full p-4 bg-white dark:bg-gray-800 text-blue-700 font-semibold bg-blue-50 dark:bg-gray-700 border-r border-gray-200 dark:border-gray-700 rounded-s-lg hover:text-gray-700 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-gray-700
+            
+            ">
+                Estatísticas
+            </a>
+        </li>
+        <li class="w-full focus-within:z-10">
+            <a href="#" data-tab="tab-campanhas" class="tab-link inline-block w-full p-4 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 border-r border-gray-200 dark:border-gray-700 hover:text-gray-700 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-gray-700">
                 Lista de Campanhas
             </a>
         </li>
@@ -18,6 +25,24 @@
     </ul>
 
     <!-- TAB: Campanhas -->
+    <section id="tab-estatisticas" class="hidden tab-content w-full max-w-screen-xl px-6 py-8 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow space-y-6">
+        <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Estatísticas Gerais</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
+                <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white">Emails Entregues</h3>
+                <p class="text-3xl font-bold text-gray-900 dark:text-white"><?= $totalEntregues ?></p>
+            </div>
+            <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
+                <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white">Aberturas</h3>
+                <p class="text-3xl font-bold text-gray-900 dark:text-white"><?= $totalAberturas ?></p>
+            </div>
+            <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
+                <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white">Cliques</h3>
+                <p class="text-3xl font-bold text-gray-900 dark:text-white"><?= $totalCliques ?></p>
+            </div>
+        </div>
+    </section>
+
     <section id="tab-campanhas" class="tab-content w-full max-w-7xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-8">
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Campanhas de Email</h2>
