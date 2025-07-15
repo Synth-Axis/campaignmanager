@@ -1,14 +1,15 @@
 <?php
-$currentPage = basename($_SERVER['REQUEST_URI']);
+$currentPage = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+$isHomeCenter = in_array($currentPage, ['home-center', 'home-center.php']);
+$isLogin = in_array($currentPage, ['login', 'login.php']);
 ?>
-
 
 <nav class="bg-white border-gray-200 dark:bg-gray-900">
     <div class="max-w-screen-2xl mx-auto flex items-center justify-between p-4">
 
-        <!-- Left group: Menu button + Logo -->
-        <div class="flex items-center space-x-10">
-            <?php if (!empty($_SESSION['user_id'])): ?>
+        <!-- Left group -->
+        <div class="<?= ($isHomeCenter || $isLogin) ? 'w-1/3 hidden' : 'w-1/3 flex items-center space-x-10' ?>">
+            <?php if (!empty($_SESSION['user_id']) && !$isHomeCenter && !$isLogin): ?>
                 <button type="button"
                     class="cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     data-drawer-target="drawer-navigation"
@@ -17,34 +18,20 @@ $currentPage = basename($_SERVER['REQUEST_URI']);
                     Menu
                 </button>
             <?php endif; ?>
-            <!-- <a href="/" class="flex items-center space-x-3">
-                <img src="../assets/img/Logo_RV-01.png" class="h-8" alt="RSV Logo" />
-            </a> -->
         </div>
 
-        <?php if (!empty($_SESSION['user_id'])): ?>
-            <!-- Center group: Navbar links (hidden on mobile) -->
-            <div class="hidden md:flex space-x-8">
-                <a href="#" class="text-blue-700 font-medium">Início</a>
-                <a href="/publico" class="text-gray-900 dark:text-white hover:text-blue-700">Público</a>
-                <a href="/campanhas" class="text-gray-900 dark:text-white hover:text-blue-700">Campanhas</a>
-                <a href="#" class="text-gray-900 dark:text-white hover:text-blue-700">Relatórios</a>
-            </div>
-        <?php endif; ?>
+        <!-- Center title -->
+        <div class="w-1/3 flex justify-center">
+            <h1 class="text-4xl font-bold text-white text-center whitespace-nowrap">MARKETING RVS - APP CENTER</h1>
+        </div>
 
-        <!-- Right group: Auth actions -->
-        <div class="flex items-center space-x-4">
+        <!-- Right group (auth actions) -->
+        <div class="w-1/3 flex justify-end items-center space-x-4 <?= empty($_SESSION['user_id']) ? 'invisible' : '' ?>">
             <?php if (!empty($_SESSION['user_id'])): ?>
-                <span class="text-white font-medium hidden md:inline">Olá,&nbsp<?= htmlspecialchars($currentUser['nome']) ?></span>
+                <span class="text-white font-medium hidden md:inline">Olá,&nbsp;<?= htmlspecialchars($currentUser['nome']) ?></span>
                 <a href="/logout">
                     <button class="cursor-pointer text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">
                         Sair
-                    </button>
-                </a>
-            <?php else: ?>
-                <a href="/login">
-                    <button class="cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Entrar
                     </button>
                 </a>
             <?php endif; ?>

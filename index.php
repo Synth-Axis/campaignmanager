@@ -9,7 +9,7 @@ define("ROOT", "/");
 $path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 $url_parts = explode("/", trim($path, "/"));
 
-$controller = !empty($url_parts[0]) ? $url_parts[0] : "home";
+$controller = !empty($url_parts[0]) ? $url_parts[0] : "login";
 $id = $url_parts[1] ?? null;
 
 $controller_file = "controllers/" . $controller . ".php";

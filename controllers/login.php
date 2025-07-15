@@ -53,9 +53,9 @@ if (isset($_POST["send"])) {
                     setcookie("remember_token", $token, time() + 60 * 60 * 24 * 30, "/", "", false, true); // HttpOnly
                 }
                 if ($currentUser["user_type"] === "admin") {
-                    header("Location: /");
+                    header("Location: /home-center");
                 } else {
-                    header("Location: /");
+                    header("Location: /home-center");
                 }
                 exit;
             } else {

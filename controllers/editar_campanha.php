@@ -170,9 +170,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $mail->addStringEmbeddedImage($imageBinary, 'qrcodeCid', 'qrcode.png', 'base64', 'image/png');
 
                         // Substituição com tracking real
+                        $clickBase = "https://www.realvidaseguros.pt/eventos/responderConviteEvento?listid=88&contact=$email&resposta=Não";
+                        $clickTrack = "http://localhost/track/click.php?tid=$trackingId&cid=$id&pid={$publico['publico_id']}&url=" . urlencode($clickBase);
+
                         $htmlPersonalizado = str_replace(
-                            ['{qr_code}', '{email}', '{firstname}', '{cid}', '{tracking_id}', '{publico_id}'],
+                            ['{click_url}', '{qr_code}', '{email}', '{firstname}', '{cid}', '{tracking_id}', '{publico_id}'],
                             [
+                                $clickTrack,
                                 '<img src="cid:qrcodeCid" width="300" height="300" style="display:block; margin:auto;" />',
                                 htmlspecialchars($email),
                                 htmlspecialchars($nomeDest),
