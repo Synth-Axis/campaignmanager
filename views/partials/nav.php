@@ -1,4 +1,10 @@
 <?php
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+$currentUser = $_SESSION['user'] ?? null;
+
 $currentPage = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 $isHomeCenter = in_array($currentPage, ['home-center', 'home-center.php']);
 $isLogin = in_array($currentPage, ['login', 'login.php']);
@@ -28,7 +34,7 @@ $isLogin = in_array($currentPage, ['login', 'login.php']);
         <!-- Right group (auth actions) -->
         <div class="w-1/3 flex justify-end items-center space-x-4 <?= empty($_SESSION['user_id']) ? 'invisible' : '' ?>">
             <?php if (!empty($_SESSION['user_id'])): ?>
-                <span class="text-white font-medium hidden md:inline">Olá,&nbsp;<?= htmlspecialchars($currentUser['nome']) ?></span>
+                <span class="text-white">Olá, <?= htmlspecialchars($currentUser['nome'] ?? 'Utilizador') ?></span>
                 <a href="/logout">
                     <button class="cursor-pointer text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">
                         Sair

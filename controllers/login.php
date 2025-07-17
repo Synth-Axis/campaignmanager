@@ -44,14 +44,16 @@ if (isset($_POST["send"])) {
             $userPassword = $currentUser["password"];
             if (password_verify($_POST["password"], $userPassword)) {
                 $_SESSION["user_id"] = $currentUser["user_id"];
+                $_SESSION["user"] = $currentUser; // <- adiciona esta linha
 
                 if (!empty($_POST["remember"]) && $_POST["remember"] === "on") {
-                    $token = bin2hex(random_bytes(32)); // 64 chars
+                    $token = bin2hex(random_bytes(32));
                     $tokenHash = hash('sha256', $token);
-                    $expiresAt = date("Y-m-d H:i:s", time() + 60 * 60 * 24 * 30); // 30 dias
+                    $expiresAt = date("Y-m-d H:i:s", time() + 60 * 60 * 24 * 30);
                     $model->storeRememberToken($currentUser["user_id"], $tokenHash, $expiresAt);
-                    setcookie("remember_token", $token, time() + 60 * 60 * 24 * 30, "/", "", false, true); // HttpOnly
+                    setcookie("remember_token", $token, time() + 60 * 60 * 24 * 30, "/", "", false, true);
                 }
+
                 if ($currentUser["user_type"] === "admin") {
                     header("Location: /home-center");
                 } else {
