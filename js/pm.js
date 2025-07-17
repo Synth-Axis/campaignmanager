@@ -16,6 +16,18 @@ document.addEventListener("DOMContentLoaded", function () {
       modal.classList.add("hidden");
     });
 
+  document
+    .getElementById("pesquisaAcesso")
+    .addEventListener("input", function () {
+      const termo = this.value.toLowerCase();
+      const cards = document.querySelectorAll("#listaAcessos > div");
+
+      cards.forEach((card) => {
+        const titulo = card.querySelector("h3").textContent.toLowerCase();
+        card.style.display = titulo.includes(termo) ? "block" : "none";
+      });
+    });
+
   // Submeter formulário via AJAX
   form.addEventListener("submit", function (e) {
     e.preventDefault();
