@@ -22,7 +22,7 @@ $isLogin = in_array($currentPage, ['login', 'login.php']);
 
         <!-- Center title -->
         <div class="w-1/3 flex justify-center">
-            <h1 class="text-4xl font-bold text-white text-center whitespace-nowrap">MARKETING RVS - APP CENTER</h1>
+            <h1 class="text-4xl font-bold text-white text-center whitespace-nowrap">MKT - APP CENTER</h1>
         </div>
 
         <!-- Right group (auth actions) -->

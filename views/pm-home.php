@@ -6,10 +6,17 @@
         <h1 class="text-3xl font-bold my-10 text-white text-center">Password Manager</h1>
 
         <div class="p-6">
-            <div class="flex justify-between items-center mb-6">
-                <input type="text" id="pesquisaAcesso" placeholder="Pesquisar serviço..."
-                    class="px-4 py-2 rounded-lg w-full md:w-1/3 bg-white text-gray-800 focus:outline-none focus:ring-1 focus:ring-blue-500" />
-                <button id="btnNovoAcesso" class="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">+ Novo Acesso</button>
+            <div class="mb-6">
+                <div class="flex justify-end mb-4">
+                    <button id="btnNovoAcesso" class="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+                        + Novo Acesso
+                    </button>
+                </div>
+
+                <div class="flex justify-end">
+                    <input type="text" id="pesquisaAcesso" placeholder="Pesquisar serviço..."
+                        class="px-4 py-2 rounded-lg w-full md:w-1/3 bg-white text-gray-800 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                </div>
             </div>
 
             <div id="listaAcessos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
