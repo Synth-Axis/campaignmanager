@@ -1,39 +1,101 @@
 document.addEventListener("DOMContentLoaded", function () {
-  function abrirModalNovo() {
+  const modal = document.getElementById("modalAcesso");
+  const form = modal.querySelector("form");
+
+  document.getElementById("btnNovoAcesso").addEventListener("click", () => {
     document.getElementById("modalTitulo").textContent = "Adicionar Acesso";
-    document.getElementById("modalAcesso").classList.remove("hidden");
+    modal.classList.remove("hidden");
+
+    form.reset();
     document.getElementById("acesso_id").value = "";
-    document.getElementById("nome_servico").value = "";
-    document.getElementById("url_acesso").value = "";
-    document.getElementById("username").value = "";
-    document.getElementById("email").value = "";
-    document.getElementById("senha").value = "";
-    document.getElementById("notas").value = "";
-  }
+  });
 
-  function fecharModal() {
-    document.getElementById("modalAcesso").classList.add("hidden");
-  }
+  document
+    .getElementById("btnFecharModal")
+    .addEventListener("click", function () {
+      modal.classList.add("hidden");
+    });
 
-  function editarAcesso(id) {
-    fetch("carregar_acesso.php?id=" + id)
-      .then((res) => res.json())
-      .then((dados) => {
-        document.getElementById("modalTitulo").textContent = "Editar Acesso";
-        document.getElementById("acesso_id").value = dados.id;
-        document.getElementById("nome_servico").value = dados.nome_servico;
-        document.getElementById("url_acesso").value = dados.url_acesso;
-        document.getElementById("username").value = dados.username;
-        document.getElementById("email").value = dados.email;
-        document.getElementById("senha").value = dados.senha; // senha desencriptada vinda do PHP
-        document.getElementById("notas").value = dados.notas;
-        document.getElementById("modalAcesso").classList.remove("hidden");
+  // Submeter formulário via AJAX
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    fetch("controllers/guardar_acesso.php", {
+      method: "POST",
+      body: formData,
+    })
+      .then(async (res) => {
+        const texto = await res.text();
+
+        try {
+          const resposta = JSON.parse(texto);
+
+          if (resposta.sucesso) {
+            modal.classList.add("hidden");
+
+            fetch("controllers/pm-home-fragment.php")
+              .then((res) => res.text())
+              .then((html) => {
+                document.getElementById("listaAcessos").innerHTML = html;
+                atualizarListeners();
+              });
+          } else {
+            alert("Erro ao guardar o acesso.");
+          }
+        } catch (e) {
+          console.error("Resposta não é JSON válido:", texto);
+          alert("Erro na comunicação com o servidor.");
+        }
+      })
+      .catch((err) => {
+        console.error("Erro na comunicação com o servidor:", err);
+        alert("Erro na comunicação com o servidor.");
       });
+  });
+
+  function atualizarListeners() {
+    document.querySelectorAll(".btnEditarAcesso").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-id");
+        fetch("controllers/carregar_acesso.php?id=" + id)
+          .then((res) => res.json())
+          .then((dados) => {
+            document.getElementById("modalTitulo").textContent =
+              "Editar Acesso";
+            document.getElementById("acesso_id").value = dados.id;
+            document.getElementById("nome_servico").value = dados.nome_servico;
+            document.getElementById("url_acesso").value = dados.url_acesso;
+            document.getElementById("username").value = dados.username;
+            document.getElementById("senha").value = dados.senha;
+            document.getElementById("notas").value = dados.notas;
+            modal.classList.remove("hidden");
+          });
+      });
+    });
+
+    document.querySelectorAll(".btnCopiarSenha").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-id");
+        fetch("controllers/desencriptar.php?id=" + id)
+          .then((res) => res.text())
+          .then((txt) =>
+            navigator.clipboard.writeText(txt).then(() => {
+              const alerta = document.getElementById("alertaSenha");
+              alerta.classList.remove("hidden");
+              alerta.classList.add("opacity-100");
+
+              setTimeout(() => {
+                alerta.classList.remove("opacity-100");
+                setTimeout(() => alerta.classList.add("hidden"), 500);
+              }, 1000);
+            })
+          );
+      });
+    });
   }
 
-  function copiarSenha(id) {
-    fetch("desencriptar.php?id=" + id)
-      .then((res) => res.text())
-      .then((txt) => navigator.clipboard.writeText(txt));
-  }
+  // Chamado no carregamento inicial
+  atualizarListeners();
 });

@@ -19,14 +19,13 @@ class Acesso extends Base
     public function inserir($dados)
     {
         $stmt = $this->db->prepare("
-            INSERT INTO acessos (nome_servico, url_acesso, username, email, senha_criptografada, notas)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO acessos (nome_servico, url_acesso, username, senha_criptografada, notas)
+            VALUES (?, ?, ?, ?, ?)
         ");
         return $stmt->execute([
             $dados['nome_servico'],
             $dados['url_acesso'],
             $dados['username'],
-            $dados['email'],
             $dados['senha_criptografada'],
             $dados['notas']
         ]);
@@ -36,14 +35,13 @@ class Acesso extends Base
     {
         $stmt = $this->db->prepare("
             UPDATE acessos
-            SET nome_servico = ?, url_acesso = ?, username = ?, email = ?, senha_criptografada = ?, notas = ?, atualizado_em = NOW()
+            SET nome_servico = ?, url_acesso = ?, username = ?, senha_criptografada = ?, notas = ?, atualizado_em = NOW()
             WHERE id = ?
         ");
         return $stmt->execute([
             $dados['nome_servico'],
             $dados['url_acesso'],
             $dados['username'],
-            $dados['email'],
             $dados['senha_criptografada'],
             $dados['notas'],
             $id

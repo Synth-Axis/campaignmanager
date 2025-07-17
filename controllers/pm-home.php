@@ -1,8 +1,9 @@
 <?php
-
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
 require_once __DIR__ . '/../models/acessos.php';
 
-$acessoModel = new Acesso($db);
+$acessoModel = new Acesso();
 $mensagem = null;
 
 // Chave para cifragem (pode vir de sessão ou .env num projeto real)
