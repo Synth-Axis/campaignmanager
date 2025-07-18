@@ -23,6 +23,6 @@ foreach ($acessos as $acesso): ?>
             <button class="cursor-pointer btnCopiarSenha text-sm text-green-400 hover:underline font-bold" data-id="<?= $acesso['id'] ?>">Copiar senha</button>
             <button class="cursor-pointer btnEditarAcesso text-sm text-yellow-500 hover:underline" data-id="<?= $acesso['id'] ?>">Editar</button>
         </div>
-        <p class="text-sm mt-2 text-gray-300 font-bold">Data da ultima atualização: <span class="font-normal"><?= $acesso['atualizado_em'] ?></span></p>
+        <p class="text-sm mt-2 text-gray-300 font-bold">Data da última actualização: <span class="font-normal"><?= $acesso['atualizado_em'] ?></span></p>
     </div>
 <?php endforeach; ?>
