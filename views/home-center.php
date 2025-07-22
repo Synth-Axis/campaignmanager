@@ -25,11 +25,11 @@
         </a>
 
         <!-- In development -->
-        <a href="/home" class="group block rounded-2xl shadow-md bg-gray-800 transition p-6">
+        <a href="/publico" class="group block rounded-2xl shadow-md bg-gray-800 transition p-6">
             <div class="flex items-center space-x-4">
                 <div>
-                    <h2 class="text-3xl font-semibold text-white mb-4 transition group-hover:text-blue-500">In development</h2>
-                    <p class="text-lg text-gray-500">Coming soon...</p>
+                    <h2 class="text-3xl font-semibold text-white mb-4 transition group-hover:text-blue-500">Público</h2>
+                    <p class="text-lg text-gray-500">Gestão de Contactos</p>
                 </div>
             </div>
         </a>
