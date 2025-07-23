@@ -26,7 +26,6 @@
         </div>
     </div>
 
-    <!-- Modal -->
     <div id="modalAcesso" class="fixed inset-0 bg-opacity-90 flex items-center justify-center hidden z-50">
         <div class="bg-slate-800 p-6 rounded-2xl shadow max-w-lg w-full">
             <h2 id="modalTitulo" class="text-xl text-white font-semibold mb-4">Adicionar Acesso</h2>

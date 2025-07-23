@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
-  // Submeter formulário via AJAX
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -108,6 +107,5 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Chamado no carregamento inicial
   atualizarListeners();
 });

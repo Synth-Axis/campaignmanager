@@ -4,8 +4,6 @@ require_once("dbconfig.php");
 
 class Publico extends Base
 {
-
-
     public function getAllPublico()
     {
         try {
@@ -137,14 +135,12 @@ class Publico extends Base
         $inicio->modify("-$dias days");
         $hoje = new DateTime();
 
-        // Inicializa o array com todos os dias
         $diasIntervalo = [];
         $periodo = new DatePeriod($inicio, new DateInterval('P1D'), $hoje->modify('+1 day'));
         foreach ($periodo as $data) {
             $diasIntervalo[$data->format('Y-m-d')] = 0;
         }
 
-        // Vai buscar os reais da base de dados
         $stmt = $this->db->prepare("
         SELECT DATE(data_registo) as dia, COUNT(*) as total
         FROM Publico
@@ -158,7 +154,6 @@ class Publico extends Base
             $diasIntervalo[$row['dia']] = (int) $row['total'];
         }
 
-        // Reconvertendo em array final
         $resultado = [];
         foreach ($diasIntervalo as $dia => $total) {
             $resultado[] = [

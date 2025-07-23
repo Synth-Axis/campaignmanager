@@ -101,7 +101,6 @@
         </form>
     </section>
 
-    <!-- Modal de Enviar Email de Teste -->
     <div id="modal-envio-teste" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
         <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-xl w-full max-w-md relative">
             <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Enviar Email de Teste</h2>

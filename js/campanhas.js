@@ -1,12 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
-  //Preview do HTML
   document.getElementById("preview-btn").addEventListener("click", function () {
     var html = document.getElementById("editor").value;
     var previewFrame = document.getElementById("html-preview");
     previewFrame.srcdoc = html;
   });
 
-  // Tab switching
   const tabLinks = document.querySelectorAll(".tab-link");
   const tabContents = document.querySelectorAll(".tab-content");
 
@@ -16,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const targetTab = this.getAttribute("data-tab");
 
-      // Ativa a tab clicada
       tabLinks.forEach((l) =>
         l.classList.remove(
           "text-blue-700",
@@ -32,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
         "dark:bg-gray-700"
       );
 
-      // Mostra apenas a section correspondente
       tabContents.forEach((section) => {
         if (section.id === targetTab) {
           section.classList.remove("hidden");

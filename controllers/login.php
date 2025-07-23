@@ -44,7 +44,7 @@ if (isset($_POST["send"])) {
             $userPassword = $currentUser["password"];
             if (password_verify($_POST["password"], $userPassword)) {
                 $_SESSION["user_id"] = $currentUser["user_id"];
-                $_SESSION["user"] = $currentUser; // <- adiciona esta linha
+                $_SESSION["user"] = $currentUser;
 
                 if (!empty($_POST["remember"]) && $_POST["remember"] === "on") {
                     $token = bin2hex(random_bytes(32));

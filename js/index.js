@@ -5,11 +5,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const porPagina = 50;
   let debounceTimer = null;
 
-  let entidadeParaApagar = null; // "lista" ou "contacto"
+  let entidadeParaApagar = null;
   let idParaApagar = null;
   let linhaParaRemover = null;
 
-  // -------------------- TABS PRINCIPAIS --------------------
   const tabs = document.querySelectorAll(".tab-link");
   let tabAtual = sessionStorage.getItem("tabAtual") || "tab-visaogeral";
 
@@ -213,7 +212,6 @@ document.addEventListener("DOMContentLoaded", function () {
             tbodyContactos.appendChild(row);
           });
 
-          // Aplicar os listeners após inserir linhas
           tbodyContactos
             .querySelectorAll(".select-acao-contacto")
             .forEach((select) => {
@@ -277,7 +275,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 3000);
   }
 
-  // -------------------- MODAIS & AÇÕES --------------------
   window.handleAcaoContacto = function (select) {
     const acao = select.value;
     const id = select.dataset.id;
@@ -302,7 +299,6 @@ document.addEventListener("DOMContentLoaded", function () {
             .getElementById("modal-editar-contacto")
             .classList.remove("hidden");
 
-          // Repor o select para a opção default após usar
           select.value = "Acções";
         })
         .catch(() => {
@@ -395,7 +391,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 
-  // -------------------- IMPORTAÇÃO FICHEIRO --------------------
   const formImportar = document.getElementById("form-importar-ficheiro");
   if (formImportar) {
     formImportar.addEventListener("submit", async function (e) {
@@ -428,7 +423,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // -------------------- GRÁFICO DE CONTACTOS --------------------
   const selectPeriodo = document.getElementById("filtro-periodo");
   const graficoCanvas = document.getElementById("grafico-crescimento");
   let chartInstance;
@@ -485,7 +479,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Permite fechar modais ao clicar fora do conteúdo
   document.querySelectorAll(".modal").forEach((modal) => {
     modal.addEventListener("click", function (e) {
       const conteudo = modal.querySelector(".modal-content");
@@ -523,7 +516,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-  // Selecionar todos os contactos
   document
     .getElementById("selecionar-todos")
     .addEventListener("change", function () {
@@ -532,7 +524,6 @@ document.addEventListener("DOMContentLoaded", function () {
         .forEach((cb) => (cb.checked = this.checked));
     });
 
-  // Exportar contactos
   document
     .getElementById("selecionar-todos")
     ?.addEventListener("change", function () {

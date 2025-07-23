@@ -25,7 +25,7 @@ class Lists extends Base
         $stmt->bindParam(':nome', $nome);
         $stmt->execute();
 
-        return $this->db->lastInsertId(); // Adiciona isto
+        return $this->db->lastInsertId();
     }
 
     public function atualizarNomeLista($id, $novoNome)

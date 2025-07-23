@@ -1,8 +1,8 @@
 <?php require __DIR__ . '/partials/head.php'; ?>
 <?php require __DIR__ . '/partials/nav.php'; ?>
 
-<main class="min-h-screen flex flex-col items-center mt-10 gap-8">
-    <!-- Mobile Tabs -->
+<main class="min-h-screen flex flex-col items-center mt-10 gap-8 px-10">
+
     <div class="sm:hidden">
         <label for="tabs" class="sr-only">Selecionar secção</label>
         <select id="tabs" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
@@ -13,7 +13,6 @@
         </select>
     </div>
 
-    <!-- Desktop Tabs -->
     <ul class="w-full max-w-2xl hidden text-sm font-medium text-center text-gray-500 rounded-lg shadow-sm sm:flex dark:divide-gray-700 dark:text-gray-400">
         <li class="w-full focus-within:z-10">
             <a href="#" data-tab="tab-visaogeral"
@@ -41,16 +40,12 @@
         </li>
     </ul>
 
-    <!-- TAB: Visão Geral -->
     <section id="tab-visaogeral" class="tab-content w-full max-w-screen-xl px-6 py-8 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow space-y-6">
         <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Visão Geral</h2>
-
-        <!-- Grid para cards e gráfico lado a lado -->
         <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
 
-            <!-- Coluna Esquerda: 3 cards -->
             <div class="space-y-6 col-span-1 md:col-span-2 lg:col-span-2">
-                <!-- Card Resumo -->
+
                 <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
                     <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-2">Resumo</h3>
                     <p class="text-3xl font-bold text-gray-900 dark:text-white"><?= $totalContactos ?></p>
@@ -58,7 +53,7 @@
                     <p class="text-xs mt-2 text-gray-400">Novos hoje: <?= $novosHoje ?></p>
                 </div>
 
-                <!-- Card Crescimento recente -->
+
                 <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
                     <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-2">Crescimento recente</h3>
                     <p class="text-sm text-gray-700 dark:text-gray-200">Últimos 30 dias</p>
@@ -66,7 +61,7 @@
                     <p class="text-sm text-gray-600 dark:text-gray-400">Desinscritos: 0</p>
                 </div>
 
-                <!-- Card Desempenho -->
+
                 <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
                     <div class="flex justify-between items-stretch mb-2 min-h-[4rem]">
                         <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white tracking-tight self-start">
@@ -88,7 +83,7 @@
                 </div>
             </div>
 
-            <!-- Coluna Direita: Gráfico -->
+
             <div class="col-span-1 md:col-span-3 lg:col-span-3">
                 <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
                     <div class="flex justify-between items-stretch mb-2 min-h-[4rem]">
@@ -111,10 +106,10 @@
             </div>
     </section>
 
-    <!-- TAB: Contactos -->
+
     <section id="tab-novocontacto" class="hidden w-full max-w-full p-0 px-50">
 
-        <!-- Tabs secundários de contactos, visual compacto -->
+
         <div class="w-full flex justify-center -mt-4 mb-8">
             <ul class="flex max-w-lg w-full text-xs font-medium text-center text-gray-500 dark:text-gray-400 bg-transparent rounded-md shadow-none gap-4" id="contactos-subtabs">
                 <li class="flex-1">
@@ -138,12 +133,8 @@
             </ul>
         </div>
 
-        <!-- Todos os Contactos -->
 
         <div id="tab-todos-contactos" class="contact-tab-content hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-6 mb-10 space-y-4 w-full mx-auto">
-
-
-            <!-- Linha de título + pesquisa -->
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-6">
                 <h5 class="text-lg font-semibold text-gray-900 dark:text-white">Todos os Contactos</h5>
                 <div class="relative w-full md:w-72">
@@ -153,7 +144,6 @@
                         class="w-full pl-10 pr-3 py-2 text-sm border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Pesquisar contacto..." />
                     <span class="absolute left-3 top-2.5 text-gray-400 pointer-events-none">
-                        <!-- Lupa SVG para dark/light mode -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z" />
                         </svg>
@@ -228,7 +218,6 @@
             <div id="paginacao-contactos" class="flex justify-center mt-4"></div>
         </div>
 
-        <!-- Inserir Contacto -->
         <form id="tab-inserir-contacto" method="POST" action="" class="max-w-4xl mx-auto contact-tab-content hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-8 space-y-6">
             <h5 class="text-lg font-semibold text-gray-900 dark:text-white">Novo registo</h5>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-10">
@@ -297,7 +286,6 @@
             </div>
         </form>
 
-        <!-- Torna o container mais largo -->
         <div id="tab-importar-ficheiro"
             class="contact-tab-content hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-6 space-y-4 w-full max-w-4xl mx-auto">
             <h5 class="text-lg font-semibold text-gray-900 dark:text-white">Importar Contactos por Ficheiro</h5>
@@ -318,7 +306,6 @@
         </div>
     </section>
 
-    <!-- TAB: Segmentos -->
     <section id="tab-segmentos" class="hidden w-full max-w-2xl p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow space-y-4">
         <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Segmentos</h2>
         <p class="text-gray-700 dark:text-gray-300">
@@ -331,7 +318,6 @@
         </ul>
     </section>
 
-    <!-- TAB: Listas -->
     <section id="tab-listas" class="hidden w-full max-w-2xl p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow space-y-4">
         <div class="flex items-center justify-between">
             <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Listas</h2>
@@ -364,7 +350,6 @@
         </table>
     </section>
 
-    <!-- Modal Listas wrapper -->
     <div id="modal-nova-lista" class="modal hidden fixed inset-0 flex items-center justify-center z-50">
         <div class="modal-content bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-600 rounded-lg shadow-lg w-full max-w-md p-6 space-y-4 relative">
 
@@ -387,7 +372,6 @@
         </div>
     </div>
 
-    <!-- Modal Editar Lista -->
     <div id="modal-editar-lista" class="modal hidden fixed inset-0 flex items-center justify-center z-50">
         <div class="modal-content bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-600 rounded-lg shadow-lg w-full max-w-md p-6 space-y-4 relative">
             <h3 class="text-lg font-medium text-gray-900 dark:text-white">Editar Lista</h3>
@@ -409,7 +393,6 @@
         </div>
     </div>
 
-    <!-- Modal Editar Contacto -->
     <div id="modal-editar-contacto" class="modal hidden fixed inset-0 flex items-center justify-center z-50">
         <div class="modal-content bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-600 rounded-lg shadow-lg w-full max-w-4xl p-6 space-y-4 relative">
             <h3 class="text-lg font-medium text-gray-900 dark:text-white">Editar Contacto</h3>
@@ -459,12 +442,10 @@
         </div>
     </div>
 
-    <!-- Alerta Custom -->
     <div id="alerta-custom" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 hidden transition-opacity duration-300 opacity-0 text-center">
         <span id="alerta-mensagem"></span>
     </div>
 
-    <!-- Modal de Confirmação Apagar -->
     <div id="modal-confirmar-apagar" class="modal hidden fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
         <div class="modal-content bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-600 rounded-lg shadow-lg w-full max-w-sm p-6 space-y-4 relative">
             <h3 class="text-lg font-medium text-gray-900 dark:text-white">Confirmar Apagar</h3>

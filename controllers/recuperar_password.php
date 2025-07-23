@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $subject = "Recuperação de Palavra-passe";
     $body = "Clique neste link para redefinir a sua palavra-passe:<br><a href='$resetLink'>$resetLink</a>";
 
-    send_email($email, $subject, $body); // usa a tua função de envio
+    send_email($email, $subject, $body);
 
     $message = "Foi enviado um e-mail com o link de recuperação.";
 }

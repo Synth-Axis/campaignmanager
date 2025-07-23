@@ -4,7 +4,6 @@ require_once("dbconfig.php");
 
 class Users extends Base
 {
-
 	public function getAllUsers()
 	{
 		$query = $this->db->prepare("
@@ -71,7 +70,6 @@ class Users extends Base
 
 	public function storeRememberToken($userId, $tokenHash, $expiresAt)
 	{
-		// Verifica se o utilizador existe
 		$check = $this->db->prepare("SELECT user_id FROM users WHERE user_id = ?");
 		$check->execute([$userId]);
 		if (!$check->fetch()) {

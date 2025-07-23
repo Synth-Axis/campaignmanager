@@ -44,12 +44,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mensagem = "Acesso inserido com sucesso.";
     }
 
-    // Evitar reenvio em refresh
     header("Location: pm-home.php?msg=" . urlencode($mensagem));
     exit;
 }
 
-// ⏹️ APAGAR (opcional via GET)
 if (isset($_GET['apagar'])) {
     $id = (int) $_GET['apagar'];
     $acessoModel->apagar($id);
@@ -57,7 +55,6 @@ if (isset($_GET['apagar'])) {
     exit;
 }
 
-// 📄 LISTAR TUDO
 $acessos = $acessoModel->listarTodos();
 
 require_once __DIR__ . '/../views/pm-home.php';

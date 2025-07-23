@@ -12,7 +12,6 @@ function send_email($to, $subject, $body)
     $mail->CharSet = 'UTF-8';
 
     try {
-        // Configurações do servidor SMTP
         $mail->isSMTP();
         $mail->Host       = ENV["PHPMAILER_HOST"];
         $mail->SMTPAuth   = true;
@@ -22,11 +21,9 @@ function send_email($to, $subject, $body)
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = ENV["PHPMAILER_PORT"];
 
-        // Remetente e destinatário
         $mail->setFrom('marketing.comunicacao@realvidaseguros.pt', 'Real Vida Seguros, SA');
         $mail->addAddress($to);
 
-        // Conteúdo do email
         $mail->isHTML(true);
         $mail->Subject = $subject;
         $mail->Body    = $body;

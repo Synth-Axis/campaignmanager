@@ -6,7 +6,6 @@ if (!defined('ENV')) {
 
 class Base
 {
-
     public $db;
 
     public function __construct()

@@ -4,7 +4,6 @@ require_once("dbconfig.php");
 
 class Campaigns extends Base
 {
-    // Lista todas as campanhas
     public function getAllCampaigns()
     {
         $query = $this->db->prepare("
@@ -25,7 +24,6 @@ class Campaigns extends Base
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Cria uma nova campanha
     public function createCampaign($data)
     {
         $query = $this->db->prepare("
@@ -41,8 +39,6 @@ class Campaigns extends Base
             $data['estado'] ?? 'rascunho',
         ]);
     }
-
-    // Obter campanha por ID
     public function getCampaignById($id)
     {
         $query = $this->db->prepare("
@@ -62,7 +58,6 @@ class Campaigns extends Base
         return $this->db->lastInsertId();
     }
 
-    // Editar campanha completa (inclui estado)
     public function updateCampaign($id, $data)
     {
         $query = $this->db->prepare("
@@ -80,7 +75,6 @@ class Campaigns extends Base
         ]);
     }
 
-    // Atualizar apenas o estado da campanha
     public function updateEstado($id, $estado)
     {
         $query = $this->db->prepare("
@@ -91,7 +85,6 @@ class Campaigns extends Base
         return $query->execute([$estado, $id]);
     }
 
-    // Apagar campanha
     public function deleteCampaign($id)
     {
         $query = $this->db->prepare("
@@ -100,7 +93,6 @@ class Campaigns extends Base
         return $query->execute([$id]);
     }
 
-    //Tracking
     public function registarEnvioTracking($campanhaId, $publicoId, $ip = null, $userAgent = null)
     {
         $stmt = $this->db->prepare("

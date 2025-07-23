@@ -5,6 +5,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 file_put_contents('debug_post.txt', date('Y-m-d H:i:s') . "\n" . print_r($_POST, true), FILE_APPEND); */
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     error_log(print_r($_POST, true));
 }
@@ -38,14 +39,12 @@ $listas = $modelLists->getAllLists();
 $gestores = $modelManagers->getAllManagers();
 $contactos = $modelPublico->getAllPublico();
 
-// CSRF
+
 if (!isset($_SESSION["csrf_token"])) {
     generateCSRFToken();
 }
 
-// ---------------------- HANDLERS DE POST ----------------------
 
-// Registo de novo contacto
 if (isset($_POST["send"])) {
     if (!isset($_POST["csrf_token"]) || $_POST["csrf_token"] !== $_SESSION["csrf_token"]) {
         die("CSRF token validation failed.");
@@ -85,7 +84,6 @@ if (isset($_POST["send"])) {
     exit;
 }
 
-// Criar nova lista (AJAX ou normal)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'nova_lista') {
     $nomeLista = trim($_POST['nova_lista_nome']);
     if (!empty($nomeLista)) {
@@ -115,7 +113,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'nova_
     }
 }
 
-// Editar lista
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'editar_lista') {
     $listaId = $_POST['lista_id'] ?? null;
     $novoNome = trim($_POST['lista_nome'] ?? '');
@@ -127,7 +124,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'edita
     }
 }
 
-// Apagar lista
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'apagar_lista') {
     $listaId = $_POST['lista_id'] ?? null;
     if ($listaId) {
@@ -167,7 +163,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'edita
     exit;
 }
 
-// ---------------------- INCLUIR VIEW (só se não for AJAX) ----------------------
 if (
     !isset($_SERVER['HTTP_X_REQUESTED_WITH']) ||
     strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest'

@@ -23,9 +23,9 @@ $dados = [
     'notas' => $_POST['notas'] ?? null,
 ];
 
-// Verifica se existe ligação $db
+
 if (!isset($db)) {
-    require_once __DIR__ . '/../models/dbconfig.php'; // garante que $db é definido
+    require_once __DIR__ . '/../models/dbconfig.php';
 }
 
 $model = new Acesso($db);
@@ -37,7 +37,7 @@ if (!empty($_POST['id'])) {
     $ok = $model->inserir($dados);
 }
 
-// Devolve resposta JSON
+
 ob_clean();
 header('Content-Type: application/json');
 echo json_encode(['sucesso' => $ok]);

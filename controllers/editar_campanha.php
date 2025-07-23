@@ -125,18 +125,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     $publico = $modelPublico->findPublicoByEmail($email);
                     if (!$publico) {
-                        continue; // ignora se não existir
+                        continue;
                     }
 
-                    // Regista tracking e obtém tracking_id
+
                     $ip = $_SERVER['REMOTE_ADDR'] ?? null;
                     $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? null;
                     $modelCampaigns->registarEnvioTracking($id, $publico['publico_id'], $ip, $userAgent);
 
-                    // Vai buscar o último tracking_id gerado
+
                     $trackingId = $modelCampaigns->getLastTrackingId();
 
-                    // QR Code
+
                     $qr = Builder::create()
                         ->writer(new PngWriter())
                         ->data("https://www.realvidaseguros.pt/eventos/admissaoConviteEvento?listid=88&contact=" . urlencode($email))
@@ -169,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         $mail->addStringEmbeddedImage($imageBinary, 'qrcodeCid', 'qrcode.png', 'base64', 'image/png');
 
-                        // Substituição com tracking real
+
                         $clickBase = "https://www.realvidaseguros.pt/eventos/responderConviteEvento?listid=88&contact=$email&resposta=Não";
                         $clickTrack = "http://localhost/track/click.php?tid=$trackingId&cid=$id&pid={$publico['publico_id']}&url=" . urlencode($clickBase);
 
@@ -224,7 +224,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // Atualiza os dados da campanha depois da ação
+
         $campanha = $modelCampaigns->getCampaignById($id);
     }
 }
