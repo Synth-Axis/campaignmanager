@@ -5,7 +5,9 @@
 <div class="flex items-center justify-center mt-24">
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
 
-        <a href="/campanhas" class="group block rounded-2xl shadow-md bg-slate-800 transition p-6">
+        <a href="/campanhas" class="group block rounded-2xl shadow-md bg-slate-800 bg-opacity-50 transition p-6 border border-blue-500">
+
+
             <div class="flex items-center space-x-4">
                 <div>
                     <h2 class="text-3xl font-semibold text-white mb-4 transition group-hover:text-blue-500">Campaign Manager</h2>
