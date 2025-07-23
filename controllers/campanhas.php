@@ -15,7 +15,7 @@ require_once(__DIR__ . '/../helpers/mailer.php');
 $modelCampaigns = new Campaigns();
 $modelLists = new Lists();
 $modelPublico = new Publico();
-$modelUsers = new Users();     // Instancia o model de contactos
+$modelUsers = new Users();
 $mensagem = "";
 $mensagem_tipo = "";
 
@@ -46,7 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($acao === 'gravar') {
-        // Só guarda com estado "rascunho"
         $ok = $modelCampaigns->createCampaign([
             'nome'     => $nome,
             'assunto'  => $assunto,

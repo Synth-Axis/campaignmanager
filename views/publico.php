@@ -67,7 +67,7 @@
                         <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white tracking-tight self-start">
                             Desempenho</br>do público
                         </h3>
-                        <select class="rounded-md self-start text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded px-2 py-1 text-gray-700 dark:text-white">
+                        <select class="rounded-md self-start text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 px-2 py-1 text-gray-700 dark:text-white">
                             <option>Últimos 7 dias</option>
                             <option>15 dias</option>
                             <option>1 mês</option>
@@ -90,7 +90,7 @@
                         <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white tracking-tight self-start mb-2">
                             Crescimento de contactos
                         </h3>
-                        <select id="filtro-periodo" class="rounded-md self-start text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded px-2 py-1 text-gray-700 dark:text-white">
+                        <select id="filtro-periodo" class="rounded-md self-start text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 px-2 py-1 text-gray-700 dark:text-white">
                             <option>Últimos 7 dias</option>
                             <option>15 dias</option>
                             <option>1 mês</option>
@@ -338,7 +338,7 @@
                     <tr class="border-b border-gray-100 dark:border-gray-700">
                         <td class="py-2 px-3"><?= htmlspecialchars($lista['lista_nome']) ?></td>
                         <td class="py-2 px-3 text-right">
-                            <select onchange="handleListaAcao(this)" class="cursor-pointer select-acao-lista bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg p-1 cursor-pointer" data-id="<?= $lista['lista_id'] ?>" data-nome="<?= htmlspecialchars($lista['lista_nome']) ?>">
+                            <select onchange="handleListaAcao(this)" class="cursor-pointer select-acao-lista bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg p-1" data-id="<?= $lista['lista_id'] ?>" data-nome="<?= htmlspecialchars($lista['lista_nome']) ?>">
                                 <option selected disabled>Acções</option>
                                 <option value="editar">Editar</option>
                                 <option value="apagar">Apagar</option>

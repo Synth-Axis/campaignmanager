@@ -5,7 +5,7 @@
 
     <ul class="w-full max-w-2xl text-sm font-medium text-center text-gray-500 rounded-lg shadow-sm flex dark:divide-gray-700 dark:text-gray-400 mb-8">
         <li class="w-full focus-within:z-10">
-            <a href="#" data-tab="tab-estatisticas" class="tab-link inline-block w-full p-4 bg-white dark:bg-gray-800 text-blue-700 font-semibold bg-blue-50 dark:bg-gray-700 border-r border-gray-200 dark:border-gray-700 rounded-s-lg hover:text-gray-700 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-gray-700
+            <a href="#" data-tab="tab-estatisticas" class="tab-link inline-block w-full p-4 bg-white text-blue-700 font-semibold dark:bg-gray-700 border-r border-gray-200 dark:border-gray-700 rounded-s-lg hover:text-gray-700 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-gray-700
             
             ">
                 Estatísticas
@@ -23,7 +23,7 @@
         </li>
     </ul>
 
-    <section id="tab-estatisticas" class="hidden tab-content w-full max-w-screen-xl px-6 py-8 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow space-y-6">
+    <section id="tab-estatisticas" class="hidden tab-content w-full max-w-screen-xl px-6 py-8 bg-white border-gray-200 dark:border-gray-700 rounded-lg shadow space-y-6">
         <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Estatísticas Gerais</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
