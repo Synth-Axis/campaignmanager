@@ -23,25 +23,25 @@
         </li>
     </ul>
 
-    <section id="tab-estatisticas" class="hidden tab-content w-full max-w-screen-xl px-6 py-8 bg-white border-gray-200 dark:border-gray-700 rounded-lg shadow space-y-6">
+    <section id="tab-estatisticas" class="hidden tab-content w-full max-w-screen-xl px-6 py-8  bg-opacity-40  border border-blue-500 dark:border-blue-500 rounded-lg shadow space-y-6">
         <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Estatísticas Gerais</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
+            <div class="p-6 bg-black  bg-opacity-40  rounded-lg shadow-sm">
                 <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white">Emails Entregues</h3>
                 <p class="text-3xl font-bold text-gray-900 dark:text-white"><?= $totalEntregues ?></p>
             </div>
-            <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
+            <div class="p-6 bg-black  bg-opacity-40 rounded-lg shadow-sm">
                 <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white">Aberturas</h3>
                 <p class="text-3xl font-bold text-gray-900 dark:text-white"><?= $totalAberturas ?></p>
             </div>
-            <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
+            <div class="p-6 bg-black  bg-opacity-40 rounded-lg shadow-sm">
                 <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white">Cliques</h3>
                 <p class="text-3xl font-bold text-gray-900 dark:text-white"><?= $totalCliques ?></p>
             </div>
         </div>
     </section>
 
-    <section id="tab-campanhas" class="tab-content w-full max-w-7xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-8">
+    <section id="tab-campanhas" class="tab-content w-full max-w-7xl bg-black  bg-opacity-40  border border-blue-500 dark:border-blue-00 rounded-lg shadow p-8">
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Campanhas de Email</h2>
         </div>
@@ -76,7 +76,7 @@
         <?php endif; ?>
     </section>
 
-    <section id="tab-nova-campanha" class="hidden tab-content w-full max-w-screen-2xl mx-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-8">
+    <section id="tab-nova-campanha" class="hidden tab-content w-full max-w-screen-2xl mx-10  bg-black bg-opacity-40 border border-blue-600 rounded-lg shadow p-8">
         <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6">Nova Campanha de Email</h3>
         <form id="form-nova-campanha" method="POST" action="campanhas" class="w-full">
             <div class="mb-4">

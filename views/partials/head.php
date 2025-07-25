@@ -11,4 +11,4 @@
     <title>Gestor de Campanhas</title>
 </head>
 
-<body class="bg-cover bg-center bg-no-repeat h-screen" style="background-image: url('/assets/img/bg.webp');">
+<body class="bg-cover bg-center h-screen" style="background-image: url('/assets/img/bg3.webp');">

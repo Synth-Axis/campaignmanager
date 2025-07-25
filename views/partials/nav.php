@@ -10,8 +10,8 @@ $isHomeCenter = in_array($currentPage, ['home-center', 'home-center.php']);
 $isLogin = in_array($currentPage, ['login', 'login.php']);
 ?>
 
-<nav class=" border-gray-200 bg-black  bg-opacity-40 ">
-    <div class="max-w-screen-2xl mx-auto flex items-center justify-between p-4">
+<nav class="border-b border-blue-600 backdrop-blur-xs bg-black/20">
+    <div class=" max-w-screen-2xl mx-auto flex items-center justify-between p-6">
 
         <!-- Left group -->
         <div class="<?= ($isHomeCenter || $isLogin) ? 'w-1/3 hidden' : 'w-1/3 flex items-center space-x-10' ?>">

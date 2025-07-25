@@ -40,13 +40,13 @@
         </li>
     </ul>
 
-    <section id="tab-visaogeral" class="tab-content w-full max-w-screen-xl px-6 py-8 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow space-y-6">
+    <section id="tab-visaogeral" class="tab-content w-full max-w-screen-xl px-6 py-8  border border-gray-200 dark:border-gray-700 rounded-lg shadow space-y-6">
         <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Visão Geral</h2>
         <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
 
             <div class="space-y-6 col-span-1 md:col-span-2 lg:col-span-2">
 
-                <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
+                <div class="p-6 bg-black bg-opacity-40 rounded-lg shadow-sm">
                     <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-2">Resumo</h3>
                     <p class="text-3xl font-bold text-gray-900 dark:text-white"><?= $totalContactos ?></p>
                     <p class="text-sm text-gray-600 dark:text-gray-400">Todos contatos</p>
@@ -54,7 +54,7 @@
                 </div>
 
 
-                <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
+                <div class="p-6 bg-black bg-opacity-40 rounded-lg shadow-sm">
                     <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-2">Crescimento recente</h3>
                     <p class="text-sm text-gray-700 dark:text-gray-200">Últimos 30 dias</p>
                     <p class="text-sm mt-1 text-gray-600 dark:text-gray-400">Novos contactos: <?= $contactosUltimos30Dias ?></p>
@@ -62,7 +62,7 @@
                 </div>
 
 
-                <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
+                <div class="p-6 bg-black bg-opacity-40 rounded-lg shadow-sm">
                     <div class="flex justify-between items-stretch mb-2 min-h-[4rem]">
                         <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white tracking-tight self-start">
                             Desempenho</br>do público
@@ -85,7 +85,7 @@
 
 
             <div class="col-span-1 md:col-span-3 lg:col-span-3">
-                <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
+                <div class="p-6 bg-black bg-opacity-40 rounded-lg shadow-sm">
                     <div class="flex justify-between items-stretch mb-2 min-h-[4rem]">
                         <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white tracking-tight self-start mb-2">
                             Crescimento de contactos

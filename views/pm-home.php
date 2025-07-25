@@ -3,7 +3,7 @@
 <?php require __DIR__ . '/partials/nav.php'; ?>
 
 <main>
-    <div class="min-h-screen bg-slate-600 p-6 w-full max-w-7xl mx-auto">
+    <div class="min-h-screen p-6 w-full max-w-7xl mx-auto">
         <h1 class="text-3xl font-bold my-10 text-white text-center">Password Manager</h1>
 
         <div class="p-6">
