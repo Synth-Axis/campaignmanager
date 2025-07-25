@@ -4,7 +4,7 @@ $model = new Acesso();
 $acessos = $model->listarTodos();
 
 foreach ($acessos as $acesso): ?>
-    <div class="rounded-xl shadow p-4 bg-black  bg-opacity-40  text-white">
+    <div class="rounded-xl shadow p-4 backdrop-blur-xs bg-black/40 text-white">
         <h3 class="text-xl font-semibold"><?= htmlspecialchars($acesso['nome_servico']) ?></h3>
 
         <?php if (!empty($acesso['url_acesso'])): ?>

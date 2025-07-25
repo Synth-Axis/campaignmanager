@@ -40,13 +40,13 @@
         </li>
     </ul>
 
-    <section id="tab-visaogeral" class="tab-content w-full max-w-screen-xl px-6 py-8  border border-gray-200 dark:border-gray-700 rounded-lg shadow space-y-6">
+    <section id="tab-visaogeral" class="tab-content w-full max-w-screen-xl px-6 py-8  backdrop-blur-xs bg-black/40  rounded-lg shadow space-y-6">
         <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Visão Geral</h2>
         <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
 
             <div class="space-y-6 col-span-1 md:col-span-2 lg:col-span-2">
 
-                <div class="p-6 bg-black bg-opacity-40 rounded-lg shadow-sm">
+                <div class="p-6 bg-white bg-opacity-10 opacity-100 rounded-lg shadow-sm">
                     <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-2">Resumo</h3>
                     <p class="text-3xl font-bold text-gray-900 dark:text-white"><?= $totalContactos ?></p>
                     <p class="text-sm text-gray-600 dark:text-gray-400">Todos contatos</p>
@@ -54,7 +54,7 @@
                 </div>
 
 
-                <div class="p-6 bg-black bg-opacity-40 rounded-lg shadow-sm">
+                <div class="p-6 bg-white bg-opacity-10 opacity-100 rounded-lg shadow-sm">
                     <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-2">Crescimento recente</h3>
                     <p class="text-sm text-gray-700 dark:text-gray-200">Últimos 30 dias</p>
                     <p class="text-sm mt-1 text-gray-600 dark:text-gray-400">Novos contactos: <?= $contactosUltimos30Dias ?></p>
@@ -62,7 +62,7 @@
                 </div>
 
 
-                <div class="p-6 bg-black bg-opacity-40 rounded-lg shadow-sm">
+                <div class="p-6 bg-white bg-opacity-10 opacity-100 rounded-lg shadow-sm">
                     <div class="flex justify-between items-stretch mb-2 min-h-[4rem]">
                         <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white tracking-tight self-start">
                             Desempenho</br>do público
@@ -85,7 +85,7 @@
 
 
             <div class="col-span-1 md:col-span-3 lg:col-span-3">
-                <div class="p-6 bg-black bg-opacity-40 rounded-lg shadow-sm">
+                <div class="p-6 bg-white bg-opacity-10 opacity-100 rounded-lg shadow-sm">
                     <div class="flex justify-between items-stretch mb-2 min-h-[4rem]">
                         <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white tracking-tight self-start mb-2">
                             Crescimento de contactos
@@ -134,7 +134,7 @@
         </div>
 
 
-        <div id="tab-todos-contactos" class="contact-tab-content hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-6 mb-10 space-y-4 w-full mx-auto">
+        <div id="tab-todos-contactos" class="contact-tab-content hidden rounded-lg shadow p-6 mb-10 space-y-4 w-full mx-auto backdrop-blur-xs bg-black/40">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-6">
                 <h5 class="text-lg font-semibold text-gray-900 dark:text-white">Todos os Contactos</h5>
                 <div class="relative w-full md:w-72">
@@ -218,7 +218,7 @@
             <div id="paginacao-contactos" class="flex justify-center mt-4"></div>
         </div>
 
-        <form id="tab-inserir-contacto" method="POST" action="" class="max-w-4xl mx-auto contact-tab-content hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-8 space-y-6">
+        <form id="tab-inserir-contacto" method="POST" action="" class="max-w-4xl mx-auto contact-tab-content hidden    rounded-lg shadow p-8 space-y-6 backdrop-blur-xs bg-black/40">
             <h5 class="text-lg font-semibold text-gray-900 dark:text-white">Novo registo</h5>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-10">
                 <div>
@@ -287,7 +287,7 @@
         </form>
 
         <div id="tab-importar-ficheiro"
-            class="contact-tab-content hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-6 space-y-4 w-full max-w-4xl mx-auto">
+            class="contact-tab-content hidden rounded-lg shadow p-6 space-y-4 w-full max-w-4xl mx-auto backdrop-blur-xs bg-black/40">
             <h5 class="text-lg font-semibold text-gray-900 dark:text-white">Importar Contactos por Ficheiro</h5>
             <form id="form-importar-ficheiro" method="POST" action="/api/importar_publico.php" enctype="multipart/form-data" class="space-y-4">
                 <label for="ficheiro" class="block max-w-2xs p-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer text-gray-500 dark:text-gray-400 text-sm text-center hover:bg-blue-50 dark:hover:bg-blue-800 transition">
@@ -306,7 +306,7 @@
         </div>
     </section>
 
-    <section id="tab-segmentos" class="hidden w-full max-w-2xl p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow space-y-4">
+    <section id="tab-segmentos" class="hidden w-full max-w-2xl p-6 backdrop-blur-xs bg-black/40 rounded-lg shadow space-y-4">
         <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Segmentos</h2>
         <p class="text-gray-700 dark:text-gray-300">
             Esta secção permite gerir os segmentos de público para campanhas mais direcionadas.
@@ -318,7 +318,7 @@
         </ul>
     </section>
 
-    <section id="tab-listas" class="hidden w-full max-w-2xl p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow space-y-4">
+    <section id="tab-listas" class="hidden w-full max-w-2xl p-6 backdrop-blur-xs bg-black/40 rounded-lg shadow space-y-4">
         <div class="flex items-center justify-between">
             <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Listas</h2>
             <a href="#" data-modal="nova-lista" class="abrir-modal px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none">Nova Lista</a>
