@@ -2,56 +2,65 @@
 <?php require __DIR__ . '/partials/head.php'; ?>
 <?php require __DIR__ . '/partials/nav.php'; ?>
 
-<div class="flex items-center justify-center mt-24">
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+<div class="bg-light w-full flex justify-center items-center py-24">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-8 w-full max-w-4xl px-6">
 
-        <a href="/campanhas" class="group block rounded-2xl shadow-md backdrop-blur-xs bg-black/40 transition transform  hover:scale-105 p-6">
-
-            <div class="flex items-center space-x-4">
-                <div>
-                    <h2 class="text-3xl font-semibold text-white mb-4 transition group-hover:text-blue-500">Campaign Manager</h2>
-                    <p class="text-lg text-gray-500">CRM System</p>
-                </div>
+        <!-- Card -->
+        <a href="/campanhas"
+            class="group relative block rounded-2xl bg-white p-6 shadow-md cursor-pointer
+          transform transition duration-400 ease-in-out
+          hover:-translate-y-1 hover:scale-105 hover:shadow-xl hover:bg-primary
+          focus:outline-none focus:ring-4 focus:ring-primary/40">
+            <div>
+                <h2 class="text-3xl font-semibold text-dark mb-3 group-hover:text-white">Campaign Manager</h2>
+                <p class="text-lg text-neutral group-hover:text-light">CRM System</p>
             </div>
         </a>
 
-
-        <a href="/pm-home" class="group block rounded-2xl shadow-md backdrop-blur-xs bg-black/40 transition transform  hover:scale-105 p-6">
-            <div class="flex items-center space-x-4">
-                <div>
-                    <h2 class="text-3xl font-semibold text-white mb-4 transition group-hover:text-blue-500">Password Manager</h2>
-                    <p class="text-lg text-gray-500">Store and organize your passwords</p>
-                </div>
+        <a href="/pm-home"
+            class="group relative block rounded-2xl bg-white p-6 shadow-md cursor-pointer
+          transform transition duration-400 ease-in-out
+          hover:-translate-y-1 hover:scale-105 hover:shadow-xl hover:bg-primary
+          focus:outline-none focus:ring-4 focus:ring-primary/40">
+            <div>
+                <h2 class="text-3xl font-semibold text-dark mb-3 group-hover:text-light">Password Manager</h2>
+                <p class="text-lg text-neutral group-hover:text-light">Store and organize your passwords</p>
             </div>
         </a>
 
-
-        <a href="/publico" class="group block rounded-2xl shadow-md backdrop-blur-xs bg-black/40 transition transform  hover:scale-105 p-6">
-            <div class="flex items-center space-x-4">
-                <div>
-                    <h2 class="text-3xl font-semibold text-white mb-4 transition group-hover:text-blue-500">Público</h2>
-                    <p class="text-lg text-gray-500">Gestão de Contactos</p>
-                </div>
+        <a href="/publico"
+            class="group relative block rounded-2xl bg-white p-6 shadow-md cursor-pointer
+          transform transition duration-400 ease-in-out
+          hover:-translate-y-1 hover:scale-105 hover:shadow-xl hover:bg-primary
+          focus:outline-none focus:ring-4 focus:ring-primary/40">
+            <div>
+                <h2 class="text-3xl font-semibold text-dark mb-3 group-hover:text-light">Público</h2>
+                <p class="text-lg text-neutral group-hover:text-light">Gestão de Contactos</p>
             </div>
         </a>
 
-        <a href="#" class="group block rounded-2xl shadow-md backdrop-blur-xs bg-black/40 transition transform  hover:scale-105 p-6">
-            <div class="flex items-center space-x-4">
-                <div>
-                    <h2 class="text-3xl font-semibold text-white mb-4 transition group-hover:text-blue-500">Acções de Campanhas</h2>
-                    <p class="text-lg text-gray-500">Posts e Redes Sociais</p>
-                </div>
+        <a href="#"
+            class="group relative block rounded-2xl bg-white p-6 shadow-md cursor-pointer
+          transform transition duration-400 ease-in-out
+          hover:-translate-y-1 hover:scale-105 hover:shadow-xl hover:bg-primary
+          focus:outline-none focus:ring-4 focus:ring-primary/40">
+            <div>
+                <h2 class="text-3xl font-semibold text-dark mb-3 group-hover:text-light">Acções de Campanhas</h2>
+                <p class="text-lg text-neutral group-hover:text-light">Posts e Redes Sociais</p>
             </div>
         </a>
 
-        <a href="#" class="group block rounded-2xl shadow-md backdrop-blur-xs bg-black/40 transition transform  hover:scale-105 p-6">
-            <div class="flex items-center space-x-4">
-                <div>
-                    <h2 class="text-3xl font-semibold text-white mb-4 transition group-hover:text-blue-500">Acções da Carrinha</h2>
-                    <p class="text-lg text-gray-500">Accões comerciais com a carrinha Real</p>
-                </div>
+        <a href="#"
+            class="group relative block rounded-2xl bg-white p-6 shadow-md cursor-pointer
+          transform transition duration-400 ease-in-out
+          hover:-translate-y-1 hover:scale-105 hover:shadow-xl hover:bg-primary
+          focus:outline-none focus:ring-4 focus:ring-primary/40">
+            <div>
+                <h2 class="text-3xl font-semibold text-dark mb-3 group-hover:text-light">Acções da Carrinha</h2>
+                <p class="text-lg text-neutral group-hover:text-light">Acções comerciais com a carrinha Real</p>
             </div>
         </a>
+
     </div>
 </div>
 

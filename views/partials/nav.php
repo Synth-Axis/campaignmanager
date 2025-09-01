@@ -10,7 +10,7 @@ $isHomeCenter = in_array($currentPage, ['home-center', 'home-center.php']);
 $isLogin = in_array($currentPage, ['login', 'login.php']);
 ?>
 
-<nav class="border-b border-blue-600 backdrop-blur-xs bg-black/20">
+<nav class="border-b border-dark backdrop-blur-xs bg-light">
     <div class=" max-w-screen-2xl mx-auto flex items-center justify-between p-6">
 
         <!-- Left group -->
@@ -28,13 +28,13 @@ $isLogin = in_array($currentPage, ['login', 'login.php']);
 
         <!-- Center title -->
         <div class="w-1/3 flex justify-center">
-            <h1 class="text-4xl font-bold text-white text-center whitespace-nowrap">MKT - APP CENTER</h1>
+            <h1 class="text-4xl font-bold text-dark text-center whitespace-nowrap">MKT - APP CENTER</h1>
         </div>
 
         <!-- Right group (auth actions) -->
         <div class="w-1/3 flex justify-end items-center space-x-4 <?= empty($_SESSION['user_id']) ? 'invisible' : '' ?>">
             <?php if (!empty($_SESSION['user_id'])): ?>
-                <span class="text-white">Olá, <?= htmlspecialchars($currentUser['nome'] ?? 'Utilizador') ?></span>
+                <span class="text-dark">Olá, <?= htmlspecialchars($currentUser['nome'] ?? 'Utilizador') ?></span>
                 <a href="/logout">
                     <button class="cursor-pointer text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">
                         Sair

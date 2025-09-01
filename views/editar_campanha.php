@@ -1,17 +1,24 @@
 <?php require __DIR__ . '/partials/head.php'; ?>
 <?php require __DIR__ . '/partials/nav.php'; ?>
 
-<main class="min-h-screen flex flex-col items-center my-10 gap-8">
-    <section class="w-full max-w-screen-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow p-8">
-        <a href="/campanhas" class="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 mb-4">
+<main class="min-h-screen flex flex-col items-center my-10 gap-8 bg-light">
+    <section class="w-full max-w-screen-2xl bg-white border border-light rounded-lg shadow p-8">
+
+        <!-- Voltar -->
+        <a href="/campanhas"
+            class="inline-flex items-center px-4 py-2 bg-light text-dark rounded hover:bg-highlight/20 mb-4 transition">
             ← Voltar à Lista de Campanhas
         </a>
+
         <div class="flex items-center justify-between mb-6">
-            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Editar Campanha</h2>
+            <h2 class="text-xl font-semibold text-dark">Editar Campanha</h2>
         </div>
 
+        <!-- Mensagens -->
         <?php if (!empty($mensagem)): ?>
-            <div class="p-4 mb-6 rounded text-sm <?= $mensagem_tipo === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' ?>">
+            <div class="p-4 mb-6 rounded text-sm <?= $mensagem_tipo === 'success'
+                                                        ? 'bg-success/10 text-success'
+                                                        : 'bg-danger/10 text-danger' ?>">
                 <?= htmlspecialchars($mensagem) ?>
             </div>
         <?php endif; ?>
@@ -19,24 +26,27 @@
         <form method="POST" class="w-full">
             <input type="hidden" name="id" value="<?= htmlspecialchars($campanha['campaign_id']) ?>">
 
+            <!-- Nome -->
             <div class="mb-4">
-                <label for="nome" class="block text-sm font-medium text-gray-900 dark:text-gray-300 mb-1">Nome da Campanha</label>
+                <label for="nome" class="block text-sm font-medium text-dark mb-1">Nome da Campanha</label>
                 <input type="text" name="nome" id="nome" required
                     value="<?= htmlspecialchars($campanha['nome']) ?>"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    class="bg-white border border-light text-dark text-sm rounded-lg w-full p-2.5 focus:outline-none focus:ring-2 focus:ring-primary/40">
             </div>
 
+            <!-- Assunto -->
             <div class="mb-4">
-                <label for="assunto" class="block text-sm font-medium text-gray-900 dark:text-gray-300 mb-1">Assunto do Email</label>
+                <label for="assunto" class="block text-sm font-medium text-dark mb-1">Assunto do Email</label>
                 <input type="text" name="assunto" id="assunto" required
                     value="<?= htmlspecialchars($campanha['assunto']) ?>"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    class="bg-white border border-light text-dark text-sm rounded-lg w-full p-2.5 focus:outline-none focus:ring-2 focus:ring-primary/40">
             </div>
 
+            <!-- Lista -->
             <div class="mb-4">
-                <label for="lista" class="block text-sm font-medium text-gray-900 dark:text-gray-300 mb-1">Lista de Destinatários</label>
+                <label for="lista" class="block text-sm font-medium text-dark mb-1">Lista de Destinatários</label>
                 <select name="lista" id="lista" required
-                    class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    class="cursor-pointer bg-white border border-light text-dark text-sm rounded-lg w-full p-2.5 focus:outline-none focus:ring-2 focus:ring-primary/40">
                     <option value="">Selecione a lista</option>
                     <?php foreach ($listas as $lista): ?>
                         <option value="<?= htmlspecialchars($lista['lista_id']) ?>"
@@ -47,26 +57,28 @@
                 </select>
             </div>
 
+            <!-- Estado -->
             <div class="mb-8">
-                <label for="estado" class="block text-sm font-medium text-gray-900 dark:text-gray-300 mb-1">Estado da Campanha</label>
+                <label for="estado" class="block text-sm font-medium text-dark mb-1">Estado da Campanha</label>
                 <select name="estado" id="estado" required
-                    class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                    <option value="rascunho">Rascunho</option>
-                    <option value="agendada">Agendada</option>
-                    <option value="enviada">Enviada</option>
+                    class="cursor-pointer bg-white border border-light text-dark text-sm rounded-lg w-full p-2.5 focus:outline-none focus:ring-2 focus:ring-primary/40">
+                    <option value="rascunho" <?= $campanha['estado'] === 'rascunho' ? 'selected' : '' ?>>Rascunho</option>
+                    <option value="agendada" <?= $campanha['estado'] === 'agendada' ? 'selected' : '' ?>>Agendada</option>
+                    <option value="enviada" <?= $campanha['estado'] === 'enviada' ? 'selected' : '' ?>>Enviada</option>
                 </select>
             </div>
 
+            <!-- Editor -->
             <div class="flex flex-col md:flex-row gap-8 mb-6">
                 <div class="flex-1 min-w-0">
-                    <label for="editor" class="block text-sm font-medium text-gray-900 dark:text-gray-300 mb-1">Conteúdo HTML</label>
+                    <label for="editor" class="block text-sm font-medium text-dark mb-1">Conteúdo HTML</label>
                     <textarea id="editor" name="html" rows="30"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white font-mono"
+                        class="bg-white border border-light text-dark text-sm rounded-lg w-full p-2.5 font-mono focus:outline-none focus:ring-2 focus:ring-primary/40"
                         placeholder="Cole ou edite aqui o HTML do email"><?= htmlspecialchars($campanha['html']) ?></textarea>
 
-                    <div class="flex justify-start mt-2 flex-wrap gap-2">
+                    <div class="flex flex-wrap gap-3 mt-3">
                         <button type="button" id="preview-btn"
-                            class="cursor-pointer px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">
+                            class="cursor-pointer px-4 py-2 bg-primary text-white rounded hover:bg-primary/90">
                             Ver Preview
                         </button>
 
@@ -77,33 +89,34 @@
                         </button>
 
                         <button type="submit" name="action" value="gravar"
-                            class="cursor-pointer px-5 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 font-medium">
+                            class="cursor-pointer px-5 py-2 text-white bg-primary rounded hover:bg-primary/90 font-medium">
                             Guardar Alterações
                         </button>
 
                         <button type="submit" name="action" value="enviar"
-                            class="cursor-pointer px-5 py-2 text-white bg-green-600 rounded hover:bg-green-700 font-medium">
+                            class="cursor-pointer px-5 py-2 text-white bg-success rounded hover:bg-success/90 font-medium">
                             Enviar Novamente
                         </button>
 
                         <button type="submit" name="action" value="duplicar"
-                            class="cursor-pointer px-5 py-2 text-white bg-gray-600 rounded hover:bg-gray-700 font-medium">
+                            class="cursor-pointer px-5 py-2 text-white bg-dark rounded hover:bg-dark/90 font-medium">
                             Duplicar Campanha
                         </button>
                     </div>
                 </div>
 
                 <div class="flex-1 min-w-0">
-                    <label class="block text-sm font-medium text-gray-900 dark:text-gray-300 mb-1">Preview</label>
-                    <iframe id="html-preview" class="w-full h-180 border rounded bg-white" style="background: #fff"></iframe>
+                    <label class="block text-sm font-medium text-dark mb-1">Preview</label>
+                    <iframe id="html-preview" class="w-full h-5/6 border border-light rounded bg-white"></iframe>
                 </div>
             </div>
         </form>
     </section>
 
+    <!-- Modal envio teste -->
     <div id="modal-envio-teste" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-xl w-full max-w-md relative">
-            <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Enviar Email de Teste</h2>
+        <div class="bg-white p-6 rounded-xl shadow-xl w-full max-w-md relative">
+            <h2 class="text-xl font-semibold mb-4 text-dark">Enviar Email de Teste</h2>
 
             <form method="POST">
                 <input type="hidden" name="action" value="enviar_teste">
@@ -111,16 +124,20 @@
                 <input type="hidden" name="assunto" value="<?= htmlspecialchars($campanha['assunto']) ?>">
                 <input type="hidden" name="html" value="<?= htmlspecialchars($campanha['html']) ?>">
 
-                <label for="emails_teste" class="block mb-2 text-white">Emails de teste</label>
+                <label for="emails_teste" class="block mb-2 text-dark">Emails de teste</label>
                 <input type="text" name="emails_teste" id="emails_teste"
-                    class="cursor-pointer w-full border rounded p-2 mb-4 text-gray-900 dark:text-white"
+                    class="cursor-pointer w-full border border-light rounded p-2 mb-4 text-dark focus:outline-none focus:ring-2 focus:ring-primary/40"
                     placeholder="ex: nome@email.pt, outro@teste.com" required>
 
                 <div class="flex justify-end gap-3">
                     <button type="button" onclick="document.getElementById('modal-envio-teste').classList.add('hidden')"
-                        class="cursor-pointer px-4 py-2 bg-gray-300 text-gray-800 rounded">Cancelar</button>
+                        class="cursor-pointer px-4 py-2 bg-light text-dark rounded hover:bg-highlight/20">
+                        Cancelar
+                    </button>
                     <button type="submit"
-                        class="cursor-pointer goit cpx-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700">Enviar Teste</button>
+                        class="cursor-pointer px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700">
+                        Enviar Teste
+                    </button>
                 </div>
             </form>
         </div>

@@ -14,21 +14,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const targetTab = this.getAttribute("data-tab");
 
-      tabLinks.forEach((l) =>
-        l.classList.remove(
-          "text-blue-700",
-          "bg-blue-50",
-          "dark:text-white",
-          "dark:bg-gray-700"
-        )
-      );
-      this.classList.add(
-        "text-blue-700",
-        "bg-blue-50",
-        "dark:text-white",
-        "dark:bg-gray-700"
-      );
+      // reset todas as tabs
+      tabLinks.forEach((l) => {
+        l.classList.remove("bg-primary", "text-white");
+        l.classList.add("bg-white", "text-neutral");
+      });
 
+      // ativa a tab clicada
+      this.classList.remove("bg-white", "text-neutral");
+      this.classList.add("bg-primary", "text-white");
+
+      // mostra a section correspondente
       tabContents.forEach((section) => {
         if (section.id === targetTab) {
           section.classList.remove("hidden");
@@ -38,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   });
+
   const previewBtn = document.getElementById("preview-btn");
   if (previewBtn) {
     previewBtn.addEventListener("click", function () {
