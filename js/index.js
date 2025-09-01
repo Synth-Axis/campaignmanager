@@ -12,45 +12,33 @@ document.addEventListener("DOMContentLoaded", function () {
   const tabs = document.querySelectorAll(".tab-link");
   let tabAtual = sessionStorage.getItem("tabAtual") || "tab-visaogeral";
 
+  // helpers para classes
+  const inactiveTab = ["bg-white", "text-neutral"];
+  const activeTab = ["bg-primary", "text-white", "font-semibold"];
+
   function ativarTab(tabId) {
     document
       .querySelectorAll('[id^="tab-"]')
       .forEach((t) => t.classList.add("hidden"));
+
+    // reset tabs
     tabs.forEach((link) => {
-      link.classList.remove(
-        "text-white",
-        "bg-gray-700",
-        "dark:bg-gray-700",
-        "font-semibold"
-      );
-      link.classList.add(
-        "text-gray-500",
-        "dark:text-gray-400",
-        "bg-white",
-        "dark:bg-gray-800"
-      );
+      link.classList.remove(...activeTab);
+      link.classList.add(...inactiveTab);
     });
 
+    // ativa a tab clicada
     const targetTab = document.getElementById(tabId);
     const linkEl = document.querySelector(`.tab-link[data-tab="${tabId}"]`);
     if (targetTab && linkEl) {
       targetTab.classList.remove("hidden");
-      linkEl.classList.remove(
-        "text-gray-500",
-        "bg-white",
-        "dark:text-gray-400",
-        "dark:bg-gray-800"
-      );
-      linkEl.classList.add(
-        "text-white",
-        "bg-gray-700",
-        "dark:bg-gray-700",
-        "font-semibold"
-      );
+      linkEl.classList.remove(...inactiveTab);
+      linkEl.classList.add(...activeTab);
     }
 
     sessionStorage.setItem("tabAtual", tabId);
 
+    // gerir subtabs quando necessário
     if (tabId === "tab-novocontacto") {
       reatribuirListenersSubTabs();
       ativarSubTab(
@@ -70,45 +58,29 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function ativarSubTab(subTabId) {
+    const inactiveSubTab = ["bg-white", "text-neutral"];
+    const activeSubTab = ["bg-primary", "text-white", "font-semibold"];
+
     document
       .querySelectorAll(".contact-tab-content")
       .forEach((c) => c.classList.add("hidden"));
     document.querySelectorAll(".contact-tab-link").forEach((l) => {
-      l.classList.remove(
-        "text-blue-700",
-        "bg-blue-50",
-        "dark:text-white",
-        "dark:bg-gray-700",
-        "font-semibold"
-      );
-      l.classList.add(
-        "text-gray-500",
-        "bg-white",
-        "dark:text-gray-400",
-        "dark:bg-gray-800"
-      );
+      l.classList.remove(...activeSubTab);
+      l.classList.add(...inactiveSubTab);
     });
+
     const target = document.getElementById(subTabId);
     const linkEl = document.querySelector(
       `.contact-tab-link[data-contacttab="${subTabId}"]`
     );
     if (target && linkEl) {
       target.classList.remove("hidden");
-      linkEl.classList.remove(
-        "text-gray-500",
-        "bg-white",
-        "dark:text-gray-400",
-        "dark:bg-gray-800"
-      );
-      linkEl.classList.add(
-        "text-blue-700",
-        "bg-blue-50",
-        "dark:text-white",
-        "dark:bg-gray-700",
-        "font-semibold"
-      );
+      linkEl.classList.remove(...inactiveSubTab);
+      linkEl.classList.add(...activeSubTab);
     }
+
     sessionStorage.setItem("contactSubTab", subTabId);
+
     if (subTabId === "tab-todos-contactos") {
       inicializarPesquisaContactos();
       fetchContactos("", 1);
@@ -136,6 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   ativarTab(tabAtual);
 
+  // --- Pesquisa contactos ---
   function inicializarPesquisaContactos() {
     const inputPesquisa = document.getElementById("pesquisar-contactos");
     if (!inputPesquisa) return;
@@ -165,6 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!tbodyContactos) return;
     termoAtual = termo;
     paginaAtual = pagina;
+
     fetch(
       `/api/pesquisar_contactos.php?q=${encodeURIComponent(
         termo
@@ -178,16 +152,17 @@ document.addEventListener("DOMContentLoaded", function () {
           !Array.isArray(data.registos) ||
           !data.registos.length
         ) {
-          tbodyContactos.innerHTML = `<tr><td colspan="8" class="py-2 px-3 text-center text-gray-400">Sem resultados</td></tr>`;
+          tbodyContactos.innerHTML = `<tr><td colspan="8" class="py-2 px-3 text-center text-neutral">Sem resultados</td></tr>`;
         } else {
           data.registos.forEach((c) => {
             const row = document.createElement("tr");
-            row.className = "border-b border-gray-100 dark:border-gray-700";
+            row.className =
+              "border-b border-light hover:bg-highlight/10 transition";
             row.innerHTML = `
               <td class="py-2 px-3">
-                  <input type="checkbox" class="checkbox-contacto" name="contactosSelecionados[]" value=${
-                    c.publico_id ?? ""
-                  }>
+                <input type="checkbox" class="checkbox-contacto" name="contactosSelecionados[]" value="${
+                  c.publico_id ?? ""
+                }">
               </td>
               <td class="py-2 px-3">${c.publico_id ?? ""}</td>
               <td class="py-2 px-3">${c.nome ?? ""}</td>
@@ -197,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
               <td class="py-2 px-3">${c.lista_nome ?? ""}</td>
               <td class="py-2 px-3">${c.data_registo ?? ""}</td>
               <td class="py-2 px-3 text-right">
-                <select class="select-acao-contacto bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg p-1 cursor-pointer"
+                <select class="select-acao-contacto bg-white border border-light text-dark text-sm rounded-lg p-1 cursor-pointer"
                   data-id="${c.publico_id}"
                   data-nome="${c.nome ?? ""}"
                   data-email="${c.email ?? ""}"
@@ -220,13 +195,14 @@ document.addEventListener("DOMContentLoaded", function () {
               });
             });
         }
+
         totalPaginas = Number.isFinite(data.total)
           ? Math.ceil(data.total / porPagina) || 1
           : 1;
         renderPaginacao();
       })
       .catch(() => {
-        tbodyContactos.innerHTML = `<tr><td colspan="8" class="py-2 px-3 text-center text-red-400">Erro ao carregar contactos</td></tr>`;
+        tbodyContactos.innerHTML = `<tr><td colspan="8" class="py-2 px-3 text-center text-danger">Erro ao carregar contactos</td></tr>`;
       });
   }
 
@@ -235,15 +211,16 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!paginacaoDiv) return;
     paginacaoDiv.innerHTML = "";
     if (totalPaginas <= 1) return;
+
     paginacaoDiv.innerHTML = `
       <div class="flex gap-6 items-center justify-center">
-        <button ${
-          paginaAtual === 1 ? "disabled" : ""
-        } id="pag-anterior" class="cursor-pointer px-4 py-2 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed">Anterior</button>
-        <span class="text-white font-semibold">Página ${paginaAtual} de ${totalPaginas}</span>
+        <button ${paginaAtual === 1 ? "disabled" : ""} id="pag-anterior"
+          class="cursor-pointer px-4 py-2 rounded bg-primary text-white font-semibold hover:bg-primary/90 transition disabled:opacity-50 disabled:cursor-not-allowed">Anterior</button>
+        <span class="text-dark font-semibold">Página ${paginaAtual} de ${totalPaginas}</span>
         <button ${
           paginaAtual === totalPaginas ? "disabled" : ""
-        } id="pag-seguinte" class="cursor-pointer px-4 py-2 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed">Seguinte</button>
+        } id="pag-seguinte"
+          class="cursor-pointer px-4 py-2 rounded bg-primary text-white font-semibold hover:bg-primary/90 transition disabled:opacity-50 disabled:cursor-not-allowed">Seguinte</button>
       </div>`;
 
     document.getElementById("pag-anterior").onclick = () => {
@@ -260,11 +237,12 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   }
 
+  // Alert/Toast com paleta
   function mostrarAlerta(mensagem, tipo = "success") {
     const alerta = document.getElementById("alerta-custom");
     const span = document.getElementById("alerta-mensagem");
-    alerta.classList.remove("bg-green-600", "bg-red-600");
-    alerta.classList.add(tipo === "error" ? "bg-red-600" : "bg-green-600");
+    alerta.classList.remove("bg-success", "bg-danger");
+    alerta.classList.add(tipo === "error" ? "bg-danger" : "bg-success");
     span.textContent = mensagem;
     alerta.classList.remove("hidden", "opacity-0");
     alerta.classList.add("opacity-100");
@@ -275,6 +253,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 3000);
   }
 
+  // Ações de contacto
   window.handleAcaoContacto = function (select) {
     const acao = select.value;
     const id = select.dataset.id;
@@ -298,7 +277,6 @@ document.addEventListener("DOMContentLoaded", function () {
           document
             .getElementById("modal-editar-contacto")
             .classList.remove("hidden");
-
           select.value = "Acções";
         })
         .catch(() => {
@@ -318,6 +296,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
+  // Ações de lista
   window.handleListaAcao = function (select) {
     const acao = select.value;
     const id = select.dataset.id;
@@ -387,10 +366,10 @@ document.addEventListener("DOMContentLoaded", function () {
         entidadeParaApagar = null;
         idParaApagar = null;
         linhaParaRemover = null;
-        select.selectedIndex = 0;
       });
   });
 
+  // Importar ficheiro
   const formImportar = document.getElementById("form-importar-ficheiro");
   if (formImportar) {
     formImportar.addEventListener("submit", async function (e) {
@@ -423,6 +402,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // Chart
   const selectPeriodo = document.getElementById("filtro-periodo");
   const graficoCanvas = document.getElementById("grafico-crescimento");
   let chartInstance;
@@ -443,19 +423,16 @@ document.addEventListener("DOMContentLoaded", function () {
             label: "Novos Contactos",
             data: valores,
             fill: false,
-            borderColor: "rgb(59, 130, 246)",
-            tension: 0.1,
+            borderColor: "#00AEEF", // primary
+            backgroundColor: "#00AEEF",
+            tension: 0.25,
           },
         ],
       },
       options: {
         responsive: true,
-        plugins: {
-          legend: { display: false },
-        },
-        scales: {
-          y: { beginAtZero: true },
-        },
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true } },
       },
     });
   }
@@ -473,21 +450,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (selectPeriodo && graficoCanvas) {
     carregarGrafico(selectPeriodo.value);
-
     selectPeriodo.addEventListener("change", function () {
       carregarGrafico(this.value);
     });
   }
 
+  // Modais: fechar ao clicar fora
   document.querySelectorAll(".modal").forEach((modal) => {
     modal.addEventListener("click", function (e) {
       const conteudo = modal.querySelector(".modal-content");
-      if (!conteudo.contains(e.target)) {
-        modal.classList.add("hidden");
-      }
+      if (!conteudo.contains(e.target)) modal.classList.add("hidden");
     });
   });
 
+  // Editar contacto (submit)
   document
     .getElementById("form-editar-contacto")
     ?.addEventListener("submit", function (e) {
@@ -495,10 +471,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const form = e.target;
       const formData = new FormData(form);
 
-      fetch("", {
-        method: "POST",
-        body: formData,
-      })
+      fetch("", { method: "POST", body: formData })
         .then((res) => res.json())
         .then((data) => {
           if (data.success) {
@@ -516,14 +489,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-  document
-    .getElementById("selecionar-todos")
-    .addEventListener("change", function () {
-      document
-        .querySelectorAll(".checkbox-contacto")
-        .forEach((cb) => (cb.checked = this.checked));
-    });
-
+  // Selecionar todos
   document
     .getElementById("selecionar-todos")
     ?.addEventListener("change", function () {
@@ -532,9 +498,10 @@ document.addEventListener("DOMContentLoaded", function () {
         .forEach((cb) => (cb.checked = this.checked));
     });
 
+  // Exportar: enviar selecionados ou todos
   document
     .getElementById("form-exportar-contactos")
-    ?.addEventListener("submit", function (e) {
+    ?.addEventListener("submit", function () {
       const selecionados = document.querySelectorAll(
         ".checkbox-contacto:checked"
       );
