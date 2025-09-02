@@ -6,7 +6,7 @@
     <div class="p-6 w-full max-w-7xl mx-auto">
         <h1 class="text-3xl font-bold my-10 text-dark text-center">Password Manager</h1>
 
-        <div class="p-6 bg-white border border-light rounded-xl shadow">
+        <div class="p-6 bg-white border rounded-xl shadow-md">
             <div class="mb-6">
                 <div class="flex justify-end mb-4">
                     <button id="btnNovoAcesso"

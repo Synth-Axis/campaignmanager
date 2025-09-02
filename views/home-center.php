@@ -7,7 +7,7 @@
 
         <!-- Card -->
         <a href="/campanhas"
-            class="group relative block rounded-2xl bg-white p-6 shadow-md cursor-pointer
+            class="group relative block rounded-2xl bg-white p-6 shadow-md border cursor-pointer
           transform transition duration-400 ease-in-out
           hover:-translate-y-1 hover:scale-105 hover:shadow-xl hover:bg-primary
           focus:outline-none focus:ring-4 focus:ring-primary/40">
@@ -18,7 +18,7 @@
         </a>
 
         <a href="/pm-home"
-            class="group relative block rounded-2xl bg-white p-6 shadow-md cursor-pointer
+            class="group relative block rounded-2xl bg-white p-6 shadow-md border cursor-pointer
           transform transition duration-400 ease-in-out
           hover:-translate-y-1 hover:scale-105 hover:shadow-xl hover:bg-primary
           focus:outline-none focus:ring-4 focus:ring-primary/40">
@@ -29,7 +29,7 @@
         </a>
 
         <a href="/publico"
-            class="group relative block rounded-2xl bg-white p-6 shadow-md cursor-pointer
+            class="group relative block rounded-2xl bg-white p-6 shadow-md border cursor-pointer
           transform transition duration-400 ease-in-out
           hover:-translate-y-1 hover:scale-105 hover:shadow-xl hover:bg-primary
           focus:outline-none focus:ring-4 focus:ring-primary/40">
@@ -40,7 +40,7 @@
         </a>
 
         <a href="#"
-            class="group relative block rounded-2xl bg-white p-6 shadow-md cursor-pointer
+            class="group relative block rounded-2xl bg-white p-6 shadow-md border cursor-pointer
           transform transition duration-400 ease-in-out
           hover:-translate-y-1 hover:scale-105 hover:shadow-xl hover:bg-primary
           focus:outline-none focus:ring-4 focus:ring-primary/40">
@@ -51,7 +51,7 @@
         </a>
 
         <a href="#"
-            class="group relative block rounded-2xl bg-white p-6 shadow-md cursor-pointer
+            class="group relative block rounded-2xl bg-white p-6 shadow-md border cursor-pointer
           transform transition duration-400 ease-in-out
           hover:-translate-y-1 hover:scale-105 hover:shadow-xl hover:bg-primary
           focus:outline-none focus:ring-4 focus:ring-primary/40">

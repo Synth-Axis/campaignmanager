@@ -4,7 +4,7 @@ $model = new Acesso();
 $acessos = $model->listarTodos();
 
 foreach ($acessos as $acesso): ?>
-    <div class="rounded-xl shadow p-4 bg-white border border-light text-dark hover:bg-highlight/10 transition">
+    <div class="rounded-xl p-4  border shadow-md text-dark hover:bg-highlight/10 transition">
 
         <h3 class="text-xl font-semibold mb-1">
             <?= htmlspecialchars($acesso['nome_servico']) ?>

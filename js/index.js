@@ -108,6 +108,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   ativarTab(tabAtual);
 
+  // === NOVO: Abertura genérica de modais (.abrir-modal) ===
+  // Suporta data-modal="nova-lista" (procura #modal-nova-lista) ou data-modal="modal-nova-lista" (procura diretamente esse id)
+  document.querySelectorAll(".abrir-modal").forEach((btn) => {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      const target = this.dataset.modal; // ex.: "nova-lista" ou "modal-nova-lista"
+      const modal =
+        document.getElementById(`modal-${target}`) ||
+        document.getElementById(target);
+      if (modal) {
+        modal.classList.remove("hidden");
+      } else {
+        console.warn(`Modal não encontrado para: ${target}`);
+      }
+    });
+  });
+  // === FIM DO BLOCO NOVO ===
+
   // --- Pesquisa contactos ---
   function inicializarPesquisaContactos() {
     const inputPesquisa = document.getElementById("pesquisar-contactos");

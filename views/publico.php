@@ -17,28 +17,28 @@
     </div>
 
     <!-- Tabs (desktop) -->
-    <ul class="w-full max-w-2xl hidden text-sm font-medium text-center rounded-lg shadow-sm sm:flex overflow-hidden">
+    <ul class="w-full max-w-2xl hidden text-sm font-medium text-center rounded-lg shadow-sm sm:flex overflow-hidden border">
         <li class="w-full">
             <a href="#" data-tab="tab-visaogeral"
-                class="tab-link inline-block w-full p-4 bg-white text-neutral border-r border-light rounded-s-lg hover:text-dark hover:bg-highlight/20 focus:outline-none focus:ring-2 focus:ring-primary/30">
+                class="tab-link  inline-block w-full p-4 bg-white text-neutral border-r border-light rounded-s-lg hover:text-dark hover:bg-highlight/20 focus:outline-none ">
                 Visão Geral
             </a>
         </li>
         <li class="w-full">
             <a href="#" data-tab="tab-novocontacto"
-                class="tab-link inline-block w-full p-4 bg-white text-neutral border-r border-light hover:text-dark hover:bg-highlight/20 focus:outline-none focus:ring-2 focus:ring-primary/30">
+                class="tab-link inline-block w-full p-4 bg-white text-neutral border-r border-light hover:text-dark hover:bg-highlight/20 focus:outline-none ">
                 Contactos
             </a>
         </li>
         <li class="w-full">
             <a href="#" data-tab="tab-segmentos"
-                class="tab-link inline-block w-full p-4 bg-white text-neutral border-r border-light hover:text-dark hover:bg-highlight/20 focus:outline-none focus:ring-2 focus:ring-primary/30">
+                class="tab-link inline-block w-full p-4 bg-white text-neutral border-r border-light hover:text-dark hover:bg-highlight/20 focus:outline-none ">
                 Segmentos
             </a>
         </li>
         <li class="w-full">
             <a href="#" data-tab="tab-listas"
-                class="tab-link inline-block w-full p-4 bg-white text-neutral rounded-e-lg hover:text-dark hover:bg-highlight/20 focus:outline-none focus:ring-2 focus:ring-primary/30">
+                class="tab-link inline-block w-full p-4 bg-white text-neutral rounded-e-lg hover:text-dark hover:bg-highlight/20 focus:outline-none ">
                 Listas
             </a>
         </li>
@@ -46,7 +46,7 @@
 
     <!-- Visão Geral -->
     <section id="tab-visaogeral"
-        class="tab-content w-full max-w-screen-xl px-6 py-8 bg-white border border-primary rounded-lg shadow space-y-6">
+        class="tab-content w-full max-w-screen-xl px-6 py-8 bg-white rounded-lg shadow-md space-y-6 border">
         <h2 class="text-xl font-semibold text-dark">Visão Geral</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
@@ -119,19 +119,19 @@
                 class="flex max-w-lg w-full text-xs font-medium text-center bg-transparent rounded-md shadow-none gap-4">
                 <li class="flex-1">
                     <a href="#" data-contacttab="tab-todos-contactos"
-                        class="contact-tab-link block w-full py-2 px-1 bg-white text-neutral rounded-md hover:text-dark hover:bg-highlight/20 transition">
+                        class="contact-tab-link block w-full py-2 px-1 text-neutral border shadow-md rounded-md hover:text-dark hover:bg-highlight/20 transition">
                         Todos os Contactos
                     </a>
                 </li>
                 <li class="flex-1">
                     <a href="#" data-contacttab="tab-inserir-contacto"
-                        class="contact-tab-link block w-full py-2 px-1 bg-white text-neutral rounded-md hover:text-dark hover:bg-highlight/20 transition">
+                        class="contact-tab-link block w-full py-2 px-1 text-neutral border shadow-md rounded-md hover:text-dark hover:bg-highlight/20 transition">
                         Inserir Contacto
                     </a>
                 </li>
                 <li class="flex-1">
                     <a href="#" data-contacttab="tab-importar-ficheiro"
-                        class="contact-tab-link block w-full py-2 px-1 bg-white text-neutral rounded-md hover:text-dark hover:bg-highlight/20 transition">
+                        class="contact-tab-link block w-full py-2 px-1 text-neutral border shadow-md rounded-md hover:text-dark hover:bg-highlight/20 transition">
                         Importar por Ficheiro
                     </a>
                 </li>
@@ -140,7 +140,7 @@
 
         <!-- Todos os Contactos -->
         <div id="tab-todos-contactos"
-            class="contact-tab-content hidden rounded-lg shadow p-6 mb-10 space-y-4 w-full max-w-7xl mx-auto bg-white border border-primary">
+            class="contact-tab-content hidden rounded-lg p-6 mb-10 space-y-4 w-full max-w-7xl mx-auto bg-white border shadow-md">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-6">
                 <h5 class="text-lg font-semibold text-dark">Todos os Contactos</h5>
                 <div class="relative w-full md:w-72">
@@ -226,7 +226,7 @@
 
         <!-- Inserir Contacto -->
         <form id="tab-inserir-contacto" method="POST" action=""
-            class="max-w-4xl mx-auto contact-tab-content hidden rounded-lg shadow p-8 space-y-6 bg-white border border-primary">
+            class="max-w-4xl mx-auto contact-tab-content hidden rounded-lg shadow-md p-8 space-y-6 bg-white border ">
             <h5 class="text-lg font-semibold text-dark">Novo registo</h5>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-10">
@@ -302,7 +302,7 @@
 
         <!-- Importar por ficheiro -->
         <div id="tab-importar-ficheiro"
-            class="contact-tab-content hidden rounded-lg shadow p-6 space-y-4 w-full max-w-4xl mx-auto bg-white border border-primary">
+            class="contact-tab-content hidden rounded-lg shadow-md p-6 space-y-4 w-full max-w-4xl mx-auto bg-white border">
             <h5 class="text-lg font-semibold text-dark">Importar Contactos por Ficheiro</h5>
 
             <form id="form-importar-ficheiro" method="POST" action="/api/importar_publico.php" enctype="multipart/form-data" class="space-y-4">
@@ -329,7 +329,7 @@
 
     <!-- Segmentos -->
     <section id="tab-segmentos"
-        class="hidden w-full max-w-2xl p-6 bg-white border border-primary rounded-lg shadow space-y-4">
+        class="hidden w-full max-w-2xl p-6 bg-white border rounded-lg shadow-md space-y-4">
         <h2 class="text-xl font-semibold text-dark">Segmentos</h2>
         <p class="text-neutral">
             Esta secção permite gerir os segmentos de público para campanhas mais direcionadas.
@@ -343,7 +343,7 @@
 
     <!-- Listas -->
     <section id="tab-listas"
-        class="hidden w-full max-w-2xl p-6 bg-white border border-primary rounded-lg shadow space-y-4">
+        class="hidden w-full max-w-2xl p-6 bg-white border rounded-lg shadow-md space-y-4">
         <div class="flex items-center justify-between">
             <h2 class="text-xl font-semibold text-dark">Listas</h2>
             <a href="#" data-modal="nova-lista"

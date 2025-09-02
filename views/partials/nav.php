@@ -17,7 +17,7 @@ $isLogin = in_array($currentPage, ['login', 'login.php']);
         <div class="<?= ($isHomeCenter || $isLogin) ? 'w-1/3 hidden' : 'w-1/3 flex items-center space-x-10' ?>">
             <?php if (!empty($_SESSION['user_id']) && !$isHomeCenter && !$isLogin): ?>
                 <button type="button"
-                    class="cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    class="cursor-pointer text-white bg-primary hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary dark:hover:bg-blue-500 dark:focus:ring-blue-800"
                     data-drawer-target="drawer-navigation"
                     data-drawer-show="drawer-navigation"
                     aria-controls="drawer-navigation">
