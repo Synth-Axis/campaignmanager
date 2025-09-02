@@ -8,55 +8,55 @@
         <!-- Card -->
         <a href="/campanhas"
             class="group relative block rounded-2xl bg-white p-6 shadow-md border cursor-pointer
-          transform transition duration-400 ease-in-out
-          hover:-translate-y-1 hover:scale-105 hover:shadow-xl hover:bg-primary
+          transform transition duration-500 ease-in-out
+          hover:-translate-y-1 hover:scale-105 hover:shadow-xl hover:bg-bg-gradient-vertical
           focus:outline-none focus:ring-4 focus:ring-primary/40">
             <div>
-                <h2 class="text-3xl font-semibold text-dark mb-3 group-hover:text-white">Campaign Manager</h2>
+                <h2 class="text-3xl font-semibold bg-text-gradient bg-clip-text text-transparent mb-3 group-hover:text-white transition-colors duration-500 ease-in-out">Campaign Manager</h2>
                 <p class="text-lg text-neutral group-hover:text-light">CRM System</p>
             </div>
         </a>
 
         <a href="/pm-home"
             class="group relative block rounded-2xl bg-white p-6 shadow-md border cursor-pointer
-          transform transition duration-400 ease-in-out
-          hover:-translate-y-1 hover:scale-105 hover:shadow-xl hover:bg-primary
+          transform transition duration-500 ease-in-out
+          hover:-translate-y-1 hover:scale-105 hover:shadow-xl hover:bg-bg-gradient-vertical
           focus:outline-none focus:ring-4 focus:ring-primary/40">
             <div>
-                <h2 class="text-3xl font-semibold text-dark mb-3 group-hover:text-light">Password Manager</h2>
+                <h2 class="text-3xl font-semibold bg-text-gradient bg-clip-text text-transparent mb-3 group-hover:text-light transition-colors duration-500 ease-in-out">Password Manager</h2>
                 <p class="text-lg text-neutral group-hover:text-light">Store and organize your passwords</p>
             </div>
         </a>
 
         <a href="/publico"
             class="group relative block rounded-2xl bg-white p-6 shadow-md border cursor-pointer
-          transform transition duration-400 ease-in-out
-          hover:-translate-y-1 hover:scale-105 hover:shadow-xl hover:bg-primary
+          transform transition duration-500 ease-in-out
+          hover:-translate-y-1 hover:scale-105 hover:shadow-xl hover:bg-bg-gradient-vertical
           focus:outline-none focus:ring-4 focus:ring-primary/40">
             <div>
-                <h2 class="text-3xl font-semibold text-dark mb-3 group-hover:text-light">Público</h2>
+                <h2 class="text-3xl font-semibold bg-text-gradient bg-clip-text text-transparent mb-3 group-hover:text-light transition-colors duration-500 ease-in-out">Público</h2>
                 <p class="text-lg text-neutral group-hover:text-light">Gestão de Contactos</p>
             </div>
         </a>
 
         <a href="#"
             class="group relative block rounded-2xl bg-white p-6 shadow-md border cursor-pointer
-          transform transition duration-400 ease-in-out
-          hover:-translate-y-1 hover:scale-105 hover:shadow-xl hover:bg-primary
+          transform transition duration-500 ease-in-out
+          hover:-translate-y-1 hover:scale-105 hover:shadow-xl hover:bg-bg-gradient-vertical
           focus:outline-none focus:ring-4 focus:ring-primary/40">
             <div>
-                <h2 class="text-3xl font-semibold text-dark mb-3 group-hover:text-light">Acções de Campanhas</h2>
+                <h2 class="text-3xl font-semibold bg-text-gradient bg-clip-text text-transparent mb-3 group-hover:text-light transition-colors duration-500 ease-in-out">Acções de Campanhas</h2>
                 <p class="text-lg text-neutral group-hover:text-light">Posts e Redes Sociais</p>
             </div>
         </a>
 
         <a href="#"
             class="group relative block rounded-2xl bg-white p-6 shadow-md border cursor-pointer
-          transform transition duration-400 ease-in-out
-          hover:-translate-y-1 hover:scale-105 hover:shadow-xl hover:bg-primary
+          transform transition duration-500 ease-in-out
+          hover:-translate-y-1 hover:scale-105 hover:shadow-xl hover:bg-bg-gradient-vertical
           focus:outline-none focus:ring-4 focus:ring-primary/40">
             <div>
-                <h2 class="text-3xl font-semibold text-dark mb-3 group-hover:text-light">Acções da Carrinha</h2>
+                <h2 class="text-3xl font-semibold bg-text-gradient bg-clip-text text-transparent mb-3 group-hover:text-light transition-colors duration-500 ease-in-out">Acções da Carrinha</h2>
                 <p class="text-lg text-neutral group-hover:text-light">Acções comerciais com a carrinha Real</p>
             </div>
         </a>

@@ -19,6 +19,13 @@ module.exports = {
         success: "#30C0B7",
         danger: "#EE227D",
       },
+      backgroundImage: {
+        "text-gradient": "linear-gradient(to right, #304C55, #10C4FF)",
+        "bg-gradient-vertical": "linear-gradient(to bottom, #304C55, #10C4FF)",
+      },
+      fontFamily: {
+        sans: ["Sora", "sans-serif"],
+      },
     },
   },
   plugins: [],
