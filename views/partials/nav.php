@@ -10,13 +10,13 @@ $isLogin = in_array($currentPage, ['login', 'login.php']);
 ?>
 
 <nav class="border-b border-light bg-light/95 backdrop-blur-xs sticky top-0 z-50">
-    <div class="max-w-screen-2xl mx-auto flex items-center justify-between p-6">
+    <div class="max-w-screen-2xl mx-auto flex items-center justify-between">
         <!-- Left group (removido o botão do menu) -->
         <div class="<?= $isLogin ? 'w-1/3 hidden' : 'w-1/3' ?>"></div>
 
         <!-- Center title -->
-        <div class="w-1/3 flex justify-center">
-            <h1 class="text-4xl font-bold bg-text-gradient bg-clip-text text-transparent text-center whitespace-nowrap">Marketing - App Center</h1>
+        <div class="flex justify-center">
+            <h1 class="text-6xl font-bold bg-text-gradient bg-clip-text text-transparent text-center whitespace-nowrap p-14">Marketing - App Center</h1>
         </div>
 
         <!-- Right group (auth actions) -->

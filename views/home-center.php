@@ -39,7 +39,7 @@
             </div>
         </a>
 
-        <a href="#"
+        <a href="/campanhas.php"
             class="group relative block rounded-2xl bg-white p-6 shadow-md border cursor-pointer
           transform transition duration-500 ease-in-out
           hover:-translate-y-1 hover:scale-105 hover:shadow-xl hover:bg-bg-gradient-vertical
