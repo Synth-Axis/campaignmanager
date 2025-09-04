@@ -44,7 +44,7 @@ class CampanhaController
             $fname = time() . '_' . preg_replace('/\s+/', '_', basename($_FILES['imagem']['name']));
             $dest = $dir . $fname;
             if (move_uploaded_file($_FILES['imagem']['tmp_name'], $dest)) {
-                $caminhoImagem = '/uploads/campanhas/' . $fname;
+                $caminhoImagem = '/public/uploads/campanhas/' . $fname;
             }
         }
 

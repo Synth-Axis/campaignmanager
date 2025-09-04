@@ -29,7 +29,7 @@
                                         <?php if ($c['caminho_imagem']): ?>
                                             <img src="<?= htmlspecialchars($c['caminho_imagem']) ?>"
                                                 alt="<?= htmlspecialchars($c['nome']) ?>"
-                                                class="w-full h-60 object-cover">
+                                                class="w-full h-60 object-cover object-top">
                                         <?php else: ?>
                                             <div class="w-full h-40 bg-highlight/30 flex items-center justify-center text-neutral">Sem imagem</div>
                                         <?php endif; ?>

@@ -2,8 +2,8 @@
 <?php require __DIR__ . '/partials/head.php'; ?>
 <?php require __DIR__ . '/partials/nav.php'; ?>
 
-<div class="bg-light w-full flex justify-center items-center py-24">
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-8 w-full max-w-4xl px-6">
+<div class="bg-light w-full flex justify-center items-center">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-8 w-full max-w-4xl px-6 py-8">
 
         <!-- Card -->
         <a href="/campanhas"
