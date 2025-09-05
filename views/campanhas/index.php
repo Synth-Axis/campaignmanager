@@ -25,7 +25,7 @@
 
                             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
                                 <?php foreach ($rows as $c): ?>
-                                    <article class="bg-white border border-light rounded-2xl shadow-sm overflow-hidden hover:shadow-md transition">
+                                    <article class="bg-white border rounded-2xl shadow-md overflow-hidden hover:shadow-md transition">
                                         <?php if ($c['caminho_imagem']): ?>
                                             <img src="<?= htmlspecialchars($c['caminho_imagem']) ?>"
                                                 alt="<?= htmlspecialchars($c['nome']) ?>"

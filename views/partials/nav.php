@@ -38,7 +38,7 @@ $isLogin = in_array($currentPage, ['login', 'login.php']);
     <!-- Sidebar fixa e sempre visível -->
     <aside
         id="drawer-navigation"
-        class="fixed top-8 left-5 z-50 h-[calc(100vh-4rem)] bg-white p-4 overflow-y-auto w-64 border-r rounded-lg border shadow-md">
+        class="fixed top-8 left-5 z-50 h-[calc(100vh-4rem)] bg-white p-4 overflow-y-auto w-72 border-r rounded-lg border shadow-md">
 
 
         <div class="py-2 overflow-y-auto">
@@ -87,6 +87,18 @@ $isLogin = in_array($currentPage, ['login', 'login.php']);
                         <span class="flex-1 ms-3 whitespace-nowrap">Público</span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="/campanhas.php"
+                        class="flex items-center p-2 rounded-lg text-dark hover:bg-highlight/20 group">
+                        <svg class="shrink-0 w-5 h-5 text-neutral transition duration-75 group-hover:text-dark" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                            <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
+                        </svg>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Acções de Campanhas</span>
+                    </a>
+                </li>
+
 
                 <li>
                     <a href="#"
