@@ -1,8 +1,8 @@
 <?php require __DIR__ . '/partials/head.php'; ?>
 <?php require __DIR__ . '/partials/nav.php'; ?>
 
-<main class="min-h-screen w-full flex flex-col items-center my-10 gap-8 bg-light">
-    <section class="max-w-screen-xl bg-white border border-light rounded-lg shadow p-8">
+<main class="min-h-screen flex flex-col items-center my-10 gap-8 bg-light">
+    <section class="w-full max-w-6xl bg-white border border-light rounded-lg shadow p-8">
 
         <!-- Voltar -->
         <a href="/campanhas"

@@ -30,7 +30,7 @@
 
     <!-- Estatísticas -->
     <section id="tab-estatisticas"
-        class="tab-content w-full max-w-screen-xl px-6 py-8 bg-white rounded-lg shadow-md space-y-6">
+        class="tab-content p-6 w-full max-w-6xl mx-auto bg-white rounded-lg shadow-md space-y-6">
         <h2 class="text-xl font-semibold text-dark">Estatísticas Gerais</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -51,7 +51,7 @@
 
     <!-- Lista de Campanhas -->
     <section id="tab-campanhas"
-        class="hidden tab-content w-full max-w-7xl bg-white rounded-lg shadow-md p-8">
+        class="hidden tab-content w-full max-w-6xl bg-white rounded-lg shadow-md p-8">
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-xl font-semibold text-dark">Campanhas de Email</h2>
         </div>
@@ -89,7 +89,7 @@
 
     <!-- Nova Campanha -->
     <section id="tab-nova-campanha"
-        class="hidden tab-content w-full max-w-screen-xl mx-10 bg-white border rounded-lg shadow-md p-8">
+        class="hidden tab-content w-full max-w-6xl bg-white border rounded-lg shadow-md p-8">
         <h3 class="text-lg font-semibold text-dark mb-6">Nova Campanha de Email</h3>
 
         <form id="form-nova-campanha" method="POST" action="campanhas" class="w-full">
