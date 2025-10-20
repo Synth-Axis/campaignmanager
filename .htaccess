@@ -1,3 +1,5 @@
+php_value date.timezone Europe/Lisbon
+php_value display_errors On
 <FilesMatch "\.(htm|html|css|js|php)$">
 AddDefaultCharset UTF-8
 </FilesMatch>

@@ -12,7 +12,7 @@ class Channels extends Base
 			SELECT 
 				*
 			FROM 
-				Canal
+				canal
             ORDER BY nome ASC
 		");
 
@@ -24,7 +24,7 @@ class Channels extends Base
     public function criarCanal($nome)
     {
         $query = $this->db->prepare("
-        INSERT INTO Canal (nome)
+        INSERT INTO canal (nome)
         VALUES (?)
     ");
 

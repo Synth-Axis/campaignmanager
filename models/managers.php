@@ -6,7 +6,7 @@ class Managers extends Base
 {
     public function getAllManagers()
     {
-        $query = $this->db->prepare("SELECT * FROM Gestor ORDER BY gestor_nome ASC");
+        $query = $this->db->prepare("SELECT * FROM gestor ORDER BY gestor_nome ASC");
         $query->execute();
         return $query->fetchAll();
     }
@@ -14,7 +14,7 @@ class Managers extends Base
     public function criarGestor($nome, $canal_id)
     {
         $query = $this->db->prepare("
-        INSERT INTO Gestor (gestor_nome, canal_id)
+        INSERT INTO gestor (gestor_nome, canal_id)
         VALUES (?, ?)
     ");
 

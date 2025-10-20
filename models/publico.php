@@ -2,9 +2,9 @@
 
 require_once("dbconfig.php");
 
-class Publico extends Base
+class publico extends Base
 {
-    public function getAllPublico()
+    public function getAllpublico()
     {
         try {
             $query = $this->db->prepare("
@@ -19,7 +19,7 @@ class Publico extends Base
             p.lista_id,
             l.lista_nome,
             p.data_registo
-        FROM Publico p
+        FROM publico p
         LEFT JOIN gestor g ON p.gestor_id = g.gestor_id
         LEFT JOIN canal c ON p.canal_id = c.canal_id
         LEFT JOIN listas l ON p.lista_id = l.lista_id
@@ -32,13 +32,13 @@ class Publico extends Base
         }
     }
 
-    public function findPublicoByEmail($email)
+    public function findpublicoByEmail($email)
     {
         $query = $this->db->prepare("
 			SELECT 
                 *
 			FROM 
-				Publico
+				publico
             WHERE
                 email = ?
 		");
@@ -48,11 +48,11 @@ class Publico extends Base
         return $query->fetch();
     }
 
-    public function RegisterPublico($formData)
+    public function Registerpublico($formData)
     {
 
         $query = $this->db->prepare("
-            INSERT INTO Publico
+            INSERT INTO publico
                 (nome, email, gestor_id, canal_id, lista_id)
                 VALUES(?, ?, ?, ?, ?)
             ");
@@ -67,7 +67,7 @@ class Publico extends Base
         return $this->db->lastInsertId();
     }
 
-    public function pesquisarPublico($termo, $page = 1, $limit = 10000)
+    public function pesquisarpublico($termo, $page = 1, $limit = 10000)
     {
         $offset = ($page - 1) * $limit;
         $sqlBase = "
@@ -79,7 +79,7 @@ class Publico extends Base
             c.nome AS canal_nome,
             l.lista_nome,
             p.data_registo
-        FROM Publico p
+        FROM publico p
         LEFT JOIN gestor g ON p.gestor_id = g.gestor_id
         LEFT JOIN canal c ON p.canal_id = c.canal_id
         LEFT JOIN listas l ON p.lista_id = l.lista_id
@@ -99,9 +99,9 @@ class Publico extends Base
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function contarPublico($termo = "")
+    public function contarpublico($termo = "")
     {
-        $sql = "SELECT COUNT(*) FROM Publico p";
+        $sql = "SELECT COUNT(*) FROM publico p";
         $params = [];
         if (trim($termo) !== "") {
             $sql .= " WHERE p.nome LIKE :termo OR p.email LIKE :termo";
@@ -117,14 +117,14 @@ class Publico extends Base
 
     public function contarNovosUltimos30Dias()
     {
-        $stmt = $this->db->prepare("SELECT COUNT(*) FROM Publico WHERE data_registo >= CURDATE() - INTERVAL 30 DAY");
+        $stmt = $this->db->prepare("SELECT COUNT(*) FROM publico WHERE data_registo >= CURDATE() - INTERVAL 30 DAY");
         $stmt->execute();
         return (int) $stmt->fetchColumn();
     }
 
     public function getAllEmailsByListId($lista_id)
     {
-        $query = $this->db->prepare("SELECT email, nome FROM Publico WHERE lista_id = ?");
+        $query = $this->db->prepare("SELECT email, nome FROM publico WHERE lista_id = ?");
         $query->execute([$lista_id]);
         return $query->fetchAll(PDO::FETCH_ASSOC); // devolve arrays com 'email' e 'nome'
     }
@@ -143,7 +143,7 @@ class Publico extends Base
 
         $stmt = $this->db->prepare("
         SELECT DATE(data_registo) as dia, COUNT(*) as total
-        FROM Publico
+        FROM publico
         WHERE data_registo >= CURDATE() - INTERVAL :dias DAY
         GROUP BY DATE(data_registo)
     ");
@@ -167,15 +167,15 @@ class Publico extends Base
 
     public function contarNovosHoje()
     {
-        $stmt = $this->db->prepare("SELECT COUNT(*) FROM Publico WHERE DATE(data_registo) = CURDATE()");
+        $stmt = $this->db->prepare("SELECT COUNT(*) FROM publico WHERE DATE(data_registo) = CURDATE()");
         $stmt->execute();
         return (int) $stmt->fetchColumn();
     }
 
-    public function updatePublico($data)
+    public function updatepublico($data)
     {
         $query = $this->db->prepare("
-        UPDATE Publico
+        UPDATE publico
         SET nome = :nome,
             email = :email,
             gestor_id = :gestor_id,
@@ -193,7 +193,7 @@ class Publico extends Base
         ]);
     }
 
-    public function apagarPublico($id)
+    public function apagarpublico($id)
     {
         $id = (int)$id;
         $sql = "DELETE FROM publico WHERE publico_id = :id";
@@ -201,7 +201,7 @@ class Publico extends Base
         return $stmt->execute([':id' => $id]);
     }
 
-    public function getPublicoByIds($ids)
+    public function getpublicoByIds($ids)
     {
         if (empty($ids)) return [];
         $in = str_repeat('?,', count($ids) - 1) . '?';
@@ -214,7 +214,7 @@ class Publico extends Base
                 c.nome AS canal,
                 l.lista_nome AS lista,
                 p.data_registo
-            FROM Publico p
+            FROM publico p
             LEFT JOIN gestor g ON p.gestor_id = g.gestor_id
             LEFT JOIN canal c ON p.canal_id = c.canal_id
             LEFT JOIN listas l ON p.lista_id = l.lista_id

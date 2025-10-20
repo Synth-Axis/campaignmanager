@@ -24,7 +24,6 @@ $modelChannels = new Channels();
 $modelLists = new Lists();
 $modelManagers = new Managers();
 
-
 $totalContactos = $modelPublico->contarPublico();
 $contactosUltimos30Dias = $modelPublico->contarNovosUltimos30Dias();
 $novosHoje = $modelPublico->contarNovosHoje();

@@ -11,7 +11,7 @@ class Lists extends Base
 			SELECT 
 				*
 			FROM 
-				Listas
+				listas
 		");
 
         $query->execute();

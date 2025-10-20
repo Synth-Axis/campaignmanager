@@ -11,7 +11,7 @@ $isLogin = in_array($currentPage, ['login', 'login.php']);
 
 <nav class="border-b border-light bg-light/95 backdrop-blur-xs sticky top-0 z-50">
     <div class="max-w-screen-2xl mx-auto flex items-center justify-between">
-        <!-- Left group (removido o botão do menu) -->
+        <!-- Left group (logo) -->
         <div class="<?= $isLogin ? 'w-1/3 hidden' : 'w-1/3' ?>"></div>
 
         <!-- Center title -->

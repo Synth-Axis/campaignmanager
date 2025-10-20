@@ -3,6 +3,7 @@
 
 <main class="min-h-screen flex flex-col items-center my-10 gap-8 bg-light">
 
+
     <!-- Tabs -->
     <ul class="w-full max-w-2xl text-sm font-medium text-center rounded-lg shadow-sm flex overflow-hidden">
         <li class="w-full">
