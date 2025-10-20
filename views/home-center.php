@@ -49,18 +49,6 @@
                 <p class="text-lg text-neutral group-hover:text-light">Posts e Redes Sociais</p>
             </div>
         </a>
-
-        <a href="#"
-            class="group relative block rounded-2xl bg-white p-6 shadow-md border cursor-pointer
-          transform transition duration-500 ease-in-out
-          hover:-translate-y-1 hover:scale-105 hover:shadow-xl hover:bg-bg-gradient-vertical
-          focus:outline-none focus:ring-4 focus:ring-primary/40">
-            <div>
-                <h2 class="text-3xl font-semibold bg-text-gradient bg-clip-text text-transparent mb-3 group-hover:text-light transition-colors duration-500 ease-in-out">Acções da Carrinha</h2>
-                <p class="text-lg text-neutral group-hover:text-light">Acções comerciais com a carrinha Real</p>
-            </div>
-        </a>
-
     </div>
 </div>
 

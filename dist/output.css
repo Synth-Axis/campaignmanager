@@ -976,6 +976,10 @@ video {
   height: calc(100vh - 4rem);
 }
 
+.h-full {
+  height: 100%;
+}
+
 .min-h-\[4rem\] {
   min-height: 4rem;
 }

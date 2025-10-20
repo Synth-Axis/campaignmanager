@@ -25,24 +25,26 @@
 
                             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
                                 <?php foreach ($rows as $c): ?>
-                                    <article class="bg-white border rounded-2xl shadow-md overflow-hidden hover:shadow-md transition">
-                                        <?php if ($c['caminho_imagem']): ?>
-                                            <img src="<?= htmlspecialchars($c['caminho_imagem']) ?>"
-                                                alt="<?= htmlspecialchars($c['nome']) ?>"
-                                                class="w-full h-60 object-cover object-top">
-                                        <?php else: ?>
-                                            <div class="w-full h-40 bg-highlight/30 flex items-center justify-center text-neutral">Sem imagem</div>
-                                        <?php endif; ?>
+                                    <article class="flex flex-col justify-between h-full bg-white border rounded-2xl shadow-md overflow-hidden hover:shadow-md transition">
+                                        <div>
+                                            <?php if ($c['caminho_imagem']): ?>
+                                                <img src="<?= htmlspecialchars($c['caminho_imagem']) ?>"
+                                                    alt="<?= htmlspecialchars($c['nome']) ?>"
+                                                    class="w-full h-60 object-cover object-top">
+                                            <?php else: ?>
+                                                <div class="w-full h-40 bg-highlight/30 flex items-center justify-center text-neutral">Sem imagem</div>
+                                            <?php endif; ?>
 
-                                        <div class="p-4 space-y-2">
-                                            <h4 class="text-dark font-semibold"><?= htmlspecialchars($c['nome']) ?></h4>
-                                            <p class="text-sm text-neutral">
-                                                <?php
-                                                $d1 = $c['data_inicio'] ? date('d M Y', strtotime($c['data_inicio'])) : null;
-                                                $d2 = $c['data_fim'] ? date('d M Y', strtotime($c['data_fim'])) : null;
-                                                echo $d1 && $d2 ? "$d1 — $d2" : ($d1 ?: ($d2 ?: 'Data por definir'));
-                                                ?>
-                                            </p>
+                                            <div class="p-4 space-y-2">
+                                                <h4 class="text-dark font-semibold"><?= htmlspecialchars($c['nome']) ?></h4>
+                                                <p class="text-sm text-neutral">
+                                                    <?php
+                                                    $d1 = $c['data_inicio'] ? date('d M Y', strtotime($c['data_inicio'])) : null;
+                                                    $d2 = $c['data_fim'] ? date('d M Y', strtotime($c['data_fim'])) : null;
+                                                    echo $d1 && $d2 ? "$d1 — $d2" : ($d1 ?: ($d2 ?: 'Data por definir'));
+                                                    ?>
+                                                </p>
+                                            </div>
                                             <?php if (!empty($c['descricao_curta'])): ?>
                                                 <p class="text-sm text-dark/80"><?= htmlspecialchars($c['descricao_curta']) ?></p>
                                             <?php endif; ?>
