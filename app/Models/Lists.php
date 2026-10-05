@@ -1,0 +1,43 @@
+<?php
+class Lists extends Database
+{
+
+    public function getAllLists()
+    {
+        $query = $this->db->prepare("
+			SELECT 
+				*
+			FROM 
+				listas
+		");
+
+        $query->execute();
+
+        return $query->fetchAll();
+    }
+
+    public function criarLista($nome)
+    {
+        $stmt = $this->db->prepare("INSERT INTO listas (lista_nome) VALUES (:nome)");
+        $stmt->bindParam(':nome', $nome);
+        $stmt->execute();
+
+        return $this->db->lastInsertId();
+    }
+
+    public function atualizarNomeLista($id, $novoNome)
+    {
+        $query = $this->db->prepare("
+            UPDATE listas
+            SET lista_nome = ?
+            WHERE lista_id = ?
+        ");
+        $query->execute([$novoNome, $id]);
+    }
+
+    public function apagarLista($id)
+    {
+        $stmt = $this->db->prepare("DELETE FROM listas WHERE lista_id = ?");
+        $stmt->execute([$id]);
+    }
+}

@@ -1,0 +1,21 @@
+<?php
+class Managers extends Database
+{
+    public function getAllManagers()
+    {
+        $query = $this->db->prepare("SELECT * FROM gestor ORDER BY gestor_nome ASC");
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    public function criarGestor($nome, $canal_id)
+    {
+        $query = $this->db->prepare("
+        INSERT INTO gestor (gestor_nome, canal_id)
+        VALUES (?, ?)
+    ");
+
+        $query->execute([$nome, $canal_id]);
+        return $this->db->lastInsertId();
+    }
+}

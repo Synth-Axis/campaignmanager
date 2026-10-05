@@ -1,22 +1,5 @@
 <?php
 
-session_start();
-
-
-define("ENV", parse_ini_file(".env"));
-define("ROOT", "/");
-
-$path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
-$url_parts = explode("/", trim($path, "/"));
-
-$controller = !empty($url_parts[0]) ? $url_parts[0] : "login";
-$id = $url_parts[1] ?? null;
-
-$controller_file = "controllers/" . $controller . ".php";
-
-if (file_exists($controller_file)) {
-    require($controller_file);
-} else {
-    http_response_code(404);
-    echo "Erro 404: O controlador '$controller' não foi encontrado.";
-}
+require_once __DIR__ . '/app/Core/bootstrap.php';
+$router = new Router(require __DIR__ . '/config/routes.php');
+$router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);

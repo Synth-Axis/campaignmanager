@@ -24,7 +24,7 @@ auth.json
 # Uploads e dados criados em execucao
 /public/uploads/*
 !/public/uploads/.gitkeep
-logs/
+/logs/
 tmp/
 .cache/
 .npm/
@@ -69,3 +69,7 @@ Desktop.ini
 /bitnami.css
 /img/
 /favicon.ico
+
+# Logs e dados locais da aplicação
+/storage/logs/*
+!/storage/logs/.gitkeep

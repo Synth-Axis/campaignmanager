@@ -8,6 +8,17 @@ Options +FollowSymLinks -MultiViews
 RewriteEngine On
 RewriteBase /
 RewriteRule ^index\.php$ - [L]
+# Private source and runtime files are never public entry points.
+RewriteRule ^(?:app|config|storage|scripts|tests|database|views|vendor|node_modules)(?:/|$) - [F,L]
+RewriteRule ^(?:\.cache|\.git|\.vscode|\.codex|\.agents)(?:/|$) - [F,L]
+RewriteRule ^\.env(?:\..*)?$ - [F,L,NC]
+# Compatibility addresses use the same router, even while old files exist.
+RewriteRule ^(?:controllers|api|track)/.*\.php$ /index.php [L,QSA]
+RewriteRule ^campanhas\.php$ /index.php [L,QSA]
+RewriteRule ^js/index\.js$ /assets/js/contactos.js [L]
+RewriteRule ^js/pm\.js$ /assets/js/password-manager.js [L]
+RewriteRule ^js/campanhas\.js$ /assets/js/campanhas-email.js [L]
+RewriteRule ^js/(theme|row-actions|segmentos)\.js$ /assets/js/$1.js [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.php [L]
