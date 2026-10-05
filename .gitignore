@@ -1,2 +1,71 @@
+# Dependencias instaladas (manter package-lock.json e composer.lock)
 node_modules/
 vendor/
+
+# Configuracao local e segredos, incluindo .ENV
+*.[eE][nN][vV]
+.[eE][nN][vV].*
+!.[eE][nN][vV].example
+!.[eE][nN][vV].sample
+!.[eE][nN][vV].template
+!*.[eE][nN][vV].example
+!*.[eE][nN][vV].sample
+!*.[eE][nN][vV].template
+.npmrc
+auth.json
+*.key
+*.p12
+*.pfx
+.aws/
+
+# CSS compilado pelo Tailwind
+/dist/
+
+# Uploads e dados criados em execucao
+/public/uploads/*
+!/public/uploads/.gitkeep
+logs/
+tmp/
+.cache/
+.npm/
+
+# Logs e ficheiros de debug gerados pela aplicacao
+*.log
+error_log
+log_erros.txt
+debug_*.txt
+debug_*.html
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Backups e ficheiros temporarios
+/Archive.zip
+backup/
+backups/
+*.bak
+*.old
+*.orig
+*.rej
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Configuracoes locais dos editores e ficheiros do sistema
+.vscode/
+.idea/
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+
+# Paginas e recursos da instalacao local do XAMPP
+/dashboard/
+/xampp/
+/webalizer/
+/applications.html
+/bitnami.css
+/img/
+/favicon.ico

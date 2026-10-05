@@ -16,7 +16,7 @@ $isLogin = in_array($currentPage, ['login', 'login.php']);
 
         <!-- Center title -->
         <div class="flex justify-center">
-            <h1 class="text-6xl font-bold bg-text-gradient bg-clip-text text-transparent text-center whitespace-nowrap p-14">Marketing - App Center</h1>
+            <h1 class="text-6xl font-bold bg-text-gradient bg-clip-text text-transparent text-center whitespace-nowrap p-14">App Center</h1>
         </div>
 
         <!-- Right group (auth actions) -->
