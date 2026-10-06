@@ -229,7 +229,7 @@ class CampanhasEmailController
                                 $mail->addStringEmbeddedImage($imageBinary, 'qrcodeCid', 'qrcode.png', 'base64', 'image/png');
 
                                 $clickBase = "https://lynx.com/eventos/responderConviteEvento?listid=88&contact=$email&resposta=Não";
-                                $clickTrack = "http://localhost/track/click.php?tid=$trackingId&cid=$id&pid={$publico['publico_id']}&url=" . urlencode($clickBase);
+                                $clickTrack = ENV['ADDRESS'] . "/track/click.php?tid=$trackingId&cid=$id&pid={$publico['publico_id']}&url=" . urlencode($clickBase);
 
                                 $htmlPersonalizado = str_replace(
                                     ['{click_url}', '{qr_code}', '{email}', '{firstname}', '{cid}', '{tracking_id}', '{publico_id}'],

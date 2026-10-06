@@ -53,7 +53,13 @@ class AuthController
                             $tokenHash = hash('sha256', $token);
                             $expiresAt = date("Y-m-d H:i:s", time() + 60 * 60 * 24 * 30);
                             $model->storeRememberToken($currentUser["user_id"], $tokenHash, $expiresAt);
-                            setcookie("remember_token", $token, time() + 60 * 60 * 24 * 30, "/", "", false, true);
+                            setcookie('remember_token', $token, [
+                                'expires' => time() + 60 * 60 * 24 * 30,
+                                'path' => '/',
+                                'secure' => (bool)ini_get('session.cookie_secure'),
+                                'httponly' => true,
+                                'samesite' => 'Lax',
+                            ]);
                         }
 
                         header("Location: /home-center");

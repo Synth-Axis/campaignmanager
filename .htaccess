@@ -1,17 +1,18 @@
 php_value date.timezone Europe/Lisbon
-php_value display_errors On
+php_value display_errors Off
 <FilesMatch "\.(htm|html|css|js|php)$">
 AddDefaultCharset UTF-8
 </FilesMatch>
-Options +FollowSymLinks -MultiViews
+Options +FollowSymLinks -MultiViews -Indexes
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /
 RewriteRule ^index\.php$ - [L]
 # Private source and runtime files are never public entry points.
-RewriteRule ^(?:app|config|storage|scripts|tests|database|views|vendor|node_modules)(?:/|$) - [F,L]
+RewriteRule ^(?:app|config|docker|storage|scripts|tests|database|views|vendor|node_modules)(?:/|$) - [F,L]
 RewriteRule ^(?:\.cache|\.git|\.vscode|\.codex|\.agents)(?:/|$) - [F,L]
 RewriteRule ^\.env(?:\..*)?$ - [F,L,NC]
+RewriteRule ^(?:Dockerfile|railway\.(?:json|toml)|composer\.(?:json|lock)|package(?:-lock)?\.json|README\.md|(?:tailwind|postcss)\.config\.js|\.(?:dockerignore|gitignore|gitattributes))$ - [F,L,NC]
 # Compatibility addresses use the same router, even while old files exist.
 RewriteRule ^(?:controllers|api|track)/.*\.php$ /index.php [L,QSA]
 RewriteRule ^campanhas\.php$ /index.php [L,QSA]

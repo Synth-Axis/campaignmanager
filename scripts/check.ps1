@@ -17,6 +17,8 @@ try {
         & node --check $file.FullName
         if ($LASTEXITCODE -ne 0) { throw "Invalid JavaScript: $($file.Name)" }
     }
+    & $phpBinary tests/configuration.php
+    if ($LASTEXITCODE -ne 0) { throw 'Configuration checks failed' }
     & $phpBinary tests/structure.php
     if ($LASTEXITCODE -ne 0) { throw 'Structure checks failed' }
     if ($CheckDatabase) {

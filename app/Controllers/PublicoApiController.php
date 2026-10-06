@@ -70,7 +70,7 @@ class PublicoApiController
                     p.gestor_id,
                     p.lista_id,
                     p.canal_id
-                FROM Publico p
+                FROM publico p
                 WHERE p.publico_id = :id
                 LIMIT 1
             ");

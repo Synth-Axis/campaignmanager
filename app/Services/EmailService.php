@@ -16,7 +16,7 @@ class EmailService
         $mail->Password = ENV['PHPMAILER_PASSWORD'];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = ENV['PHPMAILER_PORT'];
-        $mail->setFrom('LynxApp@lynx.com', 'LynxApp');
+        $mail->setFrom(ENV['PHPMAILER_FROM_EMAIL'], ENV['PHPMAILER_FROM_NAME']);
         return $mail;
     }
 

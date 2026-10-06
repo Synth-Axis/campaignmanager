@@ -29,6 +29,11 @@ for (const path of ['/api/pesquisar_contactos.php?q=Demo&page=1', '/api/crescime
   checks++;
 }
 const noAuth = await request('/api/pesquisar_contactos.php', { headers: {} });
+const health = await request('/health', { headers: {} });
+assert.equal(health.status, 200);
+assert.deepEqual(await health.json(), { status: 'ok' });
+assert.equal(health.headers.get('set-cookie'), null, 'Healthcheck must not create a session');
+checks++;
 assert.equal(noAuth.status, 401);
 assert.ok((await noAuth.json()).erro);
 assert.equal((await request('/home-center', { headers: {} })).headers.get('location'), '/login');

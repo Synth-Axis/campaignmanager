@@ -7,6 +7,7 @@ $add = static function (array $paths, string $class, string $action, array $meth
     foreach ($paths as $path) $routes[$path] = $route;
 };
 $add(['/', '/index.php', '/login', '/controllers/login.php'], AuthController::class, 'login', ['GET', 'POST'], false);
+$add(['/health'], HealthController::class, 'index', ['GET'], false, true);
 $add(['/register', '/controllers/register.php'], AuthController::class, 'register', ['GET', 'POST'], false);
 $add(['/recuperar_password', '/controllers/recuperar_password.php'], AuthController::class, 'recuperarPassword', ['GET', 'POST'], false);
 $add(['/redefinir_password', '/controllers/redefinir_password.php'], AuthController::class, 'redefinirPassword', ['GET', 'POST'], false);

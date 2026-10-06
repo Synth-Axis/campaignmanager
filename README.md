@@ -63,3 +63,41 @@ node tests/http-structure.mjs
 O Password Manager usa exclusivamente dados fictícios guardados em `.cache/fixture-accesses.json`, reiniciados automaticamente pelo teste. Os restantes testes fazem consultas de leitura à BD configurada. Não enviam campanhas, não inserem contactos e não alteram listas. Parar o servidor após o teste.
 
 O teste SMTP é uma ferramenta CLI com destinatário explícito: `php scripts/test-smtp.php destinatario@example.com`. Só executar quando se pretende enviar um email real.
+
+## Deployment no Railway
+
+O `Dockerfile` instala PHP 8.3, Apache, Composer e as extensões necessárias. O Tailwind é compilado com Node durante o build; `vendor` e `dist/output.css` são gerados na imagem. Não carregar `.env`, dependências locais ou dumps SQL para o Git.
+
+1. No projeto Railway que já contém o MySQL, adicionar um serviço a partir do repositório GitHub `Synth-Axis/campaignmanager`, branch `main`, com a raiz `/`.
+2. Nas **Variables do serviço da aplicação**, adicionar as referências abaixo. `MySQL` deve corresponder ao nome do serviço de base de dados existente.
+
+   ```dotenv
+   APP_ENV=production
+   PORT=8080
+   DB_HOST=${{MySQL.MYSQLHOST}}
+   DB_PORT=${{MySQL.MYSQLPORT}}
+   DB_NAME=${{MySQL.MYSQLDATABASE}}
+   DB_USER=${{MySQL.MYSQLUSER}}
+   DB_PASSWORD=${{MySQL.MYSQLPASSWORD}}
+   ```
+
+3. Criar um volume **no serviço da aplicação**, montado em `/var/www/html/public/uploads`, para guardar as imagens carregadas nas campanhas entre deployments. O volume existente no MySQL continua dedicado à base de dados.
+4. Fazer Deploy. O `railway.json` define o comando de arranque e o healthcheck `/health`, que verifica a ligação à tabela `users` importada. Não configurar um comando de migração: a base já foi importada.
+5. Em **Settings → Networking**, gerar o domínio da aplicação com a porta `8080`. `ADDRESS` é obtido automaticamente do `RAILWAY_PUBLIC_DOMAIN`; para um domínio personalizado, definir `ADDRESS=https://o-teu-dominio`.
+6. Abrir `/login` nesse domínio e usar as credenciais da aplicação importadas da instalação local. As credenciais MySQL servem apenas para a ligação à base de dados.
+
+As variáveis do processo têm prioridade sobre o `.env` local. Também são aceites os nomes nativos `MYSQLHOST`, `MYSQLPORT`, `MYSQLDATABASE`, `MYSQLUSER` e `MYSQLPASSWORD`. O XAMPP continua a usar o ficheiro local existente.
+
+O script de arranque escuta na porta `PORT`, ativa apenas o MPM `prefork` do Apache e ajusta as permissões do volume de uploads. Em produção, erros são enviados para os logs do Railway e os cookies de sessão usam HTTPS. Manter uma réplica: as sessões são guardadas no disco do container e terminam quando este é substituído.
+
+Para recuperação de password e envio de campanhas, configurar também `PHPMAILER_HOST`, `PHPMAILER_PORT`, `PHPMAILER_USERNAME` e `PHPMAILER_PASSWORD`. `PHPMAILER_FROM_EMAIL` deve ser um remetente autorizado pelo serviço SMTP; `PHPMAILER_FROM_NAME` define o nome apresentado. Sem estas credenciais, o envio de emails não está configurado. Não enviar mensagens de teste sem destinatário explícito.
+
+Os uploads locais não são copiados com o dump SQL: se existirem imagens em `public/uploads`, transferi-las para o volume da aplicação. `index1.html` continua intacto como modelo de campanha; URLs absolutos escritos nesse modelo devem ser revistos quando for usado para uma campanha em produção.
+
+Para verificar o build com Docker instalado:
+
+```sh
+docker build -t lynx-app-center .
+```
+
+Referências: [Dockerfiles no Railway](https://docs.railway.com/builds/dockerfiles), [variáveis e referências](https://docs.railway.com/variables), [healthchecks](https://docs.railway.com/deployments/healthchecks).

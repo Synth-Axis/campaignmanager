@@ -1,5 +1,5 @@
 <?php
-class publico extends Database
+class Publico extends Database
 {
     public function getAllpublico()
     {
